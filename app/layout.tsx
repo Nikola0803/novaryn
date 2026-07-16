@@ -5,6 +5,7 @@ import "./globals.css";
 import { CartProvider } from "@/lib/cart-context";
 import CartDrawer from "@/components/CartDrawer";
 import SiteFooter from "@/components/SiteFooter";
+import NovarynGate from "@/components/NovarynGate";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -45,9 +46,11 @@ export default function RootLayout({
     >
       <body className="bg-background-800 text-foreground-100 font-sans antialiased">
         <CartProvider>
-          {children}
-          <SiteFooter />
-          <CartDrawer />
+          <NovarynGate>
+            {children}
+            <SiteFooter />
+            <CartDrawer />
+          </NovarynGate>
         </CartProvider>
       </body>
     </html>
