@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------------------- */
+/* Custom utilities & global styles recovered 1:1 from the original build */
+/* ---------------------------------------------------------------------- */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0b0d;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f2228;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2a2e36;
+}
+
+::selection {
+  color: #e9edf2;
+  background: #5ee8d559;
+}
+
+@layer utilities {
+  .ease-precision {
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .noise:before {
+    content: "";
+    pointer-events: none;
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    position: absolute;
+    inset: 0;
+  }
+
+  .glass {
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    background: linear-gradient(135deg, #14161ab3, #0a0b0d99);
+    border: 1px solid #c9cdd314;
+  }
+
+  .glass-hover {
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .glass-hover:hover {
+    background: linear-gradient(135deg, #14161ad9, #0a0b0db3);
+    border-color: #5ee8d559;
+  }
+
+  .glow-cyan {
+    box-shadow:
+      0 0 0 1px #5ee8d540,
+      0 0 40px -6px #5ee8d559;
+  }
+
+  .text-platinum {
+    background: linear-gradient(#f5f6f8 0%, #c9cdd3 45%, #8b93a1 100%);
+    color: #0000;
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .molecule-bg {
+    background-image:
+      radial-gradient(circle at 20% 30%, #5ee8d514 0%, #0000 40%),
+      radial-gradient(circle at 80% 70%, #5ee8d50f 0%, #0000 45%);
+  }
+
+  .grid-overlay {
+    background-image:
+      linear-gradient(#5ee8d50d 1px, #0000 1px),
+      linear-gradient(90deg, #5ee8d50d 1px, #0000 1px);
+    background-size: 56px 56px;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Honeypot spam-trap fields — must never be visible */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  aria-hidden: true;
+}
