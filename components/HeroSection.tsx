@@ -200,7 +200,7 @@ export default function HeroSection() {
             maxWidth: 420, marginBottom: 4,
             animation: "nvFadeUp 0.9s ease forwards 1.04s", opacity: 0,
           }}>
-            Every batch HPLC-verified and independently tested before it ships. Every COA published publicly the moment it clears — searchable by batch code.
+            Premium research-grade peptides lyophilized and verified in the USA. Engineered for consistency, stability, and analytical reliability.
           </p>
           <p style={{
             fontSize: 10, fontStyle: "italic", color: "rgba(233,237,242,0.2)",
