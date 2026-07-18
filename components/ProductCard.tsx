@@ -1,8 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Product } from "@/data/products";
+import { Product, getVariants, getVariantLabel } from "@/data/products";
 import { useCart } from "@/lib/cart-context";
 
 function formatPrice(price: number) {
@@ -11,7 +12,10 @@ function formatPrice(price: number) {
 
 export default function ProductCard({ product }: { product: Product }) {
   const { addItem } = useCart();
-  const href = `/product/${product.slug}`;
+  const variants = getVariants(product.name);
+  const [selectedSlug, setSelectedSlug] = useState(product.slug);
+  const selected = variants.find((v) => v.slug === selectedSlug) ?? product;
+  const href = `/product/${selected.slug}`;
 
   return (
     <article
@@ -21,24 +25,24 @@ export default function ProductCard({ product }: { product: Product }) {
       <Link href={href} className="block">
         <div className="relative aspect-[4/5] overflow-hidden bg-background-100">
           <Image
-            src={product.image}
-            alt={product.imgAlt}
-            title={product.imgTitle}
+            src={selected.image}
+            alt={selected.imgAlt}
+            title={selected.imgTitle}
             fill
             className="object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-precision"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background-900/90 via-background-900/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500"></div>
           <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-background-900/70 backdrop-blur border border-background-200/50">
-            <span className={`w-1.5 h-1.5 rounded-full ${product.statusDot}`}></span>
+            <span className={`w-1.5 h-1.5 rounded-full ${selected.statusDot}`}></span>
             <span className="font-mono text-[10px] tracking-wider text-foreground-300">
-              {product.statusLabel}
+              {selected.statusLabel}
             </span>
           </div>
           <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-background-900/70 backdrop-blur border border-primary-500/25">
             <span className="w-1.5 h-1.5 rounded-full bg-secondary-500 shadow-[0_0_7px_2px_rgba(94,232,160,0.6)]"></span>
             <span className="font-mono text-[10px] tracking-wider text-primary-500">
-              {product.purity}
+              {selected.purity}
             </span>
           </div>
         </div>
@@ -54,7 +58,7 @@ export default function ProductCard({ product }: { product: Product }) {
             </h3>
             <div className="flex items-baseline gap-1 whitespace-nowrap">
               <span className="font-display text-[16px] text-foreground-100 group-hover:text-foreground-100 transition-colors duration-500">
-                {formatPrice(product.price)}
+                {formatPrice(selected.price)}
               </span>
               <span className="font-mono text-[10px] text-foreground-600">USD</span>
             </div>
@@ -66,24 +70,42 @@ export default function ProductCard({ product }: { product: Product }) {
             </span>
           </div>
         </Link>
+        {variants.length > 1 && (
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {variants.map((v) => (
+              <button
+                key={v.slug}
+                type="button"
+                onClick={() => setSelectedSlug(v.slug)}
+                className={`px-2.5 py-1 rounded-md font-mono text-[10px] tracking-wide border transition-all duration-300 ease-precision cursor-pointer ${
+                  v.slug === selected.slug
+                    ? "bg-primary-500 text-background-900 border-primary-500"
+                    : "bg-background-100 text-foreground-400 border-background-200/60 hover:border-primary-500/50 hover:text-primary-500"
+                }`}
+              >
+                {getVariantLabel(v)}
+              </button>
+            ))}
+          </div>
+        )}
         <button
-          disabled={product.disabled}
+          disabled={selected.disabled}
           onClick={() =>
             addItem({
-              slug: product.slug,
+              slug: selected.slug,
               name: product.name,
-              spec: product.spec,
-              price: product.price,
-              image: product.image,
+              spec: selected.spec,
+              price: selected.price,
+              image: selected.image,
             })
           }
           className="w-full h-10 rounded-lg text-[12px] font-medium transition-all duration-500 ease-precision flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer bg-background-100 text-foreground-300 hover:bg-primary-500 hover:text-background-900 hover:shadow-[0_0_20px_-4px_rgba(94,232,213,0.4)] disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-background-100 disabled:hover:text-foreground-300 disabled:hover:shadow-none"
         >
           <i className="ri-shopping-bag-3-line text-[13px]"></i>
-          {product.buttonText}
+          {selected.buttonText}
         </button>
-        {product.footText && (
-          <p className={product.footClass ?? ""}>{product.footText}</p>
+        {selected.footText && (
+          <p className={selected.footClass ?? ""}>{selected.footText}</p>
         )}
       </div>
     </article>

@@ -190,6 +190,44 @@ export const PRODUCTS: Product[] = [
     "footText": null
   },
   {
+    "slug": "nvr-bpc-2",
+    "name": "BPC-157",
+    "spec": "2 mg / vial",
+    "price": 34.0,
+    "image": "/images/shop-bpc-5-01.jpg",
+    "imgAlt": "BPC-157 research peptide vial 2 mg / vial",
+    "imgTitle": "BPC-157 \u2014 2 mg / vial",
+    "category": "Recovery & Repair",
+    "statusDot": "text-secondary-500 shadow-[0_0_5px_1px_currentColor]",
+    "statusLabel": "In Stock",
+    "purity": "99.65%",
+    "disabled": false,
+    "buttonText": "Add to Cart",
+    "footClass": null,
+    "footText": null,
+    "shortLabel": "2mg",
+    "hidden": true
+  },
+  {
+    "slug": "nvr-bpc-10",
+    "name": "BPC-157",
+    "spec": "10 mg / vial",
+    "price": 138.0,
+    "image": "/images/shop-bpc-5-01.jpg",
+    "imgAlt": "BPC-157 research peptide vial 10 mg / vial",
+    "imgTitle": "BPC-157 \u2014 10 mg / vial",
+    "category": "Recovery & Repair",
+    "statusDot": "text-secondary-500 shadow-[0_0_5px_1px_currentColor]",
+    "statusLabel": "In Stock",
+    "purity": "99.70%",
+    "disabled": false,
+    "buttonText": "Add to Cart",
+    "footClass": null,
+    "footText": null,
+    "shortLabel": "10mg",
+    "hidden": true
+  },
+  {
     "slug": "nvr-tb500-5",
     "name": "TB-500",
     "spec": "5 mg / vial",
@@ -205,6 +243,44 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null
+  },
+  {
+    "slug": "nvr-tb500-2",
+    "name": "TB-500",
+    "spec": "2 mg / vial",
+    "price": 42.0,
+    "image": "/images/shop-tb500-5-01.jpg",
+    "imgAlt": "TB-500 research peptide vial 2 mg / vial",
+    "imgTitle": "TB-500 \u2014 2 mg / vial",
+    "category": "Recovery & Repair",
+    "statusDot": "text-secondary-500 shadow-[0_0_5px_1px_currentColor]",
+    "statusLabel": "In Stock",
+    "purity": "99.49%",
+    "disabled": false,
+    "buttonText": "Add to Cart",
+    "footClass": null,
+    "footText": null,
+    "shortLabel": "2mg",
+    "hidden": true
+  },
+  {
+    "slug": "nvr-tb500-10",
+    "name": "TB-500",
+    "spec": "10 mg / vial",
+    "price": 165.0,
+    "image": "/images/shop-tb500-5-01.jpg",
+    "imgAlt": "TB-500 research peptide vial 10 mg / vial",
+    "imgTitle": "TB-500 \u2014 10 mg / vial",
+    "category": "Recovery & Repair",
+    "statusDot": "text-secondary-500 shadow-[0_0_5px_1px_currentColor]",
+    "statusLabel": "In Stock",
+    "purity": "99.55%",
+    "disabled": false,
+    "buttonText": "Add to Cart",
+    "footClass": null,
+    "footText": null,
+    "shortLabel": "10mg",
+    "hidden": true
   },
   {
     "slug": "nvr-ipam-2",
@@ -256,6 +332,44 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null
+  },
+  {
+    "slug": "nvr-ghk-20",
+    "name": "GHK-Cu",
+    "spec": "20 mg / vial",
+    "price": 54.0,
+    "image": "/images/shop-ghk-01.jpg",
+    "imgAlt": "GHK-Cu research peptide vial 20 mg / vial",
+    "imgTitle": "GHK-Cu \u2014 20 mg / vial",
+    "category": "Longevity",
+    "statusDot": "text-secondary-500 shadow-[0_0_5px_1px_currentColor]",
+    "statusLabel": "In Stock",
+    "purity": "99.70%",
+    "disabled": false,
+    "buttonText": "Add to Cart",
+    "footClass": null,
+    "footText": null,
+    "shortLabel": "20mg",
+    "hidden": true
+  },
+  {
+    "slug": "nvr-ghk-100",
+    "name": "GHK-Cu",
+    "spec": "100 mg / vial",
+    "price": 198.0,
+    "image": "/images/shop-ghk-01.jpg",
+    "imgAlt": "GHK-Cu research peptide vial 100 mg / vial",
+    "imgTitle": "GHK-Cu \u2014 100 mg / vial",
+    "category": "Longevity",
+    "statusDot": "text-secondary-500 shadow-[0_0_5px_1px_currentColor]",
+    "statusLabel": "In Stock",
+    "purity": "99.78%",
+    "disabled": false,
+    "buttonText": "Add to Cart",
+    "footClass": null,
+    "footText": null,
+    "shortLabel": "100mg",
+    "hidden": true
   },
   {
     "slug": "nvr-epitalon-10",
@@ -452,4 +566,18 @@ export const PRODUCTS: Product[] = [
 
 export function getProduct(slug: string): Product | undefined {
   return PRODUCTS.find((p) => p.slug === slug);
+}
+
+/** All size/variant entries that share a product name, sorted smallest to largest dose. */
+export function getVariants(name: string): Product[] {
+  return PRODUCTS.filter((p) => p.name === name).sort(
+    (a, b) => parseFloat(a.spec) - parseFloat(b.spec)
+  );
+}
+
+/** Compact pill label for a variant, e.g. "5mg", "10mg", "30mL". */
+export function getVariantLabel(p: Product): string {
+  if (p.shortLabel) return p.shortLabel.replace(/\s+/g, "");
+  const match = p.spec.match(/^([\d.]+)\s*(mg|mL|g)/i);
+  return match ? `${match[1]}${match[2]}` : p.spec;
 }

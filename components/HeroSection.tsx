@@ -240,23 +240,6 @@ export default function HeroSection() {
             </Link>
           </div>
 
-          {/* Stats */}
-          <div className="flex items-center" style={{ gap: 22, animation: "nvFadeUp 0.9s ease forwards 1.44s", opacity: 0 }}>
-            {[
-              { val: "≥99%",  label: "Purity" },
-              { val: "24h",   label: "Cold-Chain" },
-              { val: "2,847", label: "COAs Live" },
-              { val: "100%",  label: "Verified" },
-            ].map((s, i, arr) => (
-              <div key={s.label} className="flex items-center" style={{ gap: 22 }}>
-                <div>
-                  <p style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: 16, letterSpacing: "0.03em", background: `linear-gradient(135deg, ${TEAL_L}, ${TEAL})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{s.val}</p>
-                  <p style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 8.5, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(233,237,242,0.28)", marginTop: 2 }}>{s.label}</p>
-                </div>
-                {i < arr.length - 1 && <div style={{ width: 1, height: 28, background: "rgba(94,232,213,0.14)" }}/>}
-              </div>
-            ))}
-          </div>
         </div>
       </div>
 
