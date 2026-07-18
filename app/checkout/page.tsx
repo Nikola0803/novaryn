@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import PromoBanner from "@/components/PromoBanner";
@@ -7,18 +8,245 @@ import Footer from "@/components/Footer";
 import CheckoutSummary from "@/components/CheckoutSummary";
 import { useCart } from "@/lib/cart-context";
 
+const MEMO_CHARS = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"; // avoids ambiguous 0/O/1/I/L
+const RESERVATION_MS = 2 * 60 * 60 * 1000; // 2 hours
+
+function generateMemo() {
+  let code = "";
+  for (let i = 0; i < 4; i++) {
+    code += MEMO_CHARS[Math.floor(Math.random() * MEMO_CHARS.length)];
+  }
+  return code;
+}
+
+function formatCountdown(ms: number) {
+  const totalSeconds = Math.max(0, Math.floor(ms / 1000));
+  const h = Math.floor(totalSeconds / 3600);
+  const m = Math.floor((totalSeconds % 3600) / 60);
+  const s = totalSeconds % 60;
+  return `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+}
+
+const GATEWAYS = [
+  { id: "cashapp", label: "Cash App", icon: "ri-money-dollar-circle-line" },
+  { id: "zelle", label: "Zelle", icon: "ri-bank-line" },
+  { id: "venmo", label: "Venmo", icon: "ri-smartphone-line" },
+] as const;
+
 export default function CheckoutPage() {
   const router = useRouter();
   const { items, clearCart } = useCart();
 
+  const [selectedGateway, setSelectedGateway] = useState<(typeof GATEWAYS)[number]["id"] | null>(null);
+  const [memo, setMemo] = useState(() => generateMemo());
+  const [expiresAt, setExpiresAt] = useState(() => Date.now() + RESERVATION_MS);
+  const [now, setNow] = useState(() => Date.now());
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setNow(Date.now()), 1000);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const remainingMs = expiresAt - now;
+  const expired = remainingMs <= 0;
+
+  const handleRegenerate = () => {
+    setMemo(generateMemo());
+    setExpiresAt(Date.now() + RESERVATION_MS);
+  };
+
+  const handleCopyMemo = async () => {
+    try {
+      await navigator.clipboard.writeText(memo);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1800);
+    } catch {
+      // Clipboard API unavailable — code is still visible to copy manually.
+    }
+  };
+
   const handlePlaceOrder = (e: React.FormEvent) => {
     e.preventDefault();
-    if (items.length === 0) return;
+    if (items.length === 0 || !selectedGateway || expired) return;
     clearCart();
     router.push("/order-success");
   };
 
   return (
-    <div className="min-h-screen bg-background-800 text-foreground-100"><PromoBanner /><Header /><main><section className="pt-[112px] bg-background-900 border-b border-background-200/60"><div className="w-full max-w-[1440px] mx-auto px-6 md:px-10 py-12"><div className="flex items-center gap-3 mb-3"><span className="w-8 h-px bg-primary-500/60"></span><span className="font-mono text-[10px] tracking-[0.28em] text-primary-500 uppercase">Checkout</span></div><h1 className="font-display text-[36px] md:text-[44px] leading-[0.95] tracking-tightest text-foreground-100">Review &amp; Complete Order</h1></div></section><section className="w-full max-w-[1440px] mx-auto px-6 md:px-10 py-10"><div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14"><div className="lg:col-span-7 flex flex-col gap-10"><div><h2 className="font-display text-[20px] text-foreground-100 mb-1">Shipping Information</h2><p className="text-[12px] text-foreground-500 mb-6">All fields marked with * are required.</p><div className="rounded-lg border border-background-200/60 bg-background-900/50 p-5 md:p-6"><div className="grid grid-cols-1 sm:grid-cols-2 gap-4"><div><label className="block text-[12px] font-medium text-foreground-300 mb-1.5">First Name <span className="text-signal">*</span></label><input placeholder="John" className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="text" defaultValue="" /></div><div><label className="block text-[12px] font-medium text-foreground-300 mb-1.5">Last Name <span className="text-signal">*</span></label><input placeholder="Doe" className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="text" defaultValue="" /></div><div className="sm:col-span-2"><label className="block text-[12px] font-medium text-foreground-300 mb-1.5">Email Address <span className="text-signal">*</span></label><input placeholder="you@lab.edu" className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="email" defaultValue="" /></div><div className="sm:col-span-2"><label className="block text-[12px] font-medium text-foreground-300 mb-1.5">Phone Number <span className="text-signal">*</span></label><input placeholder="+1 (555) 000-0000" className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="tel" defaultValue="" /></div><div className="sm:col-span-2"><label className="block text-[12px] font-medium text-foreground-300 mb-1.5">Street Address <span className="text-signal">*</span></label><input placeholder="123 Research Blvd, Suite 100" className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="text" defaultValue="" /></div><div><label className="block text-[12px] font-medium text-foreground-300 mb-1.5">City <span className="text-signal">*</span></label><input placeholder="Boston" className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="text" defaultValue="" /></div><div className="relative"><label className="block text-[12px] font-medium text-foreground-300 mb-1.5">State <span className="text-signal">*</span></label><button type="button" className="w-full h-10 px-3 rounded-md bg-background-100 border text-sm text-left flex items-center justify-between transition cursor-pointer border-background-200 focus:border-primary-500 text-foreground-600"><span className="truncate">Select state…</span><i className="ri-arrow-down-s-line text-[14px] text-foreground-500 transition-transform duration-200 "></i></button></div><div className="sm:col-span-2"><label className="block text-[12px] font-medium text-foreground-300 mb-1.5">ZIP Code <span className="text-signal">*</span></label><input placeholder="02110" maxLength={10} className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="text" defaultValue="" /></div></div><div className="mt-5 flex items-start gap-3 p-3 rounded-md bg-background-100/40 border border-background-200/60"><input type="checkbox" id="sms-consent" className="mt-0.5 w-4 h-4 shrink-0 accent-primary-500 cursor-pointer" /><label htmlFor="sms-consent" className="text-[11px] text-foreground-500 leading-relaxed cursor-pointer">By checking this box, you agree to receive text messages from Vintage Peptides at the number provided. Consent is not a condition to purchase. Message frequency varies. Message and data rates may apply. Reply STOP to cancel or HELP for help. View our <a href="https://vintagepeptides.com/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-primary-500 hover:text-primary-400 underline transition-colors">Privacy Policy</a> and <a href="https://vintagepeptides.com/terms-of-service" target="_blank" rel="noopener noreferrer" className="text-primary-500 hover:text-primary-400 underline transition-colors">Terms of Service</a>.</label></div></div></div><div><h2 className="font-display text-[20px] text-foreground-100 mb-5">Order Summary</h2><div className="rounded-lg border border-background-200/60 bg-background-900/50 overflow-hidden"><CheckoutSummary /></div></div></div><div className="lg:col-span-5"><div className="mb-8"><h3 className="font-display text-[15px] text-foreground-200 mb-3">Coupon Code</h3><div className="rounded-lg border border-background-200/60 bg-background-900/50 p-4"><div className="flex items-center gap-2"><div className="flex-1 relative"><i className="ri-coupon-line absolute left-3 top-1/2 -translate-y-1/2 text-[14px] text-foreground-500"></i><input placeholder="Enter coupon code" className="w-full h-10 pl-9 pr-3 rounded-md bg-background-100 border border-background-200 text-foreground-100 text-sm placeholder:text-foreground-600 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500/40 transition font-mono" type="text" defaultValue="" /></div><button type="button" className="h-10 px-4 rounded-md bg-background-100 border border-background-200 text-foreground-300 text-[12px] font-medium hover:border-primary-500 hover:text-primary-500 transition-all cursor-pointer whitespace-nowrap">Apply</button></div><p className="mt-2 text-[10px] text-foreground-600">Try <span className="font-mono text-foreground-500">VERTALIS10</span>, <span className="font-mono text-foreground-500">LABVIP</span>, or <span className="font-mono text-foreground-500">WELCOME5</span></p></div></div><h2 className="font-display text-[20px] text-foreground-100 mb-5">Payment Method</h2><form className="space-y-6" onSubmit={handlePlaceOrder}><div className="grid grid-cols-3 gap-3"><button type="button" className="flex flex-col items-center gap-2 p-4 rounded-lg border transition-all duration-300 cursor-pointer border-background-200/60 bg-background-100/50 hover:border-background-300"><i className="ri-money-dollar-circle-line text-[22px] text-foreground-400"></i><span className="text-[12px] font-medium text-foreground-400">Cash App</span></button><button type="button" className="flex flex-col items-center gap-2 p-4 rounded-lg border transition-all duration-300 cursor-pointer border-background-200/60 bg-background-100/50 hover:border-background-300"><i className="ri-bank-line text-[22px] text-foreground-400"></i><span className="text-[12px] font-medium text-foreground-400">Zelle</span></button><button type="button" className="flex flex-col items-center gap-2 p-4 rounded-lg border transition-all duration-300 cursor-pointer border-background-200/60 bg-background-100/50 hover:border-background-300"><i className="ri-smartphone-line text-[22px] text-foreground-400"></i><span className="text-[12px] font-medium text-foreground-400">Venmo</span></button></div><div><label className="block text-[13px] font-medium text-foreground-200 mb-2">Custom Verification Code</label><input placeholder="e.g., your order reference number" className="w-full h-11 px-4 rounded-md bg-background-100 border border-background-200 text-foreground-100 text-sm placeholder:text-foreground-600 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500/40 transition font-mono" type="text" defaultValue="" /><p className="mt-1.5 text-[11px] text-foreground-500">Include this code in your payment notes so we can verify and dispatch faster.</p></div><div><label className="block text-[13px] font-medium text-foreground-200 mb-2">Order Notes <span className="text-foreground-500 font-normal">(optional)</span></label><textarea maxLength={500} rows={3} placeholder="Any special instructions or notes..." className="w-full px-4 py-3 rounded-md bg-background-100 border border-background-200 text-foreground-100 text-sm placeholder:text-foreground-600 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500/40 transition resize-none"></textarea><p className="mt-1 text-[10px] text-foreground-600 text-right">0/500</p></div><div className="flex items-start gap-2 p-3 rounded-md bg-yellow-400/5 border border-yellow-400/20"><i className="ri-information-line text-[14px] text-yellow-400/70 mt-0.5"></i><p className="text-[11px] text-foreground-500 leading-relaxed">By placing this order, you confirm that all products are purchased for laboratory research use only, in accordance with our Terms of Service.</p></div><button type="submit" className="w-full h-12 rounded-md bg-primary-500 text-background-900 text-[13px] font-semibold hover:bg-primary-400 transition-all duration-300 ease-precision hover:shadow-[0_0_24px_-4px_rgba(94,232,213,0.6)] flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:shadow-none"><i className="ri-lock-line text-[14px]"></i>Confirm Order — $190.00</button></form></div></div></section></main></div>
+    <div className="min-h-screen bg-background-800 text-foreground-100">
+      <PromoBanner />
+      <Header />
+      <main>
+        <section className="pt-[112px] bg-background-900 border-b border-background-200/60">
+          <div className="w-full max-w-[1440px] mx-auto px-6 md:px-10 py-12">
+            <div className="flex items-center gap-3 mb-3">
+              <span className="w-8 h-px bg-primary-500/60"></span>
+              <span className="font-mono text-[10px] tracking-[0.28em] text-primary-500 uppercase">Checkout</span>
+            </div>
+            <h1 className="font-display text-[36px] md:text-[44px] leading-[0.95] tracking-tightest text-foreground-100">Review &amp; Complete Order</h1>
+          </div>
+        </section>
+        <section className="w-full max-w-[1440px] mx-auto px-6 md:px-10 py-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+            <div className="lg:col-span-7 flex flex-col gap-10">
+              <div>
+                <h2 className="font-display text-[20px] text-foreground-100 mb-1">Shipping Information</h2>
+                <p className="text-[12px] text-foreground-500 mb-6">All fields marked with * are required.</p>
+                <div className="rounded-lg border border-background-200/60 bg-background-900/50 p-5 md:p-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[12px] font-medium text-foreground-300 mb-1.5">First Name <span className="text-signal">*</span></label>
+                      <input placeholder="John" className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="text" defaultValue="" />
+                    </div>
+                    <div>
+                      <label className="block text-[12px] font-medium text-foreground-300 mb-1.5">Last Name <span className="text-signal">*</span></label>
+                      <input placeholder="Doe" className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="text" defaultValue="" />
+                    </div>
+                    <div className="sm:col-span-2">
+                      <label className="block text-[12px] font-medium text-foreground-300 mb-1.5">Email Address <span className="text-signal">*</span></label>
+                      <input placeholder="you@lab.edu" className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="email" defaultValue="" />
+                    </div>
+                    <div className="sm:col-span-2">
+                      <label className="block text-[12px] font-medium text-foreground-300 mb-1.5">Phone Number <span className="text-signal">*</span></label>
+                      <input placeholder="+1 (555) 000-0000" className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="tel" defaultValue="" />
+                    </div>
+                    <div className="sm:col-span-2">
+                      <label className="block text-[12px] font-medium text-foreground-300 mb-1.5">Street Address <span className="text-signal">*</span></label>
+                      <input placeholder="123 Research Blvd, Suite 100" className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="text" defaultValue="" />
+                    </div>
+                    <div>
+                      <label className="block text-[12px] font-medium text-foreground-300 mb-1.5">City <span className="text-signal">*</span></label>
+                      <input placeholder="Boston" className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="text" defaultValue="" />
+                    </div>
+                    <div className="relative">
+                      <label className="block text-[12px] font-medium text-foreground-300 mb-1.5">State <span className="text-signal">*</span></label>
+                      <button type="button" className="w-full h-10 px-3 rounded-md bg-background-100 border text-sm text-left flex items-center justify-between transition cursor-pointer border-background-200 focus:border-primary-500 text-foreground-600"><span className="truncate">Select state…</span><i className="ri-arrow-down-s-line text-[14px] text-foreground-500 transition-transform duration-200 "></i></button>
+                    </div>
+                    <div className="sm:col-span-2">
+                      <label className="block text-[12px] font-medium text-foreground-300 mb-1.5">ZIP Code <span className="text-signal">*</span></label>
+                      <input placeholder="02110" maxLength={10} className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="text" defaultValue="" />
+                    </div>
+                  </div>
+                  <div className="mt-5 flex items-start gap-3 p-3 rounded-md bg-background-100/40 border border-background-200/60">
+                    <input type="checkbox" id="sms-consent" className="mt-0.5 w-4 h-4 shrink-0 accent-primary-500 cursor-pointer" />
+                    <label htmlFor="sms-consent" className="text-[11px] text-foreground-500 leading-relaxed cursor-pointer">By checking this box, you agree to receive text messages from Vintage Peptides at the number provided. Consent is not a condition to purchase. Message frequency varies. Message and data rates may apply. Reply STOP to cancel or HELP for help. View our <a href="https://vintagepeptides.com/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-primary-500 hover:text-primary-400 underline transition-colors">Privacy Policy</a> and <a href="https://vintagepeptides.com/terms-of-service" target="_blank" rel="noopener noreferrer" className="text-primary-500 hover:text-primary-400 underline transition-colors">Terms of Service</a>.</label>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h2 className="font-display text-[20px] text-foreground-100 mb-5">Order Summary</h2>
+                <div className="rounded-lg border border-background-200/60 bg-background-900/50 overflow-hidden">
+                  <CheckoutSummary />
+                </div>
+              </div>
+            </div>
+            <div className="lg:col-span-5">
+              <div className="mb-8">
+                <h3 className="font-display text-[15px] text-foreground-200 mb-3">Coupon Code</h3>
+                <div className="rounded-lg border border-background-200/60 bg-background-900/50 p-4">
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 relative">
+                      <i className="ri-coupon-line absolute left-3 top-1/2 -translate-y-1/2 text-[14px] text-foreground-500"></i>
+                      <input placeholder="Enter coupon code" className="w-full h-10 pl-9 pr-3 rounded-md bg-background-100 border border-background-200 text-foreground-100 text-sm placeholder:text-foreground-600 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500/40 transition font-mono" type="text" defaultValue="" />
+                    </div>
+                    <button type="button" className="h-10 px-4 rounded-md bg-background-100 border border-background-200 text-foreground-300 text-[12px] font-medium hover:border-primary-500 hover:text-primary-500 transition-all cursor-pointer whitespace-nowrap">Apply</button>
+                  </div>
+                  <p className="mt-2 text-[10px] text-foreground-600">Try <span className="font-mono text-foreground-500">VERTALIS10</span>, <span className="font-mono text-foreground-500">LABVIP</span>, or <span className="font-mono text-foreground-500">WELCOME5</span></p>
+                </div>
+              </div>
+              <h2 className="font-display text-[20px] text-foreground-100 mb-5">Payment Method</h2>
+              <form className="space-y-6" onSubmit={handlePlaceOrder}>
+                <div className="grid grid-cols-3 gap-3">
+                  {GATEWAYS.map((gw) => {
+                    const active = selectedGateway === gw.id;
+                    return (
+                      <button
+                        key={gw.id}
+                        type="button"
+                        onClick={() => setSelectedGateway(gw.id)}
+                        aria-pressed={active}
+                        className={`relative flex flex-col items-center gap-2 p-4 rounded-lg border transition-all duration-300 cursor-pointer ${
+                          active
+                            ? "border-primary-500 bg-primary-500/10 shadow-[0_0_20px_-6px_rgba(94,232,213,0.5)]"
+                            : "border-background-200/60 bg-background-100/50 hover:border-background-300"
+                        }`}
+                      >
+                        {active && (
+                          <i className="ri-checkbox-circle-fill absolute top-2 right-2 text-[14px] text-primary-500"></i>
+                        )}
+                        <i className={`${gw.icon} text-[22px] ${active ? "text-primary-500" : "text-foreground-400"}`}></i>
+                        <span className={`text-[12px] font-medium ${active ? "text-primary-500" : "text-foreground-400"}`}>{gw.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <div className="rounded-lg border border-primary-500/25 bg-primary-500/[0.04] p-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="text-[13px] font-medium text-foreground-200">Payment Memo</label>
+                    {!expired ? (
+                      <span className="flex items-center gap-1.5 font-mono text-[10px] tracking-wider text-yellow-400/90">
+                        <i className="ri-time-line text-[12px]"></i>
+                        Reserved {formatCountdown(remainingMs)}
+                      </span>
+                    ) : (
+                      <span className="flex items-center gap-1.5 font-mono text-[10px] tracking-wider text-signal">
+                        <i className="ri-error-warning-line text-[12px]"></i>
+                        Reservation expired
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className={`flex-1 h-11 px-4 rounded-md bg-background-100 border flex items-center font-mono text-[18px] tracking-[0.35em] ${expired ? "border-background-200 text-foreground-600" : "border-primary-500/40 text-primary-500"}`}>
+                      {memo}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={handleCopyMemo}
+                      disabled={expired}
+                      className="h-11 px-4 rounded-md bg-background-100 border border-background-200 text-foreground-300 text-[12px] font-medium hover:border-primary-500 hover:text-primary-500 transition-all cursor-pointer whitespace-nowrap disabled:opacity-30 disabled:cursor-not-allowed"
+                    >
+                      {copied ? "Copied ✓" : "Copy"}
+                    </button>
+                  </div>
+                  <p className="mt-2 text-[11px] text-foreground-500 leading-relaxed">
+                    Include this exact code in your {selectedGateway ? GATEWAYS.find((g) => g.id === selectedGateway)?.label : "payment"} note so we can match your payment and dispatch faster. Your items are held for 2 hours — after that, stock releases back to general inventory.
+                  </p>
+                  {expired && (
+                    <button
+                      type="button"
+                      onClick={handleRegenerate}
+                      className="mt-3 h-9 px-4 rounded-md bg-primary-500/10 border border-primary-500/40 text-primary-500 text-[11px] font-medium hover:bg-primary-500/20 transition-all cursor-pointer whitespace-nowrap"
+                    >
+                      <i className="ri-refresh-line mr-1.5"></i>Generate New Code
+                    </button>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-[13px] font-medium text-foreground-200 mb-2">Order Notes <span className="text-foreground-500 font-normal">(optional)</span></label>
+                  <textarea maxLength={500} rows={3} placeholder="Any special instructions or notes..." className="w-full px-4 py-3 rounded-md bg-background-100 border border-background-200 text-foreground-100 text-sm placeholder:text-foreground-600 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500/40 transition resize-none"></textarea>
+                  <p className="mt-1 text-[10px] text-foreground-600 text-right">0/500</p>
+                </div>
+
+                <div className="flex items-start gap-2 p-3 rounded-md bg-yellow-400/5 border border-yellow-400/20">
+                  <i className="ri-information-line text-[14px] text-yellow-400/70 mt-0.5"></i>
+                  <p className="text-[11px] text-foreground-500 leading-relaxed">By placing this order, you confirm that all products are purchased for laboratory research use only, in accordance with our Terms of Service.</p>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={items.length === 0 || !selectedGateway || expired}
+                  className="w-full h-12 rounded-md bg-primary-500 text-background-900 text-[13px] font-semibold hover:bg-primary-400 transition-all duration-300 ease-precision hover:shadow-[0_0_24px_-4px_rgba(94,232,213,0.6)] flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:shadow-none"
+                >
+                  <i className="ri-lock-line text-[14px]"></i>Confirm Order — $190.00
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
   );
 }
