@@ -2,7 +2,7 @@ import Link from "next/link";
 import { SITE } from "@/data/site-config";
 
 /* ------------------------------------------------------------------ *
- * Shared building blocks for Novaryn legal / compliance pages.
+ * Shared building blocks for Vertalis legal / compliance pages.
  * Dark lab aesthetic: obsidian surfaces, mono eyebrows, cyan accent,
  * signal-red for warnings, success-green for affirmations.
  * ------------------------------------------------------------------ */

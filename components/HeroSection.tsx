@@ -97,8 +97,8 @@ export default function HeroSection() {
         }} />
       ))}
 
-      {/* Molecular SVG — right half */}
-      <div className="absolute right-0 top-0 bottom-0 z-[5] pointer-events-none hidden lg:block" style={{ width: "50%" }}>
+      {/* Molecular SVG — right half (kept clear of the fixed banner + nav, which together occupy the top 112px) */}
+      <div className="absolute right-0 top-[112px] bottom-0 z-[5] pointer-events-none hidden lg:block" style={{ width: "50%" }}>
         <svg viewBox="0 0 600 520" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" className="w-full h-full">
           <defs>
             <filter id="nv-glow"><feGaussianBlur stdDeviation="5" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
@@ -216,7 +216,7 @@ export default function HeroSection() {
             </p>
           </div>
 
-          {/* Main headline — Novaryn's own copy */}
+          {/* Main headline — Vertalis's own copy */}
           <div style={{ marginBottom: 14 }}>
             <h1 style={{
               fontSize: "clamp(44px, 5.8vw, 82px)", lineHeight: 0.9,

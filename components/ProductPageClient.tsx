@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Header from "@/components/Header";
+import PromoBanner from "@/components/PromoBanner";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import CoaModal from "@/components/CoaModal";
@@ -54,10 +55,10 @@ export default function ProductPageClient({ slug }: { slug: string }) {
 
   return (
     <div className="min-h-screen bg-background-800 text-foreground-100">
-      <Header />
+      <PromoBanner /><Header />
       <main>
         {/* Breadcrumb */}
-        <section className="pt-[72px] bg-background-900 border-b border-background-200/60">
+        <section className="pt-[112px] bg-background-900 border-b border-background-200/60">
           <div className="w-full max-w-[1440px] mx-auto px-6 md:px-10 py-5">
             <nav className="flex items-center gap-2 text-[12px] text-foreground-500 font-mono">
               <Link href="/" className="hover:text-primary-500 transition-colors">Home</Link>
@@ -280,7 +281,7 @@ export default function ProductPageClient({ slug }: { slug: string }) {
                   <div>
                     <h3 className="font-display text-[17px] text-foreground-100 mb-3">Compound Overview</h3>
                     <p className="text-[14px] text-foreground-400 leading-relaxed">
-                      {product.name} ({product.spec}) is a research-grade peptide compound supplied for laboratory use. Novaryn maintains every batch under pharmaceutical-grade synthesis controls with independent third-party HPLC and mass-spec verification before release. Each vial is lyophilized and sealed under inert atmosphere for maximum stability.
+                      {product.name} ({product.spec}) is a research-grade peptide compound supplied for laboratory use. Vertalis maintains every batch under pharmaceutical-grade synthesis controls with independent third-party HPLC and mass-spec verification before release. Each vial is lyophilized and sealed under inert atmosphere for maximum stability.
                     </p>
                   </div>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -339,7 +340,7 @@ export default function ProductPageClient({ slug }: { slug: string }) {
                 <div className="space-y-6">
                   <h3 className="font-display text-[17px] text-foreground-100 mb-3">Certificate of Analysis</h3>
                   <p className="text-[14px] text-foreground-400 leading-relaxed">
-                    Every NOVARYN batch is independently tested by a certified third-party laboratory before release. The COA includes full HPLC chromatograms, mass spectrometry confirmation, and purity quantification.
+                    Every VERTALIS batch is independently tested by a certified third-party laboratory before release. The COA includes full HPLC chromatograms, mass spectrometry confirmation, and purity quantification.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
                     <button

@@ -6,7 +6,7 @@
  * the /api/wc/* and /api/auth/* route handlers, which use these helpers.
  *
  * Required env (see .env.local.example):
- *   WC_URL     = https://cms.novaryn.com      (your headless WordPress site)
+ *   WC_URL     = https://cms.vertalispeptides.com      (your headless WordPress site)
  *   WC_KEY     = ck_xxxxxxxxxxxxxxxxxxxxxxxx
  *   WC_SECRET  = cs_xxxxxxxxxxxxxxxxxxxxxxxx
  */

@@ -1,5 +1,5 @@
 /* ------------------------------------------------------------------ *
- * NOVARYN — Central compliance & site configuration
+ * VERTALIS — Central compliance & site configuration
  * ------------------------------------------------------------------ *
  * Every legal page, the access gate, and the compliance banners read
  * from this single file. Edit the values below once and the whole site
@@ -13,9 +13,9 @@
 
 export const SITE = {
   /** Display / marketing name */
-  brand: "NOVARYN",
+  brand: "VERTALIS",
   /** Legal entity name used in contracts and policies */
-  legalName: "Novaryn Laboratories",
+  legalName: "Vertalis Peptides, LLC",
   /** Short tagline shown under the wordmark */
   tagline: "The Precision Standard in Research Peptides",
 
@@ -23,7 +23,7 @@ export const SITE = {
   minimumAge: 21,
 
   /* --- Contact (blank fields are hidden on legal pages) --- */
-  contactEmail: "", // TODO e.g. "compliance@novaryn.com" — leave "" to route users to /contact
+  contactEmail: "", // TODO e.g. "compliance@vertalispeptides.com" — leave "" to route users to /contact
   contactPhone: "", // TODO e.g. "(000) 000-0000" — leave "" to hide
   /** Registered business mailing address, one line or blank */
   businessAddress: "", // TODO — leave "" to hide
@@ -31,7 +31,7 @@ export const SITE = {
   /* --- Jurisdiction & fulfilment --- */
   // TODO Confirm with counsel. Used in the Terms "Governing Law" section.
   governingLaw:
-    "the laws of the jurisdiction in which Novaryn Laboratories is organised, without regard to conflict-of-law provisions",
+    "the laws of the jurisdiction in which Vertalis Peptides is organised, without regard to conflict-of-law provisions",
   /** Where you ship to, plain language for the Shipping policy */
   shipsTo: "the United States", // TODO adjust to your actual fulfilment regions
   /** Typical order handling time */

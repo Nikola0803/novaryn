@@ -12,9 +12,9 @@ import {
 import { SITE, LEGAL_ROUTES } from "@/data/site-config";
 
 export const metadata: Metadata = {
-  title: "Research Use Only Policy — NOVARYN",
+  title: "Research Use Only Policy — VERTALIS",
   description:
-    "All Novaryn Laboratories products are supplied exclusively for in vitro research and laboratory use by qualified professionals. Not for human consumption.",
+    "All Vertalis Peptides products are supplied exclusively for in vitro research and laboratory use by qualified professionals. Not for human consumption.",
 };
 
 const related = [

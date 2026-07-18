@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Header from "@/components/Header";
+import PromoBanner from "@/components/PromoBanner";
 
 const BENEFITS = [
   { icon: "ri-percent-line", title: "Commission on Every Order", body: "Earn a percentage on every verified order placed through your unique referral link. Commission structure scales with volume." },
@@ -19,10 +20,10 @@ const TIERS = [
 export default function AffiliatePage() {
   return (
     <div className="min-h-screen bg-background-800 text-foreground-100">
-      <Header />
+      <PromoBanner /><Header />
       <main>
         {/* Hero */}
-        <section className="relative pt-[72px] bg-background-900 border-b border-background-200/60 overflow-hidden">
+        <section className="relative pt-[112px] bg-background-900 border-b border-background-200/60 overflow-hidden">
           <div className="absolute inset-0 grid-overlay opacity-20 pointer-events-none"></div>
           <div className="absolute top-20 right-10 w-96 h-96 rounded-full bg-primary-500/6 blur-[140px] pointer-events-none"></div>
           <div className="relative w-full max-w-[1440px] mx-auto px-6 md:px-10 py-20 md:py-28">
@@ -34,7 +35,7 @@ export default function AffiliatePage() {
               Refer colleagues.<br /><span className="text-platinum">Earn on every order.</span>
             </h1>
             <p className="text-[16px] text-foreground-400 max-w-xl leading-relaxed mb-10">
-              Designed for researchers, lab managers, and institutions who trust Novaryn and want to extend that trust — and earn while doing it.
+              Designed for researchers, lab managers, and institutions who trust Vertalis and want to extend that trust — and earn while doing it.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <a href="#apply" className="h-12 px-8 rounded-md bg-primary-500 text-background-900 text-[13px] font-semibold hover:bg-primary-400 transition-all cursor-pointer inline-flex items-center gap-2">
@@ -154,7 +155,7 @@ export default function AffiliatePage() {
                 </div>
               ))}
               <div>
-                <label className="block text-[12px] font-medium text-foreground-300 mb-1.5">How do you plan to promote Novaryn?</label>
+                <label className="block text-[12px] font-medium text-foreground-300 mb-1.5">How do you plan to promote Vertalis?</label>
                 <textarea rows={4} placeholder="Describe your network, platform, or community…" className="w-full px-3 py-3 rounded-md bg-background-100 border border-background-200 text-foreground-100 text-sm placeholder:text-foreground-600 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500/40 transition resize-none"></textarea>
               </div>
               <button type="submit" className="w-full h-11 rounded-md bg-primary-500 text-background-900 text-[13px] font-semibold hover:bg-primary-400 transition-all cursor-pointer flex items-center justify-center gap-2">

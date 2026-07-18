@@ -5,7 +5,7 @@ import "./globals.css";
 import { CartProvider } from "@/lib/cart-context";
 import CartDrawer from "@/components/CartDrawer";
 import SiteFooter from "@/components/SiteFooter";
-import NovarynGate from "@/components/NovarynGate";
+import VertalisGate from "@/components/VertalisGate";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -29,9 +29,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NOVARYN — Research Peptides",
+  title: "VERTALIS — Research Peptides",
   description:
-    "Novaryn Labs is a dedicated supplier of high-purity research peptides and biochemicals for laboratory use. Every product undergoes rigorous third-party analytical verification.",
+    "Vertalis Labs is a dedicated supplier of high-purity research peptides and biochemicals for laboratory use. Every product undergoes rigorous third-party analytical verification.",
 };
 
 export default function RootLayout({
@@ -46,11 +46,11 @@ export default function RootLayout({
     >
       <body className="bg-background-800 text-foreground-100 font-sans antialiased">
         <CartProvider>
-          <NovarynGate>
+          <VertalisGate>
             {children}
             <SiteFooter />
             <CartDrawer />
-          </NovarynGate>
+          </VertalisGate>
         </CartProvider>
       </body>
     </html>

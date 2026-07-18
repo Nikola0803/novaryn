@@ -48,7 +48,7 @@ export default function CoaLookup() {
             <span className="w-2 h-2 rounded-full bg-primary-500/60"></span>
             <span className="w-2 h-2 rounded-full bg-secondary-500"></span>
           </div>
-          <span className="font-mono text-[10px] tracking-[0.22em] text-foreground-500 uppercase">Novaryn Verification · Terminal</span>
+          <span className="font-mono text-[10px] tracking-[0.22em] text-foreground-500 uppercase">Vertalis Verification · Terminal</span>
           <span className="font-mono text-[10px] text-foreground-600">v2.4</span>
         </div>
 
@@ -56,7 +56,7 @@ export default function CoaLookup() {
         <div className="relative p-8 md:p-10 bg-background-900/50">
           <div className="mb-6 font-mono text-[11px] text-primary-500">
             <span className="mr-2">$</span>
-            <span className="text-foreground-500">novaryn verify --batch</span>
+            <span className="text-foreground-500">vertalis verify --batch</span>
           </div>
 
           <form className="relative" onSubmit={handleSubmit}>

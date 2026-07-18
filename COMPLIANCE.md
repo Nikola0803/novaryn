@@ -1,7 +1,7 @@
-# Novaryn — Compliance & CMS Integration
+# Vertalis — Compliance & CMS Integration
 
 This document covers the compliance scaffolding and CMS wiring added to the
-Novaryn site, what still needs your input before you sell, and how the account
+Vertalis site, what still needs your input before you sell, and how the account
 wall backend works.
 
 > **Important, and please read this honestly.** What's below is the *technical
@@ -21,9 +21,9 @@ wall backend works.
 
 ## 1. What was implemented
 
-**Access gate — `components/NovarynGate.tsx`** (mounted globally in
+**Access gate — `components/VertalisGate.tsx`** (mounted globally in
 `app/layout.tsx`).
-- Same split-panel pattern as Valkyrie's `AccessGate`, rebuilt in Novaryn's dark
+- Same split-panel pattern as Valkyrie's `AccessGate`, rebuilt in Vertalis's dark
   lab aesthetic (obsidian panel, cyan accent, mono type, product-render backdrop).
 - **Age (21+) + Research-Use-Only consent is mandatory** on every path.
 - Three modes: **Enter Site** (guest research access — age/RUO consent only),
@@ -38,7 +38,7 @@ wall backend works.
 - `/legal/terms` — Terms of Service
 - `/legal/privacy` — Privacy Policy
 - `/legal/shipping-returns` — Shipping & Returns (Valkyrie's shipping + return
-  content merged, since the Novaryn footer already links a single combined route)
+  content merged, since the Vertalis footer already links a single combined route)
 
 These routes match the links already present in `components/SiteFooter.tsx`.
 
@@ -61,7 +61,7 @@ gate read from it. Blank contact fields are hidden gracefully.
 
 Valkyrie is a Vite build, so its WooCommerce `ck`/`cs` keys and Mailchimp key are
 compiled into the browser bundle — anyone can read them and hit the store's
-admin API. Because Novaryn is Next.js, I routed every credentialed call through
+admin API. Because Vertalis is Next.js, I routed every credentialed call through
 same-origin server handlers instead:
 
 - `/api/wc/[...path]` — authenticated WooCommerce proxy. Reads are open; writes
@@ -122,7 +122,7 @@ POST  {WC_URL}/wp-json/nvr/v1/validate   { token }
         -> 200 { valid: true | false }
 ```
 
-The Novaryn `/api/auth/*` handlers already proxy to these. Until the plugin is
+The Vertalis `/api/auth/*` handlers already proxy to these. Until the plugin is
 installed, the account tabs return a friendly "not available yet — use Enter
 Site" message and the gate still works. (You can adapt Valkyrie's existing router
 PHP; just rename the namespace to `nvr/v1`.)

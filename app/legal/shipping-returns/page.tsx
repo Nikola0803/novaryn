@@ -12,9 +12,9 @@ import {
 import { SITE, LEGAL_ROUTES } from "@/data/site-config";
 
 export const metadata: Metadata = {
-  title: "Shipping & Returns — NOVARYN",
+  title: "Shipping & Returns — VERTALIS",
   description:
-    "Novaryn Laboratories shipping, delivery, and return policy for research-use-only products.",
+    "Vertalis Peptides shipping, delivery, and return policy for research-use-only products.",
 };
 
 const related = [

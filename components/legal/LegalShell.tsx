@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import PromoBanner from "@/components/PromoBanner";
 import { LegalHero, RelatedLinks } from "@/components/legal/LegalUI";
 
 /**
@@ -22,8 +23,8 @@ export default function LegalShell({
 }) {
   return (
     <div className="min-h-screen bg-background-800 text-foreground-100">
-      <Header />
-      <main className="pt-[72px]">
+      <PromoBanner /><Header />
+      <main className="pt-[112px]">
         <LegalHero line1={line1} line2={line2} breadcrumb={breadcrumb} />
         <div className="w-full max-w-[860px] mx-auto px-6 md:px-10 py-16">
           <div className="space-y-10">{children}</div>

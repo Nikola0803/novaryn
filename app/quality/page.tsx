@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Header from "@/components/Header";
+import PromoBanner from "@/components/PromoBanner";
 
 const STEPS = [
   { n: "01", icon: "ri-flask-line", title: "Sourcing", body: "All raw materials are procured exclusively from vetted synthesis partners operating under strict NDAs. Every supplier undergoes facility audit and documented chain-of-custody verification before we accept a single gram of material." },
@@ -19,10 +20,10 @@ const LABS = [
 export default function QualityPage() {
   return (
     <div className="min-h-screen bg-background-800 text-foreground-100">
-      <Header />
+      <PromoBanner /><Header />
       <main>
         {/* Hero */}
-        <section className="relative pt-[72px] bg-background-900 border-b border-background-200/60">
+        <section className="relative pt-[112px] bg-background-900 border-b border-background-200/60">
           <div className="absolute inset-0 grid-overlay opacity-20 pointer-events-none"></div>
           <div className="absolute top-20 right-0 w-80 h-80 rounded-full bg-primary-500/5 blur-[120px] pointer-events-none"></div>
           <div className="relative w-full max-w-[1440px] mx-auto px-6 md:px-10 py-20 md:py-28">
@@ -34,7 +35,7 @@ export default function QualityPage() {
               Six stages.<br /><span className="text-platinum">Nothing ships without them.</span>
             </h1>
             <p className="text-[16px] text-foreground-400 max-w-xl leading-relaxed">
-              Every Novaryn batch passes a documented six-stage quality pipeline before it reaches your lab. No exceptions. No batch-skipping. No shortcuts.
+              Every Vertalis batch passes a documented six-stage quality pipeline before it reaches your lab. No exceptions. No batch-skipping. No shortcuts.
             </p>
             <div className="flex flex-wrap gap-4 mt-8">
               {["≥99% Purity Baseline", "100% Third-Party Verified", "Publicly Archived COAs", "Cold-Chain Guaranteed"].map((badge) => (
@@ -144,7 +145,7 @@ export default function QualityPage() {
           <div className="w-full max-w-[1440px] mx-auto px-6 md:px-10 flex flex-col sm:flex-row items-center justify-between gap-6">
             <div>
               <h2 className="font-display text-[24px] text-foreground-100 mb-1">Verify any batch in seconds.</h2>
-              <p className="text-[14px] text-foreground-500">Enter a batch code from any Novaryn vial to retrieve the full COA.</p>
+              <p className="text-[14px] text-foreground-500">Enter a batch code from any Vertalis vial to retrieve the full COA.</p>
             </div>
             <Link href="/coa" className="shrink-0 h-10 px-6 rounded-md bg-primary-500 text-background-900 text-[13px] font-semibold hover:bg-primary-400 transition-all cursor-pointer inline-flex items-center gap-2">
               <i className="ri-shield-check-line text-[14px]"></i>COA Archive

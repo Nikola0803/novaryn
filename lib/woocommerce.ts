@@ -1,5 +1,5 @@
 /**
- * WooCommerce client for Novaryn (browser + server safe).
+ * WooCommerce client for Vertalis Peptides (browser + server safe).
  *
  * Unlike a Vite build, this never holds the WooCommerce keys. Every request
  * goes through the same-origin /api/wc/* proxy, which attaches the admin
@@ -252,7 +252,7 @@ function extractContent(slug: string, name: string): string | null {
   return match ? match[1].toLowerCase() : null;
 }
 
-/** Maps a WooCommerce product onto the shape the Novaryn UI/cart expects. */
+/** Maps a WooCommerce product onto the shape the Vertalis Peptides UI/cart expects. */
 export function normalizeProduct(p: WCProduct) {
   const content = extractContent(p.slug, p.name);
   const metaCoa = p.meta_data.find((m) => m.key === "_novaryn_coa_images")?.value ?? "";

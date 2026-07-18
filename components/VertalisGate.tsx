@@ -1,10 +1,10 @@
 "use client";
 
 /**
- * NovarynGate — verified-research-access wall.
+ * VertalisGate — verified-research-access wall.
  *
  * Combines three things in one gate, matching the Valkyrie pattern but in
- * Novaryn's dark lab aesthetic:
+ * Vertalis's dark lab aesthetic:
  *   1. Age verification (21+) + Research-Use-Only consent  — ALWAYS required.
  *   2. Optional account Sign In / Create Account, backed by the WordPress/
  *      WooCommerce endpoints proxied through /api/auth/* (keys stay server-side).
@@ -49,7 +49,7 @@ export function clearAuth() {
 
 type Mode = "verify" | "signin" | "register";
 
-export default function NovarynGate({ children }: { children: React.ReactNode }) {
+export default function VertalisGate({ children }: { children: React.ReactNode }) {
   const [granted, setGranted] = useState(false);
   const [checking, setChecking] = useState(true);
   const [mode, setMode] = useState<Mode>("verify");
@@ -272,7 +272,7 @@ export default function NovarynGate({ children }: { children: React.ReactNode })
             <div className="absolute inset-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/novaryn-hero-bg-01.jpg"
+                src="/images/vertalis-hero-bg-01.jpg"
                 alt=""
                 className="w-full h-full object-cover"
                 style={{ objectPosition: "center 30%", opacity: 0.28 }}

@@ -7,7 +7,7 @@ set "BRANCH=main"
 cd /d "%~dp0"
 
 echo ============================================
-echo   NOVARYN - Deploy to GitHub
+echo   VERTALIS PEPTIDES - Deploy to GitHub
 echo ============================================
 echo.
 

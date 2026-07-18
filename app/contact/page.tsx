@@ -1,12 +1,13 @@
 import Link from "next/link";
 import Header from "@/components/Header";
+import PromoBanner from "@/components/PromoBanner";
 
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-background-800 text-foreground-100">
-      <Header />
+      <PromoBanner /><Header />
       <main>
-        <section className="relative pt-[72px] bg-background-900 border-b border-background-200/60">
+        <section className="relative pt-[112px] bg-background-900 border-b border-background-200/60">
           <div className="absolute inset-0 grid-overlay opacity-20 pointer-events-none"></div>
           <div className="relative w-full max-w-[1440px] mx-auto px-6 md:px-10 py-20 md:py-28">
             <div className="flex items-center gap-3 mb-4">
@@ -58,7 +59,7 @@ export default function ContactPage() {
             <div className="lg:col-span-5 space-y-6">
               <h2 className="font-display text-[24px] text-foreground-100 mb-6">Other ways to reach us</h2>
               {[
-                { icon: "ri-mail-line", title: "Email", val: "orders@novaryn.com", sub: "General inquiries & orders" },
+                { icon: "ri-mail-line", title: "Email", val: "orders@vertalispeptides.com", sub: "General inquiries & orders" },
                 { icon: "ri-customer-service-2-line", title: "Support Hours", val: "7 days · 9AM–8PM EST", sub: "Response within 24 hours" },
                 { icon: "ri-building-2-line", title: "Location", val: "United States", sub: "US-based operations & dispatch" },
               ].map((item) => (

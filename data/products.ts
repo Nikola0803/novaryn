@@ -92,7 +92,7 @@ export const PRODUCTS: Product[] = [
     "name": "Semaglutide",
     "spec": "10 mg / vial",
     "price": 189.0,
-    "image": "/images/novaryn-prod-sema-01.jpg",
+    "image": "/images/vertalis-prod-sema-01.jpg",
     "imgAlt": "Semaglutide research peptide vial 10 mg / vial",
     "imgTitle": "Semaglutide \u2014 10 mg / vial",
     "category": "Fat Loss & Metabolic",

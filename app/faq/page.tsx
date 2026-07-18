@@ -1,12 +1,13 @@
 import Header from "@/components/Header";
+import PromoBanner from "@/components/PromoBanner";
 import FaqAccordion from "@/components/FaqAccordion";
 
 export default function FaqPage() {
   return (
     <div className="min-h-screen bg-background-800 text-foreground-100">
-      <Header />
+      <PromoBanner /><Header />
       <main>
-        <section className="relative pt-[72px] bg-background-900 border-b border-background-200/60">
+        <section className="relative pt-[112px] bg-background-900 border-b border-background-200/60">
           <div className="absolute inset-0 grid-overlay opacity-20 pointer-events-none"></div>
           <div className="relative w-full max-w-[1440px] mx-auto px-6 md:px-10 py-20 md:py-24">
             <div className="flex items-center gap-3 mb-4">

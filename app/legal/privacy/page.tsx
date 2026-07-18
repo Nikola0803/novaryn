@@ -11,9 +11,9 @@ import {
 import { SITE, LEGAL_ROUTES } from "@/data/site-config";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — NOVARYN",
+  title: "Privacy Policy — VERTALIS",
   description:
-    "How Novaryn Laboratories collects, uses, and protects your personal information.",
+    "How Vertalis Peptides collects, uses, and protects your personal information.",
 };
 
 const related = [
