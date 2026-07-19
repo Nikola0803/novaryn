@@ -2,9 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
-import dynamic from "next/dynamic";
-
-const HeroVial3D = dynamic(() => import("./HeroVial3D"), { ssr: false });
 
 const TEAL   = "#5EE8D5";
 const TEAL_D = "#3bb8a8";
@@ -100,37 +97,102 @@ export default function HeroSection() {
         }} />
       ))}
 
-      {/* 3D rotating peptide chain — right half (kept clear of the fixed banner + nav, which together occupy the top 112px) */}
-      <div className="absolute right-0 top-[112px] bottom-0 z-[5] hidden lg:block" style={{ width: "50%" }}>
-        {/* Ambient glow behind the chain */}
-        <div className="absolute inset-0 pointer-events-none" style={{
-          background: "radial-gradient(ellipse 42% 50% at 55% 48%, rgba(94,232,213,0.12) 0%, transparent 70%)",
-        }} />
+      {/* Live HPLC trace panel — right half (kept clear of the fixed banner + nav, which together occupy the top 112px) */}
+      <div className="absolute right-0 top-[112px] bottom-0 z-[5] hidden lg:flex items-center" style={{ width: "50%" }}>
+        <div className="relative w-full px-10">
+          {/* Ambient glow behind the panel */}
+          <div className="absolute inset-0 pointer-events-none" style={{
+            background: "radial-gradient(ellipse 60% 60% at 50% 50%, rgba(94,232,213,0.10) 0%, transparent 70%)",
+          }} />
 
-        <div className="absolute inset-0">
-          <HeroVial3D />
-        </div>
+          <div
+            className="relative rounded-xl border border-background-200/60 bg-background-900/70 backdrop-blur-sm overflow-hidden"
+            style={{ boxShadow: "0 40px 90px -30px rgba(0,0,0,0.65)" }}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between px-5 py-3.5 border-b border-background-200/50" style={{ background: "rgba(94,232,213,0.04)" }}>
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary-500" style={{ animation: "nvPulse 2s ease-in-out infinite" }} />
+                <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, letterSpacing: "0.16em", color: TEAL_D, textTransform: "uppercase" }}>
+                  HPLC-UV · Live Trace
+                </span>
+              </div>
+              <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: "rgba(233,237,242,0.35)" }}>
+                BATCH VTX-24-1108-A
+              </span>
+            </div>
 
-        {/* Floating verification pill */}
-        <div className="absolute top-8 left-10 flex items-center gap-2 px-3 py-1.5 rounded-full bg-background-900/80 backdrop-blur border border-primary-500/30 pointer-events-none" style={{ animation: "nvFloat 6s ease-in-out infinite" }}>
-          <span className="w-1.5 h-1.5 rounded-full bg-primary-500 shadow-[0_0_8px_2px_rgba(94,232,213,0.6)]" />
-          <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, letterSpacing: "0.12em", color: "#E9EDF2" }}>
-            3RD PARTY VERIFIED
-          </span>
-        </div>
+            {/* Chromatogram */}
+            <div className="px-5 pt-6 pb-2">
+              <svg viewBox="0 0 400 160" className="w-full h-auto overflow-visible" preserveAspectRatio="none">
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <line key={`h${i}`} x1="0" x2="400" y1={i * 40} y2={i * 40} stroke="rgba(94,232,213,0.08)" strokeWidth="1" />
+                ))}
+                {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+                  <line key={`v${i}`} x1={i * 50} x2={i * 50} y1="0" y2="160" stroke="rgba(94,232,213,0.06)" strokeWidth="1" />
+                ))}
 
-        {/* Floating COA readout card */}
-        <div className="absolute bottom-16 left-10 w-[190px] rounded-md bg-background-900/85 backdrop-blur border border-background-200/60 pointer-events-none overflow-hidden" style={{ animation: "nvFloat2 8s ease-in-out infinite 2s" }}>
-          <div className="flex items-center gap-1.5 px-3 py-2 border-b border-background-200/50" style={{ background: "rgba(94,232,213,0.06)" }}>
-            <span className="w-1.5 h-1.5 rounded-full" style={{ background: "#FF5C5C", opacity: 0.6 }} />
-            <span className="w-1.5 h-1.5 rounded-full" style={{ background: "#FFBC00", opacity: 0.6 }} />
-            <span className="w-1.5 h-1.5 rounded-full bg-primary-500" style={{ opacity: 0.6 }} />
-            <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9, color: TEAL_D, marginLeft: 4 }}>COA DATA</span>
-          </div>
-          <div className="px-3 py-2.5" style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9.5 }}>
-            <p className="text-foreground-600 mb-1">Purity: <span style={{ color: TEAL_L }}>99.42%</span></p>
-            <p className="text-foreground-600 mb-1">MW: <span className="text-foreground-100">4,113.6 Da</span></p>
-            <p className="text-foreground-600">Batch: <span className="text-foreground-100">VTX-24-1108-A</span></p>
+                <defs>
+                  <linearGradient id="heroPeakFill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor={TEAL} stopOpacity="0.55" />
+                    <stop offset="100%" stopColor={TEAL} stopOpacity="0" />
+                  </linearGradient>
+                </defs>
+
+                <path
+                  d="M 160 122 C 172 112, 182 35, 198 20 C 214 35, 226 108, 250 124 L 250 160 L 160 160 Z"
+                  fill="url(#heroPeakFill)"
+                />
+                <path
+                  d="M 10 128 L 50 126 L 90 129 L 130 127 L 160 122 C 172 112, 182 35, 198 20 C 214 35, 226 108, 250 124 L 290 126 L 330 128 L 370 127 L 395 128"
+                  fill="none"
+                  stroke={TEAL}
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+
+                <circle cx="198" cy="20" r="3.5" fill={TEAL_L}>
+                  <animate attributeName="r" values="3;6;3" dur="2.2s" repeatCount="indefinite" />
+                </circle>
+
+                <rect x="0" y="0" width="2" height="160" fill={TEAL} opacity="0.5">
+                  <animate attributeName="x" values="0;398;0" keyTimes="0;0.5;1" dur="6s" repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="0.55;0.15;0.55" dur="6s" repeatCount="indefinite" />
+                </rect>
+              </svg>
+            </div>
+
+            {/* Readouts */}
+            <div className="grid grid-cols-3 divide-x divide-background-200/40 border-t border-background-200/50">
+              {[
+                { label: "Purity", value: "99.42%" },
+                { label: "Ret. Time", value: "4.82 min" },
+                { label: "MW", value: "4,113.6 Da" },
+              ].map((s) => (
+                <div key={s.label} className="px-4 py-3.5 text-center">
+                  <p style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9, letterSpacing: "0.18em", color: "rgba(233,237,242,0.35)", textTransform: "uppercase", marginBottom: 5 }}>
+                    {s.label}
+                  </p>
+                  <p style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: 16, color: TEAL_L }}>
+                    {s.value}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Footer */}
+            <Link
+              href="/coa"
+              className="flex items-center justify-between px-5 py-3 border-t border-background-200/50 hover:bg-primary-500/[0.04] transition-colors duration-300 cursor-pointer"
+            >
+              <span className="flex items-center gap-1.5" style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: "rgba(233,237,242,0.45)" }}>
+                <i className="ri-shield-check-line" style={{ color: TEAL }}></i>
+                Verified · Janoshik Analytical
+              </span>
+              <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: TEAL }}>
+                View COA →
+              </span>
+            </Link>
           </div>
         </div>
       </div>
