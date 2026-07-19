@@ -97,112 +97,8 @@ export default function HeroSection() {
         }} />
       ))}
 
-      {/* Live MS trace panel · right side (kept clear of the fixed banner + nav, which together occupy the top 112px) */}
-      <div className="absolute right-0 top-[112px] bottom-0 z-[5] hidden lg:flex items-center justify-end" style={{ width: "62%" }}>
-        <div className="relative w-full max-w-[820px] px-10">
-          {/* Ambient glow behind the panel */}
-          <div className="absolute inset-0 pointer-events-none" style={{
-            background: "radial-gradient(ellipse 70% 70% at 50% 50%, rgba(94,232,213,0.13) 0%, transparent 70%)",
-          }} />
-
-          <div
-            className="relative rounded-2xl border border-background-200/60 bg-background-900/70 backdrop-blur-sm overflow-hidden"
-            style={{ boxShadow: "0 50px 120px -30px rgba(0,0,0,0.65)" }}
-          >
-            {/* Header */}
-            <div className="flex items-center justify-between px-9 py-6 border-b border-background-200/50" style={{ background: "rgba(94,232,213,0.04)" }}>
-              <div className="flex items-center gap-3">
-                <span className="w-2.5 h-2.5 rounded-full bg-primary-500" style={{ animation: "nvPulse 2s ease-in-out infinite" }} />
-                <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 17, letterSpacing: "0.15em", color: TEAL_D, textTransform: "uppercase" }}>
-                  MS Confirmation · BPC-157
-                </span>
-              </div>
-              <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 16, color: "rgba(233,237,242,0.35)" }}>
-                BATCH VTX-24-1142-C
-              </span>
-            </div>
-
-            {/* Mass spectrum */}
-            <div className="px-9 pt-10 pb-5">
-              <svg viewBox="0 0 400 150" className="w-full h-auto overflow-visible" preserveAspectRatio="none">
-                {[0, 1, 2, 3].map((i) => (
-                  <line key={`h${i}`} x1="0" x2="400" y1={i * 38} y2={i * 38} stroke="rgba(94,232,213,0.08)" strokeWidth="1" />
-                ))}
-                {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
-                  <line key={`v${i}`} x1={i * 50} x2={i * 50} y1="0" y2="146" stroke="rgba(94,232,213,0.06)" strokeWidth="1" />
-                ))}
-                <line x1="0" x2="400" y1="146" y2="146" stroke="rgba(94,232,213,0.2)" strokeWidth="1" />
-
-                {[
-                  { x: 40, h: 13 }, { x: 68, h: 8 }, { x: 100, h: 18 }, { x: 140, h: 10 },
-                  { x: 190, h: 48 }, { x: 210, h: 28 },
-                  { x: 280, h: 136 },
-                  { x: 300, h: 20 }, { x: 335, h: 25 }, { x: 365, h: 11 },
-                ].map((peak, i) => (
-                  <line
-                    key={i}
-                    x1={peak.x} x2={peak.x} y1={146} y2={146 - peak.h}
-                    stroke={peak.x === 280 ? TEAL_L : TEAL}
-                    strokeWidth={peak.x === 280 ? 3 : 1.8}
-                    strokeLinecap="round"
-                    opacity={peak.x === 280 ? 1 : 0.55}
-                  />
-                ))}
-
-                <text x="280" y="0" textAnchor="middle" fill={TEAL_L} style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 17 }}>
-                  1419.6 [M+H]⁺
-                </text>
-                <circle cx="280" cy="7" r="5" fill={TEAL_L}>
-                  <animate attributeName="opacity" values="1;0.35;1" dur="2.4s" repeatCount="indefinite" />
-                </circle>
-
-                <rect x="0" y="0" width="2" height="146" fill={TEAL} opacity="0.4">
-                  <animate attributeName="x" values="0;398;0" keyTimes="0;0.5;1" dur="7s" repeatCount="indefinite" />
-                  <animate attributeName="opacity" values="0.45;0.1;0.45" dur="7s" repeatCount="indefinite" />
-                </rect>
-              </svg>
-              <p className="mt-4" style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 15, color: "rgba(233,237,242,0.4)" }}>
-                CAS 137525-51-0 · C₆₂H₉₈N₁₆O₂₂
-              </p>
-            </div>
-
-            {/* Readouts */}
-            <div className="grid grid-cols-3 divide-x divide-background-200/40 border-t border-background-200/50">
-              {[
-                { label: "Purity", value: "99.15%" },
-                { label: "MW", value: "1,419.5 Da" },
-                { label: "m/z [M+H]⁺", value: "1419.6" },
-              ].map((s) => (
-                <div key={s.label} className="px-6 py-6 text-center">
-                  <p style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 13, letterSpacing: "0.15em", color: "rgba(233,237,242,0.35)", textTransform: "uppercase", marginBottom: 8 }}>
-                    {s.label}
-                  </p>
-                  <p style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: 24, color: TEAL_L }}>
-                    {s.value}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            {/* Footer */}
-            <Link
-              href="/coa"
-              className="flex items-center justify-between px-9 py-6 border-t border-background-200/50 hover:bg-primary-500/[0.04] transition-colors duration-300 cursor-pointer"
-            >
-              <span className="flex items-center gap-2" style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 15, color: "rgba(233,237,242,0.45)" }}>
-                <i className="ri-shield-check-line" style={{ color: TEAL }}></i>
-                Verified · Janoshik Analytical
-              </span>
-              <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 15, color: TEAL }}>
-                View COA →
-              </span>
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* ── Text · constrained to same 1440px grid as rest of page ── */}
-      <div className="relative z-[8] h-full w-full max-w-[1440px] mx-auto px-6 md:px-10 flex flex-col justify-center">
+      {/* ── Text + visual panel · both anchored to the same 1440px grid so left/right gutters match exactly ── */}
+      <div className="relative z-[8] h-full w-full max-w-[1440px] mx-auto px-6 md:px-10 flex items-center justify-between gap-10 lg:gap-16">
         <div className="max-w-[580px]">
 
           {/* Eyebrow */}
@@ -306,6 +202,108 @@ export default function HeroSection() {
             </Link>
           </div>
 
+        </div>
+
+        {/* Live MS trace panel · right side, sized against the same container so its right gutter matches the text's left gutter */}
+        <div className="hidden lg:block relative shrink-0" style={{ width: "48%", maxWidth: 760 }}>
+          {/* Ambient glow behind the panel */}
+          <div className="absolute inset-0 pointer-events-none" style={{
+            background: "radial-gradient(ellipse 70% 70% at 50% 50%, rgba(94,232,213,0.13) 0%, transparent 70%)",
+          }} />
+
+          <div
+            className="relative rounded-2xl border border-background-200/60 bg-background-900/70 backdrop-blur-sm overflow-hidden"
+            style={{ boxShadow: "0 50px 120px -30px rgba(0,0,0,0.65)" }}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between px-9 py-6 border-b border-background-200/50" style={{ background: "rgba(94,232,213,0.04)" }}>
+              <div className="flex items-center gap-3">
+                <span className="w-2.5 h-2.5 rounded-full bg-primary-500" style={{ animation: "nvPulse 2s ease-in-out infinite" }} />
+                <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 17, letterSpacing: "0.15em", color: TEAL_D, textTransform: "uppercase" }}>
+                  MS Confirmation · BPC-157
+                </span>
+              </div>
+              <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 16, color: "rgba(233,237,242,0.35)" }}>
+                BATCH VTX-24-1142-C
+              </span>
+            </div>
+
+            {/* Mass spectrum */}
+            <div className="px-9 pt-10 pb-5">
+              <svg viewBox="0 0 400 150" className="w-full h-auto overflow-visible" preserveAspectRatio="none">
+                {[0, 1, 2, 3].map((i) => (
+                  <line key={`h${i}`} x1="0" x2="400" y1={i * 38} y2={i * 38} stroke="rgba(94,232,213,0.08)" strokeWidth="1" />
+                ))}
+                {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+                  <line key={`v${i}`} x1={i * 50} x2={i * 50} y1="0" y2="146" stroke="rgba(94,232,213,0.06)" strokeWidth="1" />
+                ))}
+                <line x1="0" x2="400" y1="146" y2="146" stroke="rgba(94,232,213,0.2)" strokeWidth="1" />
+
+                {[
+                  { x: 40, h: 13 }, { x: 68, h: 8 }, { x: 100, h: 18 }, { x: 140, h: 10 },
+                  { x: 190, h: 48 }, { x: 210, h: 28 },
+                  { x: 280, h: 136 },
+                  { x: 300, h: 20 }, { x: 335, h: 25 }, { x: 365, h: 11 },
+                ].map((peak, i) => (
+                  <line
+                    key={i}
+                    x1={peak.x} x2={peak.x} y1={146} y2={146 - peak.h}
+                    stroke={peak.x === 280 ? TEAL_L : TEAL}
+                    strokeWidth={peak.x === 280 ? 3 : 1.8}
+                    strokeLinecap="round"
+                    opacity={peak.x === 280 ? 1 : 0.55}
+                  />
+                ))}
+
+                <text x="280" y="0" textAnchor="middle" fill={TEAL_L} style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 17 }}>
+                  1419.6 [M+H]⁺
+                </text>
+                <circle cx="280" cy="7" r="5" fill={TEAL_L}>
+                  <animate attributeName="opacity" values="1;0.35;1" dur="2.4s" repeatCount="indefinite" />
+                </circle>
+
+                <rect x="0" y="0" width="2" height="146" fill={TEAL} opacity="0.4">
+                  <animate attributeName="x" values="0;398;0" keyTimes="0;0.5;1" dur="7s" repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="0.45;0.1;0.45" dur="7s" repeatCount="indefinite" />
+                </rect>
+              </svg>
+              <p className="mt-4" style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 15, color: "rgba(233,237,242,0.4)" }}>
+                CAS 137525-51-0 · C₆₂H₉₈N₁₆O₂₂
+              </p>
+            </div>
+
+            {/* Readouts */}
+            <div className="grid grid-cols-3 divide-x divide-background-200/40 border-t border-background-200/50">
+              {[
+                { label: "Purity", value: "99.15%" },
+                { label: "MW", value: "1,419.5 Da" },
+                { label: "m/z [M+H]⁺", value: "1419.6" },
+              ].map((s) => (
+                <div key={s.label} className="px-6 py-6 text-center">
+                  <p style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 13, letterSpacing: "0.15em", color: "rgba(233,237,242,0.35)", textTransform: "uppercase", marginBottom: 8 }}>
+                    {s.label}
+                  </p>
+                  <p style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: 24, color: TEAL_L }}>
+                    {s.value}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Footer */}
+            <Link
+              href="/coa"
+              className="flex items-center justify-between px-9 py-6 border-t border-background-200/50 hover:bg-primary-500/[0.04] transition-colors duration-300 cursor-pointer"
+            >
+              <span className="flex items-center gap-2" style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 15, color: "rgba(233,237,242,0.45)" }}>
+                <i className="ri-shield-check-line" style={{ color: TEAL }}></i>
+                Verified · Janoshik Analytical
+              </span>
+              <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 15, color: TEAL }}>
+                View COA →
+              </span>
+            </Link>
+          </div>
         </div>
       </div>
 
