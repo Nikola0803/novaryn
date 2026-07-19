@@ -1,12 +1,77 @@
 "use client";
 
 import { useMemo, useRef, useState, useEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
 const TEAL = "#5EE8D5";
 const TEAL_DIM = "#2A5F58";
 const PLATINUM = "#C9CDD3";
+
+/**
+ * Builds a small procedural environment map and assigns it to the scene.
+ * Glass materials with `transmission` sample the scene environment to render
+ * refraction/highlights — without one, on a transparent canvas they read as a
+ * flat, muddy, near-black blob instead of clear glass. This gives the vial
+ * something coherent (a soft teal highlight over a dark gradient) to refract.
+ */
+function EnvironmentSetup() {
+  const { gl, scene } = useThree();
+
+  useEffect(() => {
+    let pmrem: THREE.PMREMGenerator | null = null;
+    let envTexture: THREE.Texture | null = null;
+    let renderTarget: THREE.WebGLRenderTarget | null = null;
+
+    try {
+      const canvas = document.createElement("canvas");
+      canvas.width = 256;
+      canvas.height = 128;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
+      const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      grad.addColorStop(0, "#123a35");
+      grad.addColorStop(0.42, "#0d2320");
+      grad.addColorStop(0.6, "#0a0b0d");
+      grad.addColorStop(1, "#050607");
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Soft bright band so the glass has a highlight to catch as it rotates.
+      ctx.fillStyle = "rgba(168,245,237,0.85)";
+      ctx.beginPath();
+      ctx.ellipse(canvas.width * 0.28, canvas.height * 0.32, 46, 16, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "rgba(94,232,213,0.35)";
+      ctx.beginPath();
+      ctx.ellipse(canvas.width * 0.78, canvas.height * 0.62, 60, 22, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      envTexture = new THREE.CanvasTexture(canvas);
+      envTexture.mapping = THREE.EquirectangularReflectionMapping;
+      envTexture.colorSpace = THREE.SRGBColorSpace;
+      envTexture.needsUpdate = true;
+
+      pmrem = new THREE.PMREMGenerator(gl);
+      pmrem.compileEquirectangularShader();
+      renderTarget = pmrem.fromEquirectangular(envTexture);
+      scene.environment = renderTarget.texture;
+    } catch {
+      // If PMREM generation fails on an unusual GPU/browser, materials fall
+      // back to their non-environment appearance rather than crashing.
+    }
+
+    return () => {
+      pmrem?.dispose();
+      envTexture?.dispose();
+      renderTarget?.dispose();
+      scene.environment = null;
+    };
+  }, [gl, scene]);
+
+  return null;
+}
 
 /** Builds a canvas texture for the vial label — batch code + purity, drawn procedurally (no external assets). */
 function useLabelTexture() {
@@ -69,21 +134,22 @@ function VialModel({ reduceMotion }: { reduceMotion: boolean }) {
   });
 
   return (
-    <group ref={group} rotation={[0.08, 0.6, 0]}>
+    <group ref={group} rotation={[0.08, 0.6, 0]} scale={0.88}>
       {/* Glass vial body */}
       <mesh castShadow>
         <latheGeometry args={[profile, 48]} />
         <meshPhysicalMaterial
           color="#dfe8e6"
-          roughness={0.04}
+          roughness={0.05}
           metalness={0}
-          transmission={1}
+          transmission={0.92}
           thickness={0.6}
           ior={1.45}
           clearcoat={0.6}
           clearcoatRoughness={0.15}
           attenuationColor="#bfe9e2"
           attenuationDistance={1.2}
+          envMapIntensity={1.4}
         />
       </mesh>
 
@@ -92,14 +158,15 @@ function VialModel({ reduceMotion }: { reduceMotion: boolean }) {
         <cylinderGeometry args={[0.55, 0.55, 2.1, 40]} />
         <meshPhysicalMaterial
           color={TEAL}
-          transmission={0.85}
+          transmission={0.7}
           roughness={0.15}
           thickness={0.8}
           ior={1.33}
           emissive={TEAL_DIM}
-          emissiveIntensity={0.25}
+          emissiveIntensity={0.3}
+          envMapIntensity={0.8}
           transparent
-          opacity={0.55}
+          opacity={0.62}
         />
       </mesh>
 
@@ -147,6 +214,7 @@ export default function HeroVial3D() {
         <directionalLight position={[3, 4, 4]} intensity={1.1} color="#ffffff" />
         <pointLight position={[-3, 1, 2]} intensity={18} color={TEAL} />
         <pointLight position={[2, -2, -3]} intensity={8} color={TEAL_DIM} />
+        <EnvironmentSetup />
         <VialModel reduceMotion={reduceMotion} />
       </Canvas>
     </div>
