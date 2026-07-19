@@ -118,6 +118,25 @@ export default function CheckoutPage() {
               <span className="font-mono text-[10px] tracking-[0.28em] text-primary-500 uppercase">Checkout</span>
             </div>
             <h1 className="font-display text-[36px] md:text-[44px] leading-[0.95] tracking-tightest text-foreground-100">Review &amp; Complete Order</h1>
+
+            {/* Flow tracker */}
+            <div className="flex items-center gap-2 mt-7">
+              {[
+                { n: "01", label: "Shipping" },
+                { n: "02", label: "Payment" },
+                { n: "03", label: "Confirmation" },
+              ].map((step, i) => (
+                <div key={step.n} className="flex items-center gap-2">
+                  <div className={`flex items-center gap-1.5 ${i === 2 ? "opacity-40" : ""}`}>
+                    <span className={`w-5 h-5 rounded-full flex items-center justify-center font-mono text-[9px] ${i < 2 ? "bg-primary-500 text-background-900" : "border border-background-300 text-foreground-500"}`}>
+                      {i < 2 ? <i className="ri-check-line text-[11px]"></i> : step.n}
+                    </span>
+                    <span className={`text-[11px] font-medium ${i < 2 ? "text-foreground-200" : "text-foreground-500"}`}>{step.label}</span>
+                  </div>
+                  {i < 2 && <span className="w-8 h-px bg-primary-500/40"></span>}
+                </div>
+              ))}
+            </div>
           </div>
         </section>
         <section className="w-full max-w-[1440px] mx-auto px-6 md:px-10 py-10">
@@ -170,17 +189,22 @@ export default function CheckoutPage() {
                   </div>
                 </div>
               </div>
-              <div>
-                <div className="flex items-center gap-3 mb-5">
-                  <span className="font-mono text-[10px] tracking-[0.22em] text-primary-500">02</span>
-                  <h2 className="font-display text-[20px] text-foreground-100">Order Summary</h2>
-                </div>
-                <div className="rounded-lg border border-background-200/60 bg-background-900/50 overflow-hidden">
+            </div>
+            <div className="lg:col-span-5">
+              <div className="lg:sticky lg:top-[130px] mb-8">
+                <div className="rounded-lg border border-primary-500/25 bg-background-900/70 overflow-hidden" style={{ boxShadow: "0 30px 70px -30px rgba(0,0,0,0.55)" }}>
+                  <div className="flex items-center justify-between px-4 py-3.5 border-b border-background-200/50" style={{ background: "rgba(94,232,213,0.05)" }}>
+                    <div className="flex items-center gap-2">
+                      <i className="ri-shopping-bag-3-line text-[15px] text-primary-500"></i>
+                      <span className="font-display text-[15px] text-foreground-100">Your Order</span>
+                    </div>
+                    <span className="font-mono text-[10px] tracking-wider text-foreground-500">
+                      {items.length} {items.length === 1 ? "item" : "items"}
+                    </span>
+                  </div>
                   <CheckoutSummary />
                 </div>
               </div>
-            </div>
-            <div className="lg:col-span-5">
               <div className="mb-8">
                 <h3 className="font-display text-[15px] text-foreground-200 mb-3">Coupon Code</h3>
                 <div className="rounded-lg border border-background-200/60 bg-background-900/50 p-4">
@@ -195,7 +219,7 @@ export default function CheckoutPage() {
                 </div>
               </div>
               <div className="flex items-center gap-3 mb-5">
-                <span className="font-mono text-[10px] tracking-[0.22em] text-primary-500">03</span>
+                <span className="font-mono text-[10px] tracking-[0.22em] text-primary-500">02</span>
                 <h2 className="font-display text-[20px] text-foreground-100">Payment Method</h2>
               </div>
               <form className="space-y-6" onSubmit={handlePlaceOrder}>

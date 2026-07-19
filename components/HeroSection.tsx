@@ -114,60 +114,64 @@ export default function HeroSection() {
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary-500" style={{ animation: "nvPulse 2s ease-in-out infinite" }} />
                 <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, letterSpacing: "0.16em", color: TEAL_D, textTransform: "uppercase" }}>
-                  HPLC-UV · Live Trace
+                  MS Confirmation · BPC-157
                 </span>
               </div>
               <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: "rgba(233,237,242,0.35)" }}>
-                BATCH VTX-24-1108-A
+                BATCH VTX-24-1142-C
               </span>
             </div>
 
-            {/* Chromatogram */}
-            <div className="px-5 pt-6 pb-2">
-              <svg viewBox="0 0 400 160" className="w-full h-auto overflow-visible" preserveAspectRatio="none">
+            {/* Mass spectrum */}
+            <div className="px-5 pt-7 pb-3">
+              <svg viewBox="0 0 400 200" className="w-full h-auto overflow-visible" preserveAspectRatio="none">
                 {[0, 1, 2, 3, 4].map((i) => (
-                  <line key={`h${i}`} x1="0" x2="400" y1={i * 40} y2={i * 40} stroke="rgba(94,232,213,0.08)" strokeWidth="1" />
+                  <line key={`h${i}`} x1="0" x2="400" y1={i * 50} y2={i * 50} stroke="rgba(94,232,213,0.08)" strokeWidth="1" />
                 ))}
                 {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
-                  <line key={`v${i}`} x1={i * 50} x2={i * 50} y1="0" y2="160" stroke="rgba(94,232,213,0.06)" strokeWidth="1" />
+                  <line key={`v${i}`} x1={i * 50} x2={i * 50} y1="0" y2="200" stroke="rgba(94,232,213,0.06)" strokeWidth="1" />
+                ))}
+                <line x1="0" x2="400" y1="196" y2="196" stroke="rgba(94,232,213,0.2)" strokeWidth="1" />
+
+                {[
+                  { x: 40, h: 18 }, { x: 68, h: 10 }, { x: 100, h: 24 }, { x: 140, h: 14 },
+                  { x: 190, h: 66 }, { x: 210, h: 38 },
+                  { x: 280, h: 188 },
+                  { x: 300, h: 28 }, { x: 335, h: 34 }, { x: 365, h: 15 },
+                ].map((peak, i) => (
+                  <line
+                    key={i}
+                    x1={peak.x} x2={peak.x} y1={196} y2={196 - peak.h}
+                    stroke={peak.x === 280 ? TEAL_L : TEAL}
+                    strokeWidth={peak.x === 280 ? 3.5 : 2}
+                    strokeLinecap="round"
+                    opacity={peak.x === 280 ? 1 : 0.55}
+                  />
                 ))}
 
-                <defs>
-                  <linearGradient id="heroPeakFill" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor={TEAL} stopOpacity="0.55" />
-                    <stop offset="100%" stopColor={TEAL} stopOpacity="0" />
-                  </linearGradient>
-                </defs>
-
-                <path
-                  d="M 160 122 C 172 112, 182 35, 198 20 C 214 35, 226 108, 250 124 L 250 160 L 160 160 Z"
-                  fill="url(#heroPeakFill)"
-                />
-                <path
-                  d="M 10 128 L 50 126 L 90 129 L 130 127 L 160 122 C 172 112, 182 35, 198 20 C 214 35, 226 108, 250 124 L 290 126 L 330 128 L 370 127 L 395 128"
-                  fill="none"
-                  stroke={TEAL}
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-
-                <circle cx="198" cy="20" r="3.5" fill={TEAL_L}>
-                  <animate attributeName="r" values="3;6;3" dur="2.2s" repeatCount="indefinite" />
+                <text x="280" y="0" textAnchor="middle" fill={TEAL_L} style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 11 }}>
+                  1419.6 [M+H]⁺
+                </text>
+                <circle cx="280" cy="8" r="3" fill={TEAL_L}>
+                  <animate attributeName="opacity" values="1;0.35;1" dur="2.4s" repeatCount="indefinite" />
                 </circle>
 
-                <rect x="0" y="0" width="2" height="160" fill={TEAL} opacity="0.5">
-                  <animate attributeName="x" values="0;398;0" keyTimes="0;0.5;1" dur="6s" repeatCount="indefinite" />
-                  <animate attributeName="opacity" values="0.55;0.15;0.55" dur="6s" repeatCount="indefinite" />
+                <rect x="0" y="0" width="2" height="196" fill={TEAL} opacity="0.4">
+                  <animate attributeName="x" values="0;398;0" keyTimes="0;0.5;1" dur="7s" repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="0.45;0.1;0.45" dur="7s" repeatCount="indefinite" />
                 </rect>
               </svg>
+              <p className="mt-3" style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: "rgba(233,237,242,0.4)" }}>
+                CAS 137525-51-0 · C₆₂H₉₈N₁₆O₂₂
+              </p>
             </div>
 
             {/* Readouts */}
             <div className="grid grid-cols-3 divide-x divide-background-200/40 border-t border-background-200/50">
               {[
-                { label: "Purity", value: "99.42%" },
-                { label: "Ret. Time", value: "4.82 min" },
-                { label: "MW", value: "4,113.6 Da" },
+                { label: "Purity", value: "99.15%" },
+                { label: "MW", value: "~1419.5 Da" },
+                { label: "m/z [M+H]⁺", value: "1419.6" },
               ].map((s) => (
                 <div key={s.label} className="px-4 py-3.5 text-center">
                   <p style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9, letterSpacing: "0.18em", color: "rgba(233,237,242,0.35)", textTransform: "uppercase", marginBottom: 5 }}>
@@ -178,42 +182,6 @@ export default function HeroSection() {
                   </p>
                 </div>
               ))}
-            </div>
-
-            {/* MS confirmation — second chart, BPC-157 */}
-            <div className="px-5 pt-4 pb-3 border-t border-background-200/50">
-              <div className="flex items-center justify-between mb-3">
-                <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9, letterSpacing: "0.16em", color: TEAL_D, textTransform: "uppercase" }}>
-                  MS Confirmation · BPC-157
-                </span>
-                <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9, color: "rgba(233,237,242,0.3)" }}>
-                  [M+H]⁺
-                </span>
-              </div>
-              <svg viewBox="0 0 400 70" className="w-full h-auto overflow-visible" preserveAspectRatio="none">
-                <line x1="0" x2="400" y1="70" y2="70" stroke="rgba(94,232,213,0.15)" strokeWidth="1" />
-                {[
-                  { x: 40, h: 7 }, { x: 68, h: 4 }, { x: 100, h: 9 }, { x: 140, h: 5 },
-                  { x: 190, h: 24 }, { x: 210, h: 14 },
-                  { x: 280, h: 66 },
-                  { x: 300, h: 10 }, { x: 335, h: 13 }, { x: 365, h: 6 },
-                ].map((peak, i) => (
-                  <line
-                    key={i}
-                    x1={peak.x} x2={peak.x} y1={70} y2={70 - peak.h}
-                    stroke={peak.x === 280 ? TEAL_L : TEAL}
-                    strokeWidth={peak.x === 280 ? 2.5 : 1.5}
-                    strokeLinecap="round"
-                    opacity={peak.x === 280 ? 1 : 0.6}
-                  />
-                ))}
-                <circle cx="280" cy="4" r="2.5" fill={TEAL_L}>
-                  <animate attributeName="opacity" values="1;0.35;1" dur="2.4s" repeatCount="indefinite" />
-                </circle>
-              </svg>
-              <p className="mt-2" style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9.5, color: "rgba(233,237,242,0.4)" }}>
-                CAS 137525-51-0 · C₆₂H₉₈N₁₆O₂₂ · ~1419.5 Da · 99.15% Purity
-              </p>
             </div>
 
             {/* Footer */}
