@@ -8,7 +8,7 @@ const STEPS = [
   { n: "03", icon: "ri-microscope-line", title: "Internal QC", body: "Each batch undergoes internal quality control including visual inspection, moisture content (Karl Fischer), and preliminary identity screen before being submitted for external testing." },
   { n: "04", icon: "ri-search-eye-line", title: "Independent Testing", body: "Every lot is independently analyzed by our third-party laboratory partners using HPLC-UV, LC-MS/MS, and LAL endotoxin assay. Results are not released internally before testing clears." },
   { n: "05", icon: "ri-shield-check-line", title: "COA Publication", body: "Certificates of Analysis are published publicly and indexed by batch code the moment they pass all thresholds. No batch ships before its COA is live." },
-  { n: "06", icon: "ri-truck-line", title: "Cold-Chain Dispatch", body: "Vials are sealed in inert atmosphere, packed in temperature-monitored insulated mailers with gel ice, and dispatched on a next-day cold-chain courier within 24h of payment confirmation." },
+  { n: "06", icon: "ri-truck-line", title: "Ambient Dispatch", body: "Vials are sealed in inert atmosphere and dispatched via standard courier within 24h of payment confirmation. Lyophilized peptides are shelf-stable at ambient temperature, so no cold-chain packaging or ice packs are required." },
 ];
 
 const LABS = [
@@ -38,7 +38,7 @@ export default function QualityPage() {
               Every Vertalis batch passes a documented six-stage quality pipeline before it reaches your lab. No exceptions. No batch-skipping. No shortcuts.
             </p>
             <div className="flex flex-wrap gap-4 mt-8">
-              {["≥99% Purity Baseline", "100% Third-Party Verified", "Publicly Archived COAs", "Cold-Chain Guaranteed"].map((badge) => (
+              {["≥99% Purity Baseline", "100% Third-Party Verified", "Publicly Archived COAs", "Lyophilized · Ships Ambient"].map((badge) => (
                 <span key={badge} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-secondary-500/30 bg-secondary-500/5 font-mono text-[11px] text-secondary-500">
                   <i className="ri-checkbox-circle-fill text-[12px]"></i>{badge}
                 </span>

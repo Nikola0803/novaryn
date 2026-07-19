@@ -184,7 +184,7 @@ export default function HeroSection() {
             color: TEAL_D, letterSpacing: "0.22em", textTransform: "uppercase",
             marginBottom: 16, animation: "nvFadeUp 0.9s ease forwards 0.84s", opacity: 0,
           }}>
-            Precision Synthesis · Independent COA · Cold-Chain
+            Precision Synthesis · Independent COA · Lyophilized
           </p>
 
           {/* Divider */}
@@ -211,7 +211,7 @@ export default function HeroSection() {
 
           {/* Badges */}
           <div className="flex flex-wrap gap-2" style={{ marginBottom: 24, animation: "nvFadeUp 0.9s ease forwards 1.18s", opacity: 0 }}>
-            {["≥99% PURITY", "3RD PARTY TESTED", "COLD-CHAIN 24H"].map((b) => (
+            {["≥99% PURITY", "3RD PARTY TESTED", "LYOPHILIZED · NO COLD-CHAIN"].map((b) => (
               <div key={b} className="flex items-center gap-2" style={{
                 padding: "5px 12px", border: `1px solid rgba(94,232,213,0.25)`,
                 background: "rgba(94,232,213,0.04)",

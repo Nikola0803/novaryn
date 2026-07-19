@@ -3,7 +3,7 @@
 import { useCart } from "@/lib/cart-context";
 import { PRODUCTS } from "@/data/products";
 
-const BAC_SLUGS = ["nvr-bac-3", "nvr-bac-10"];
+const BAC_SLUGS = ["nvr-bac-5", "nvr-bac-10"];
 
 export default function CheckoutSummary() {
   const { items, addItem, removeItem, setQty, subtotal, count } = useCart();

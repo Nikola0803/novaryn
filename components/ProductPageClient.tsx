@@ -228,7 +228,7 @@ export default function ProductPageClient({ slug }: { slug: string }) {
                     {product.disabled ? "Out of Stock" : `Add to Cart — ${fmt(tierPrice)}`}
                   </button>
                   <p className="mt-4 flex items-center gap-1.5 text-[11px] text-foreground-500">
-                    <i className="ri-snowy-line text-[13px]"></i>Cold-chain dispatched within 24 hours
+                    <i className="ri-flask-line text-[13px]"></i>Lyophilized — ships ambient within 24 hours, no cold-chain needed
                   </p>
                 </div>
               </div>
@@ -281,7 +281,9 @@ export default function ProductPageClient({ slug }: { slug: string }) {
                   <div>
                     <h3 className="font-display text-[17px] text-foreground-100 mb-3">Compound Overview</h3>
                     <p className="text-[14px] text-foreground-400 leading-relaxed">
-                      {product.name} ({product.spec}) is a research-grade peptide compound supplied for laboratory use. Vertalis maintains every batch under pharmaceutical-grade synthesis controls with independent third-party HPLC and mass-spec verification before release. Each vial is lyophilized and sealed under inert atmosphere for maximum stability.
+                      {product.description ??
+                        `${product.name} (${product.spec}) is a research-grade peptide compound supplied for laboratory use. Vertalis maintains every batch under pharmaceutical-grade synthesis controls with independent third-party HPLC and mass-spec verification before release.`}
+                      {" "}Each vial is lyophilized and sealed under inert atmosphere for maximum stability — shelf-stable at ambient temperature in transit, so no cold-chain shipping is required.
                     </p>
                   </div>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -363,8 +365,8 @@ export default function ProductPageClient({ slug }: { slug: string }) {
                   <h3 className="font-display text-[17px] text-foreground-100 mb-3">Shipping & Handling</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     {[
-                      { icon: "ri-snowy-line", title: "Cold-Chain", desc: "All peptides ship in insulated packaging with ice pack. Temperature-monitored from lab to door." },
-                      { icon: "ri-truck-line", title: "24h Dispatch", desc: "Orders confirmed before 2pm EST dispatch same business day on the cold-chain courier." },
+                      { icon: "ri-flask-line", title: "Ambient Shipping", desc: "Peptides are lyophilized (freeze-dried) and fully stable at ambient temperature in transit — no ice packs or cold-chain packaging required." },
+                      { icon: "ri-truck-line", title: "24h Dispatch", desc: "Orders confirmed before 2pm EST dispatch same business day via standard courier." },
                       { icon: "ri-global-line", title: "International", desc: "We ship worldwide. International buyers are responsible for import compliance in their jurisdiction." },
                     ].map((item) => (
                       <div key={item.title} className="p-5 rounded-md bg-background-100/60 border border-background-200/40">
