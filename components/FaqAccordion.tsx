@@ -13,7 +13,7 @@ const FAQS = [
   },
   {
     q: "How do I verify the purity of my batch?",
-    a: "Every VERTALIS vial includes a batch code printed on the label. Enter this code on our COA Lookup page to retrieve the full Certificate of Analysis — including HPLC chromatograms, mass spectrometry data, and the independent laboratory report. All COAs are publicly archived and permanently searchable.",
+    a: "Every VERTALIS vial includes a batch code printed on the label. Enter this code on our COA Lookup page to retrieve the full Certificate of Analysis, including HPLC chromatograms, mass spectrometry data, and the independent laboratory report. All COAs are publicly archived and permanently searchable.",
   },
   {
     q: "What is lyophilized powder and how should I store it?",
@@ -25,7 +25,7 @@ const FAQS = [
   },
   {
     q: "Do you ship internationally?",
-    a: "Yes. VERTALIS ships to research institutions and laboratories worldwide. Shipping rates and transit times vary by destination. All international orders are subject to local import regulations — it is the buyer's responsibility to ensure compliance with their country's customs and import laws.",
+    a: "Yes. VERTALIS ships to research institutions and laboratories worldwide. Shipping rates and transit times vary by destination. All international orders are subject to local import regulations. It is the buyer's responsibility to ensure compliance with their country's customs and import laws.",
   },
   {
     q: "What is your return policy?",

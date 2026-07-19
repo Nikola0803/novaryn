@@ -1,11 +1,11 @@
 "use client";
 
 /**
- * VertalisGate — verified-research-access wall.
+ * VertalisGate: verified-research-access wall.
  *
  * Combines three things in one gate, matching the Valkyrie pattern but in
  * Vertalis's dark lab aesthetic:
- *   1. Age verification (21+) + Research-Use-Only consent  — ALWAYS required.
+ *   1. Age verification (21+) + Research-Use-Only consent: ALWAYS required.
  *   2. Optional account Sign In / Create Account, backed by the WordPress/
  *      WooCommerce endpoints proxied through /api/auth/* (keys stay server-side).
  *   3. A guest "Verify & Enter" path so the gate works even before a CMS
@@ -172,7 +172,7 @@ export default function VertalisGate({ children }: { children: React.ReactNode }
       return;
     }
 
-    // Guest / verify-only path — no backend needed.
+    // Guest / verify-only path: no backend needed.
     if (mode === "verify") {
       grantGuest();
       return;

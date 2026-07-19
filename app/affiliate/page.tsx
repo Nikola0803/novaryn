@@ -6,7 +6,7 @@ const BENEFITS = [
   { icon: "ri-percent-line", title: "Commission on Every Order", body: "Earn a percentage on every verified order placed through your unique referral link. Commission structure scales with volume." },
   { icon: "ri-dashboard-line", title: "Affiliate Dashboard", body: "Track clicks, conversions, and earnings in real time through your dedicated affiliate portal." },
   { icon: "ri-gift-line", title: "Personal Discount", body: "Affiliates receive a personal discount code for their own research procurement in addition to commission earnings." },
-  { icon: "ri-time-line", title: "60-Day Cookie Window", body: "Referral attribution is tracked for 60 days from the initial click — not just the first session." },
+  { icon: "ri-time-line", title: "60-Day Cookie Window", body: "Referral attribution is tracked for 60 days from the initial click. Not just the first session." },
   { icon: "ri-secure-payment-line", title: "Monthly Payouts", body: "Earnings are paid out monthly via Zelle, Venmo, or Cash App with no minimum threshold." },
   { icon: "ri-community-line", title: "Priority Support", body: "Lab affiliates get dedicated priority support for their own orders and a direct contact line to the team." },
 ];
@@ -35,7 +35,7 @@ export default function AffiliatePage() {
               Refer colleagues.<br /><span className="text-platinum">Earn on every order.</span>
             </h1>
             <p className="text-[16px] text-foreground-400 max-w-xl leading-relaxed mb-10">
-              Designed for researchers, lab managers, and institutions who trust Vertalis and want to extend that trust — and earn while doing it.
+              Designed for researchers, lab managers, and institutions who trust Vertalis and want to extend that trust, and earn while doing it.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <a href="#apply" className="h-12 px-8 rounded-md bg-primary-500 text-background-900 text-[13px] font-semibold hover:bg-primary-400 transition-all cursor-pointer inline-flex items-center gap-2">
@@ -146,7 +146,7 @@ export default function AffiliatePage() {
               {[
                 ["Full Name", "text", "Dr. Jane Smith"],
                 ["Email", "email", "you@institution.edu"],
-                ["Institution / Lab", "text", "Harvard Medical School — Biochemistry"],
+                ["Institution / Lab", "text", "Harvard Medical School, Biochemistry"],
                 ["Website or Profile URL", "url", "https://lab.university.edu/yourprofile"],
               ].map(([label, type, ph]) => (
                 <div key={String(label)}>

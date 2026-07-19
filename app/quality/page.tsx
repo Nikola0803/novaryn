@@ -93,7 +93,7 @@ export default function QualityPage() {
               {[
                 { icon: "ri-microscope-line", title: "HPLC Purity", body: "High-performance liquid chromatography confirms purity ≥99.0%. Full chromatogram published in every COA." },
                 { icon: "ri-scan-line", title: "LC-MS/MS Identity", body: "Liquid chromatography–mass spectrometry confirms molecular weight and sequence identity against theoretical values." },
-                { icon: "ri-shield-flash-line", title: "Endotoxin (LAL)", body: "Limulus Amebocyte Lysate assay confirms endotoxin levels below 5 EU/mg — critical for in vitro research integrity." },
+                { icon: "ri-shield-flash-line", title: "Endotoxin (LAL)", body: "Limulus Amebocyte Lysate assay confirms endotoxin levels below 5 EU/mg. Critical for in vitro research integrity." },
                 { icon: "ri-close-circle-line", title: "Microbial Limits", body: "Microbial contamination screening ensures sterility for research applications requiring clean environments." },
               ].map((item) => (
                 <div key={item.title} className="group relative rounded-xl bg-background-900/70 border border-background-200/60 p-6 hover:border-primary-500/25 transition-all duration-500">
@@ -120,7 +120,7 @@ export default function QualityPage() {
                 The labs behind every COA.
               </h2>
               <p className="mt-4 text-[15px] text-foreground-500 max-w-xl">
-                We work exclusively with accredited, internationally recognized analytical laboratories. All are independent — they report results to us, not the other way around.
+                We work exclusively with accredited, internationally recognized analytical laboratories. All are independent. They report results to us, not the other way around.
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

@@ -17,7 +17,9 @@ const VERIFY_LINKS = [
 ];
 const COMPANY_LINKS = [
   { label: "About Us", href: "/about" },
+  { label: "Blog", href: "/blog" },
   { label: "Lab Affiliate Program", href: "/affiliate" },
+  { label: "Vets & First Responders", href: "/veterans" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact Us", href: "/contact" },
 ];

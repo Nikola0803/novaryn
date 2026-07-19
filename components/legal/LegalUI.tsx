@@ -86,7 +86,7 @@ export function Divider() {
 
 /** Bold, high-contrast critical-notice box (signal-red accent). */
 export function CriticalBox({
-  label = "Critical Notice — Please Read",
+  label = "Critical Notice: Please Read",
   children,
 }: {
   label?: string;
@@ -121,7 +121,7 @@ export function NoticeBox({ children }: { children: React.ReactNode }) {
   );
 }
 
-/** Affirmative list (green checks) — e.g. purchaser warranties. */
+/** Affirmative list (green checks): e.g. purchaser warranties. */
 export function CheckList({ items }: { items: string[] }) {
   return (
     <div className="space-y-2">
@@ -140,7 +140,7 @@ export function CheckList({ items }: { items: string[] }) {
   );
 }
 
-/** Prohibition list (red crosses) — e.g. product-use restrictions. */
+/** Prohibition list (red crosses): e.g. product-use restrictions. */
 export function CrossList({ items }: { items: string[] }) {
   return (
     <div className="space-y-2">
@@ -234,7 +234,7 @@ export function ContactCard({ dept }: { dept: string }) {
   return (
     <div className="rounded-lg p-6 bg-background-900 border border-background-200/60">
       <p className="font-display text-[14px] tracking-wide text-foreground-100 mb-1">
-        {SITE.legalName} — {dept}
+        {SITE.legalName} · {dept}
       </p>
       {SITE.contactPhone && (
         <p className="font-mono text-[12px] text-foreground-400 mt-1">

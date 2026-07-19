@@ -13,6 +13,13 @@ const NAV_LINKS = [
   { href: "/contact", label: "Contact Us" },
 ];
 
+const CONTACT_DROPDOWN = [
+  { slug: "blog", href: "/blog", name: "Blog", desc: "Research notes & methodology.", icon: "ri-article-line" },
+  { slug: "veterans", href: "/veterans", name: "Vets & First Responders", desc: "23% off for life. How we honor service.", icon: "ri-medal-line" },
+  { slug: "faq", href: "/faq", name: "FAQ", desc: "Answers before and after ordering.", icon: "ri-question-line" },
+  { slug: "contact", href: "/contact", name: "Contact Us", desc: "Talk to a person, 7 days a week.", icon: "ri-mail-line" },
+];
+
 const SHOP_CATEGORIES = [
   {
     slug: "peptides",
@@ -63,7 +70,10 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [shopMenuOpen, setShopMenuOpen] = useState(false);
   const [mobileShopOpen, setMobileShopOpen] = useState(false);
+  const [contactMenuOpen, setContactMenuOpen] = useState(false);
+  const [mobileContactOpen, setMobileContactOpen] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const contactCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { count, openCart } = useCart();
 
   useEffect(() => {
@@ -79,6 +89,14 @@ export default function Header() {
   };
   const scheduleCloseShopMenu = () => {
     closeTimer.current = setTimeout(() => setShopMenuOpen(false), 150);
+  };
+
+  const openContactMenu = () => {
+    if (contactCloseTimer.current) clearTimeout(contactCloseTimer.current);
+    setContactMenuOpen(true);
+  };
+  const scheduleCloseContactMenu = () => {
+    contactCloseTimer.current = setTimeout(() => setContactMenuOpen(false), 150);
   };
 
   return (
@@ -171,6 +189,56 @@ export default function Header() {
                   </div>
                 </div>
               </div>
+            ) : link.href === "/contact" ? (
+              <div
+                key={link.href}
+                className="relative"
+                onMouseEnter={openContactMenu}
+                onMouseLeave={scheduleCloseContactMenu}
+              >
+                <Link
+                  href={link.href}
+                  className="flex items-center gap-1.5 text-[13px] tracking-wide text-foreground-300 hover:text-foreground-100 transition-colors relative group"
+                  aria-expanded={contactMenuOpen}
+                >
+                  {link.label}
+                  <i
+                    className={`ri-arrow-down-s-line text-[14px] transition-transform duration-300 ease-precision ${
+                      contactMenuOpen ? "rotate-180 text-primary-500" : ""
+                    }`}
+                  ></i>
+                  <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-primary-500 transition-all duration-500 ease-precision group-hover:w-full"></span>
+                </Link>
+
+                {/* Dropdown */}
+                <div
+                  className={`absolute right-0 top-[calc(100%+18px)] w-[300px] rounded-lg bg-background-800/95 backdrop-blur-xl border border-background-200/60 shadow-[0_24px_60px_-16px_rgba(0,0,0,0.6)] transition-all duration-300 ease-precision overflow-hidden ${
+                    contactMenuOpen
+                      ? "opacity-100 translate-y-0 pointer-events-auto"
+                      : "opacity-0 -translate-y-2 pointer-events-none"
+                  }`}
+                >
+                  {CONTACT_DROPDOWN.map((item) => (
+                    <Link
+                      key={item.slug}
+                      href={item.href}
+                      className="group/item flex items-start gap-3 px-4 py-3.5 hover:bg-background-100/70 transition-colors duration-300 ease-precision border-b border-background-200/40 last:border-none"
+                    >
+                      <span className="w-8 h-8 flex items-center justify-center rounded-md bg-primary-500/10 text-primary-500 shrink-0 group-hover/item:bg-primary-500 group-hover/item:text-background-900 transition-all duration-300 ease-precision">
+                        <i className={`${item.icon} text-[14px]`}></i>
+                      </span>
+                      <span className="flex flex-col">
+                        <span className="text-[13px] font-medium text-foreground-100 group-hover/item:text-primary-500 transition-colors">
+                          {item.name}
+                        </span>
+                        <span className="text-[11px] text-foreground-500 leading-snug mt-0.5">
+                          {item.desc}
+                        </span>
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
             ) : (
               <Link
                 key={link.href}
@@ -260,6 +328,44 @@ export default function Header() {
                         >
                           <i className={`${cat.icon} text-[13px]`}></i>
                           {cat.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : link.href === "/contact" ? (
+                <div key={link.href} className="border-b border-background-200/40">
+                  <div className="flex items-center justify-between py-3">
+                    <Link
+                      href={link.href}
+                      onClick={() => setMenuOpen(false)}
+                      className="text-[13px] tracking-wide text-foreground-300 hover:text-foreground-100 transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                    <button
+                      aria-label="Toggle contact links"
+                      onClick={() => setMobileContactOpen((v) => !v)}
+                      className="w-8 h-8 flex items-center justify-center text-foreground-400 cursor-pointer"
+                    >
+                      <i
+                        className={`ri-arrow-down-s-line text-[16px] transition-transform duration-300 ease-precision ${
+                          mobileContactOpen ? "rotate-180 text-primary-500" : ""
+                        }`}
+                      ></i>
+                    </button>
+                  </div>
+                  {mobileContactOpen && (
+                    <div className="pb-3 grid grid-cols-1 gap-0.5">
+                      {CONTACT_DROPDOWN.map((item) => (
+                        <Link
+                          key={item.slug}
+                          href={item.href}
+                          onClick={() => setMenuOpen(false)}
+                          className="flex items-center gap-2.5 py-2 pl-2 text-[12px] text-foreground-400 hover:text-primary-500 transition-colors"
+                        >
+                          <i className={`${item.icon} text-[13px]`}></i>
+                          {item.name}
                         </Link>
                       ))}
                     </div>

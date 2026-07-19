@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Hero visual — a procedurally generated 3D peptide chain (ball-and-stick
+ * Hero visual: a procedurally generated 3D peptide chain (ball-and-stick
  * alpha-helix), not a vial or product photo. Built entirely from Three.js
  * primitives (spheres + oriented cylinders along a helical curve), so it's
  * original artwork rather than a rendering of any real-world object, and it
@@ -20,7 +20,7 @@ const PLATINUM = "#C9CDD3";
 
 /**
  * Builds a small procedural environment map and assigns it to the scene so
- * the metallic bonds / node highlights have something coherent to reflect —
+ * the metallic bonds / node highlights have something coherent to reflect;
  * without one they read flat under a transparent canvas.
  */
 function EnvironmentSetup() {

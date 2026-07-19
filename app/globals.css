@@ -91,7 +91,7 @@
   }
 }
 
-/* Honeypot spam-trap fields — must never be visible */
+/* Honeypot spam-trap fields: must never be visible */
 .hp-field {
   position: absolute;
   left: -9999px;

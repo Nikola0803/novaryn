@@ -102,7 +102,7 @@ export default function CheckoutSummary() {
                     }
                     className="h-8 px-3 rounded-md border border-signal/40 text-signal text-[11px] font-medium hover:bg-signal/10 transition-colors cursor-pointer whitespace-nowrap"
                   >
-                    {bac.shortLabel ?? bac.name} — ${bac.price.toFixed(2)}
+                    {bac.shortLabel ?? bac.name} · ${bac.price.toFixed(2)}
                   </button>
                 ))}
               </div>

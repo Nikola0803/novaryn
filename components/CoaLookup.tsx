@@ -93,7 +93,7 @@ export default function CoaLookup() {
             <div className="mt-6 p-4 rounded-md border border-secondary-500/30 bg-secondary-500/5">
               <div className="flex items-center gap-2 mb-4">
                 <i className="ri-checkbox-circle-fill text-secondary-500 text-[16px]"></i>
-                <span className="font-mono text-[12px] text-secondary-500 font-semibold">BATCH VERIFIED — PASS</span>
+                <span className="font-mono text-[12px] text-secondary-500 font-semibold">BATCH VERIFIED · PASS</span>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-[12px]">
                 <div>
@@ -123,7 +123,7 @@ export default function CoaLookup() {
             <div className="mt-6 p-4 rounded-md border border-signal/30 bg-signal/5">
               <div className="flex items-center gap-2">
                 <i className="ri-error-warning-line text-signal text-[16px]"></i>
-                <span className="font-mono text-[12px] text-signal">BATCH NOT FOUND — try NVR-24-1108-A</span>
+                <span className="font-mono text-[12px] text-signal">BATCH NOT FOUND: try NVR-24-1108-A</span>
               </div>
             </div>
           )}

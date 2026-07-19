@@ -10,7 +10,7 @@ import {
 import { SITE, LEGAL_ROUTES } from "@/data/site-config";
 
 export const metadata: Metadata = {
-  title: "Terms of Service — VERTALIS",
+  title: "Terms of Service · VERTALIS",
   description:
     "The terms and conditions governing use of the Vertalis Peptides website and the purchase of research-use-only products.",
 };

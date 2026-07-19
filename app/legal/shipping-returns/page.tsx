@@ -12,7 +12,7 @@ import {
 import { SITE, LEGAL_ROUTES } from "@/data/site-config";
 
 export const metadata: Metadata = {
-  title: "Shipping & Returns — VERTALIS",
+  title: "Shipping & Returns · VERTALIS",
   description:
     "Vertalis Peptides shipping, delivery, and return policy for research-use-only products.",
 };

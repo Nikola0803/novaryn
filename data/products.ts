@@ -32,7 +32,7 @@ export const PRODUCTS: Product[] = [
     "price": 75.0,
     "image": "/images/shop-glp3rt-10-01.jpg",
     "imgAlt": "GLP-3 (RT) - 10MG research peptide vial 10 mg / vial",
-    "imgTitle": "GLP-3 (RT) - 10MG — 10 mg / vial",
+    "imgTitle": "GLP-3 (RT) - 10MG · 10 mg / vial",
     "category": "Peptides",
     "statusDot": LIMITED,
     "statusLabel": "Limited",
@@ -49,7 +49,7 @@ export const PRODUCTS: Product[] = [
     "price": 190.0,
     "image": "/images/shop-glp3rt-30-01.jpg",
     "imgAlt": "GLP-3 (RT) - 30MG research peptide vial 30 mg / vial",
-    "imgTitle": "GLP-3 (RT) - 30MG — 30 mg / vial",
+    "imgTitle": "GLP-3 (RT) - 30MG · 30 mg / vial",
     "category": "Peptides",
     "statusDot": LIMITED,
     "statusLabel": "Limited",
@@ -66,7 +66,7 @@ export const PRODUCTS: Product[] = [
     "price": 39.99,
     "image": "/images/vertalis-prod-pt141-01.jpg",
     "imgAlt": "PT-141 research peptide vial 10 mg / vial",
-    "imgTitle": "PT-141 — 10 mg / vial",
+    "imgTitle": "PT-141 · 10 mg / vial",
     "category": "Peptides",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -75,7 +75,7 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null,
-    "description": "PT-141 (Bremelanotide) is a melanocortin receptor agonist studied in central nervous system signaling research. Supplied as a lyophilized powder, sealed under inert atmosphere — ships ambient with no cold-chain courier required."
+    "description": "PT-141 (Bremelanotide) is a melanocortin receptor agonist studied in central nervous system signaling research. Supplied as a lyophilized powder, sealed under inert atmosphere. Ships ambient with no cold-chain courier required."
   },
   {
     "slug": "nvr-mt2-10",
@@ -84,7 +84,7 @@ export const PRODUCTS: Product[] = [
     "price": 39.99,
     "image": "/images/vertalis-prod-mt2-01.jpg",
     "imgAlt": "Melanotan II research peptide vial 10 mg / vial",
-    "imgTitle": "Melanotan II — 10 mg / vial",
+    "imgTitle": "Melanotan II · 10 mg / vial",
     "category": "Peptides",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -93,7 +93,7 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null,
-    "description": "Melanotan II is a synthetic analog of alpha-MSH studied in melanocortin receptor and pigmentation research. Lyophilized and sealed for stability — ships ambient, no cold-chain packaging needed."
+    "description": "Melanotan II is a synthetic analog of alpha-MSH studied in melanocortin receptor and pigmentation research. Lyophilized and sealed for stability. Ships ambient, no cold-chain packaging needed."
   },
 
   // ───────────────────────── Fat Loss & Metabolic ─────────────────────────
@@ -104,7 +104,7 @@ export const PRODUCTS: Product[] = [
     "price": 74.99,
     "image": "/images/vertalis-prod-sema-01.jpg",
     "imgAlt": "Semaglutide research peptide vial 10 mg / vial",
-    "imgTitle": "Semaglutide — 10 mg / vial",
+    "imgTitle": "Semaglutide · 10 mg / vial",
     "category": "Fat Loss & Metabolic",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -113,7 +113,7 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null,
-    "description": "Semaglutide is a GLP-1 receptor agonist studied extensively in metabolic and appetite-regulation research. Lyophilized and sealed for stability — ships ambient with no cold-chain required."
+    "description": "Semaglutide is a GLP-1 receptor agonist studied extensively in metabolic and appetite-regulation research. Lyophilized and sealed for stability. Ships ambient with no cold-chain required."
   },
   {
     "slug": "nvr-sema-5",
@@ -122,7 +122,7 @@ export const PRODUCTS: Product[] = [
     "price": 49.99,
     "image": "/images/shop-sema-5-01.jpg",
     "imgAlt": "Semaglutide research peptide vial 5 mg / vial",
-    "imgTitle": "Semaglutide — 5 mg / vial",
+    "imgTitle": "Semaglutide · 5 mg / vial",
     "category": "Fat Loss & Metabolic",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -131,7 +131,7 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null,
-    "description": "Semaglutide is a GLP-1 receptor agonist studied extensively in metabolic and appetite-regulation research. Lyophilized and sealed for stability — ships ambient with no cold-chain required."
+    "description": "Semaglutide is a GLP-1 receptor agonist studied extensively in metabolic and appetite-regulation research. Lyophilized and sealed for stability. Ships ambient with no cold-chain required."
   },
   {
     "slug": "nvr-tirz-10",
@@ -140,7 +140,7 @@ export const PRODUCTS: Product[] = [
     "price": 59.99,
     "image": "/images/vertalis-prod-tirz-01.jpg",
     "imgAlt": "Tirzepatide research peptide vial 10 mg / vial",
-    "imgTitle": "Tirzepatide — 10 mg / vial",
+    "imgTitle": "Tirzepatide · 10 mg / vial",
     "category": "Fat Loss & Metabolic",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -149,7 +149,7 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null,
-    "description": "Tirzepatide is a dual GIP/GLP-1 receptor agonist studied in metabolic-pathway research models. Supplied lyophilized — ships ambient, no cold-chain packaging needed."
+    "description": "Tirzepatide is a dual GIP/GLP-1 receptor agonist studied in metabolic-pathway research models. Supplied lyophilized. Ships ambient, no cold-chain packaging needed."
   },
   {
     "slug": "nvr-tirz-15",
@@ -158,7 +158,7 @@ export const PRODUCTS: Product[] = [
     "price": 89.99,
     "image": "/images/vertalis-prod-tirz-01.jpg",
     "imgAlt": "Tirzepatide research peptide vial 15 mg / vial",
-    "imgTitle": "Tirzepatide — 15 mg / vial",
+    "imgTitle": "Tirzepatide · 15 mg / vial",
     "category": "Fat Loss & Metabolic",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -176,7 +176,7 @@ export const PRODUCTS: Product[] = [
     "price": 149.99,
     "image": "/images/vertalis-prod-tirz-01.jpg",
     "imgAlt": "Tirzepatide research peptide vial 30 mg / vial",
-    "imgTitle": "Tirzepatide — 30 mg / vial",
+    "imgTitle": "Tirzepatide · 30 mg / vial",
     "category": "Fat Loss & Metabolic",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -194,7 +194,7 @@ export const PRODUCTS: Product[] = [
     "price": 274.99,
     "image": "/images/vertalis-prod-tirz-01.jpg",
     "imgAlt": "Tirzepatide research peptide vial 60 mg / vial",
-    "imgTitle": "Tirzepatide — 60 mg / vial",
+    "imgTitle": "Tirzepatide · 60 mg / vial",
     "category": "Fat Loss & Metabolic",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -212,7 +212,7 @@ export const PRODUCTS: Product[] = [
     "price": 74.99,
     "image": "/images/vertalis-prod-reta-01.jpg",
     "imgAlt": "Retatrutide research peptide vial 10 mg / vial",
-    "imgTitle": "Retatrutide — 10 mg / vial",
+    "imgTitle": "Retatrutide · 10 mg / vial",
     "category": "Fat Loss & Metabolic",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -221,7 +221,7 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null,
-    "description": "Retatrutide is a triple-agonist (GIP/GLP-1/glucagon) compound studied in metabolic and energy-expenditure research. Lyophilized and sealed under inert atmosphere — ships ambient, no cold-chain required."
+    "description": "Retatrutide is a triple-agonist (GIP/GLP-1/glucagon) compound studied in metabolic and energy-expenditure research. Lyophilized and sealed under inert atmosphere. Ships ambient, no cold-chain required."
   },
   {
     "slug": "nvr-reta-15",
@@ -230,7 +230,7 @@ export const PRODUCTS: Product[] = [
     "price": 129.99,
     "image": "/images/vertalis-prod-reta-01.jpg",
     "imgAlt": "Retatrutide research peptide vial 15 mg / vial",
-    "imgTitle": "Retatrutide — 15 mg / vial",
+    "imgTitle": "Retatrutide · 15 mg / vial",
     "category": "Fat Loss & Metabolic",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -248,7 +248,7 @@ export const PRODUCTS: Product[] = [
     "price": 189.99,
     "image": "/images/vertalis-prod-reta-01.jpg",
     "imgAlt": "Retatrutide research peptide vial 30 mg / vial",
-    "imgTitle": "Retatrutide — 30 mg / vial",
+    "imgTitle": "Retatrutide · 30 mg / vial",
     "category": "Fat Loss & Metabolic",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -266,7 +266,7 @@ export const PRODUCTS: Product[] = [
     "price": 349.99,
     "image": "/images/vertalis-prod-reta-01.jpg",
     "imgAlt": "Retatrutide research peptide vial 60 mg / vial",
-    "imgTitle": "Retatrutide — 60 mg / vial",
+    "imgTitle": "Retatrutide · 60 mg / vial",
     "category": "Fat Loss & Metabolic",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -284,7 +284,7 @@ export const PRODUCTS: Product[] = [
     "price": 49.99,
     "image": "/images/vertalis-prod-motsc-01.jpg",
     "imgAlt": "MOTS-c research peptide vial 10 mg / vial",
-    "imgTitle": "MOTS-c — 10 mg / vial",
+    "imgTitle": "MOTS-c · 10 mg / vial",
     "category": "Fat Loss & Metabolic",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -293,7 +293,7 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null,
-    "description": "MOTS-c is a mitochondrial-derived peptide studied in metabolic and exercise-adaptation research. Supplied lyophilized — stable at ambient temperature in transit, no cold-chain courier required."
+    "description": "MOTS-c is a mitochondrial-derived peptide studied in metabolic and exercise-adaptation research. Supplied lyophilized. Stable at ambient temperature in transit, no cold-chain courier required."
   },
   {
     "slug": "nvr-motsc-40",
@@ -302,7 +302,7 @@ export const PRODUCTS: Product[] = [
     "price": 149.99,
     "image": "/images/vertalis-prod-motsc-01.jpg",
     "imgAlt": "MOTS-c research peptide vial 40 mg / vial",
-    "imgTitle": "MOTS-c — 40 mg / vial",
+    "imgTitle": "MOTS-c · 40 mg / vial",
     "category": "Fat Loss & Metabolic",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -322,7 +322,7 @@ export const PRODUCTS: Product[] = [
     "price": 39.99,
     "image": "/images/vertalis-prod-bpc-01.jpg",
     "imgAlt": "BPC-157 research peptide vial 5 mg / vial",
-    "imgTitle": "BPC-157 — 5 mg / vial",
+    "imgTitle": "BPC-157 · 5 mg / vial",
     "category": "Recovery & Repair",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -331,7 +331,7 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null,
-    "description": "BPC-157 is a synthetic peptide fragment studied extensively in gastrointestinal and tissue-repair research models. Lyophilized and sealed under inert atmosphere — ships ambient with no cold-chain required."
+    "description": "BPC-157 is a synthetic peptide fragment studied extensively in gastrointestinal and tissue-repair research models. Lyophilized and sealed under inert atmosphere. Ships ambient with no cold-chain required."
   },
   {
     "slug": "nvr-bpc-10",
@@ -340,7 +340,7 @@ export const PRODUCTS: Product[] = [
     "price": 49.99,
     "image": "/images/vertalis-prod-bpc-01.jpg",
     "imgAlt": "BPC-157 research peptide vial 10 mg / vial",
-    "imgTitle": "BPC-157 — 10 mg / vial",
+    "imgTitle": "BPC-157 · 10 mg / vial",
     "category": "Recovery & Repair",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -358,7 +358,7 @@ export const PRODUCTS: Product[] = [
     "price": 89.99,
     "image": "/images/vertalis-prod-bpc-01.jpg",
     "imgAlt": "BPC-157 research peptide vial 20 mg / vial",
-    "imgTitle": "BPC-157 — 20 mg / vial",
+    "imgTitle": "BPC-157 · 20 mg / vial",
     "category": "Recovery & Repair",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -376,7 +376,7 @@ export const PRODUCTS: Product[] = [
     "price": 44.99,
     "image": "/images/vertalis-prod-tb500-01.jpg",
     "imgAlt": "TB-500 research peptide vial 5 mg / vial",
-    "imgTitle": "TB-500 — 5 mg / vial",
+    "imgTitle": "TB-500 · 5 mg / vial",
     "category": "Recovery & Repair",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -385,7 +385,7 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null,
-    "description": "TB-500 is a synthetic fragment of Thymosin Beta-4 studied for its role in cell-migration and wound-healing research. Supplied lyophilized — ambient-stable in transit, no cold-chain courier needed."
+    "description": "TB-500 is a synthetic fragment of Thymosin Beta-4 studied for its role in cell-migration and wound-healing research. Supplied lyophilized. Ambient-stable in transit, no cold-chain courier needed."
   },
   {
     "slug": "nvr-tb500-10",
@@ -394,7 +394,7 @@ export const PRODUCTS: Product[] = [
     "price": 69.99,
     "image": "/images/vertalis-prod-tb500-01.jpg",
     "imgAlt": "TB-500 research peptide vial 10 mg / vial",
-    "imgTitle": "TB-500 — 10 mg / vial",
+    "imgTitle": "TB-500 · 10 mg / vial",
     "category": "Recovery & Repair",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -412,7 +412,7 @@ export const PRODUCTS: Product[] = [
     "price": 129.99,
     "image": "/images/vertalis-prod-tb500-01.jpg",
     "imgAlt": "TB-500 research peptide vial 20 mg / vial",
-    "imgTitle": "TB-500 — 20 mg / vial",
+    "imgTitle": "TB-500 · 20 mg / vial",
     "category": "Recovery & Repair",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -430,7 +430,7 @@ export const PRODUCTS: Product[] = [
     "price": 62.0,
     "image": "/images/shop-ipam-01.jpg",
     "imgAlt": "Ipamorelin research peptide vial 2 mg / vial",
-    "imgTitle": "Ipamorelin — 2 mg / vial",
+    "imgTitle": "Ipamorelin · 2 mg / vial",
     "category": "Recovery & Repair",
     "statusDot": LIMITED,
     "statusLabel": "Limited",
@@ -447,7 +447,7 @@ export const PRODUCTS: Product[] = [
     "price": 68.0,
     "image": "/images/shop-cjc-01.webp",
     "imgAlt": "CJC-1295 research peptide vial 2 mg / vial",
-    "imgTitle": "CJC-1295 — 2 mg / vial",
+    "imgTitle": "CJC-1295 · 2 mg / vial",
     "category": "Recovery & Repair",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -464,7 +464,7 @@ export const PRODUCTS: Product[] = [
     "price": 39.99,
     "image": "/images/vertalis-prod-kpv-01.jpg",
     "imgAlt": "KPV research peptide vial 10 mg / vial",
-    "imgTitle": "KPV — 10 mg / vial",
+    "imgTitle": "KPV · 10 mg / vial",
     "category": "Recovery & Repair",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -473,7 +473,7 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null,
-    "description": "KPV is a small tripeptide fragment studied for its role in inflammatory-response and gut-barrier research models. Supplied lyophilized and sealed under inert atmosphere — ships ambient with no cold-chain required."
+    "description": "KPV is a small tripeptide fragment studied for its role in inflammatory-response and gut-barrier research models. Supplied lyophilized and sealed under inert atmosphere. Ships ambient with no cold-chain required."
   },
   {
     "slug": "nvr-cartalax-20",
@@ -482,7 +482,7 @@ export const PRODUCTS: Product[] = [
     "price": 59.99,
     "image": "/images/vertalis-prod-cartalax-01.jpg",
     "imgAlt": "Cartalax research peptide vial 20 mg / vial",
-    "imgTitle": "Cartalax — 20 mg / vial",
+    "imgTitle": "Cartalax · 20 mg / vial",
     "category": "Recovery & Repair",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -491,7 +491,7 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null,
-    "description": "Cartalax is a synthetic dipeptide studied in cartilage and connective-tissue regeneration research. Supplied as a lyophilized powder — ambient-stable in transit, no cold-chain shipping required."
+    "description": "Cartalax is a synthetic dipeptide studied in cartilage and connective-tissue regeneration research. Supplied as a lyophilized powder. Ambient-stable in transit, no cold-chain shipping required."
   },
 
   // ───────────────────────── Longevity ─────────────────────────
@@ -502,7 +502,7 @@ export const PRODUCTS: Product[] = [
     "price": 39.99,
     "image": "/images/shop-ghk-01.jpg",
     "imgAlt": "GHK-Cu research peptide vial 50 mg / vial",
-    "imgTitle": "GHK-Cu — 50 mg / vial",
+    "imgTitle": "GHK-Cu · 50 mg / vial",
     "category": "Longevity",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -511,7 +511,7 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null,
-    "description": "GHK-Cu is a naturally occurring copper peptide studied for tissue-remodeling and collagen-synthesis research. Lyophilized and sealed under inert atmosphere — ships ambient with no cold-chain required."
+    "description": "GHK-Cu is a naturally occurring copper peptide studied for tissue-remodeling and collagen-synthesis research. Lyophilized and sealed under inert atmosphere. Ships ambient with no cold-chain required."
   },
   {
     "slug": "nvr-epitalon-10",
@@ -520,7 +520,7 @@ export const PRODUCTS: Product[] = [
     "price": 82.0,
     "image": "/images/shop-epitalon-01.jpg",
     "imgAlt": "Epitalon research peptide vial 10 mg / vial",
-    "imgTitle": "Epitalon — 10 mg / vial",
+    "imgTitle": "Epitalon · 10 mg / vial",
     "category": "Longevity",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -537,7 +537,7 @@ export const PRODUCTS: Product[] = [
     "price": 64.99,
     "image": "/images/vertalis-prod-nad-01.jpg",
     "imgAlt": "NAD+ research peptide vial 500 mg / vial",
-    "imgTitle": "NAD+ — 500 mg / vial",
+    "imgTitle": "NAD+ · 500 mg / vial",
     "category": "Longevity",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -546,7 +546,7 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null,
-    "description": "NAD+ is a coenzyme studied extensively in cellular-energy and longevity research models. Lyophilized and sealed under inert atmosphere — ships ambient, no cold-chain required."
+    "description": "NAD+ is a coenzyme studied extensively in cellular-energy and longevity research models. Lyophilized and sealed under inert atmosphere. Ships ambient, no cold-chain required."
   },
   {
     "slug": "nvr-ta1-5",
@@ -555,7 +555,7 @@ export const PRODUCTS: Product[] = [
     "price": 44.99,
     "image": "/images/vertalis-prod-ta1-01.jpg",
     "imgAlt": "Thymosin Alpha-1 research peptide vial 5 mg / vial",
-    "imgTitle": "Thymosin Alpha-1 — 5 mg / vial",
+    "imgTitle": "Thymosin Alpha-1 · 5 mg / vial",
     "category": "Longevity",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -564,7 +564,7 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null,
-    "description": "Thymosin Alpha-1 is a thymic peptide widely used in immune-modulation and cellular-signaling research. Lyophilized for stability and shipped ambient — no cold-chain packaging needed."
+    "description": "Thymosin Alpha-1 is a thymic peptide widely used in immune-modulation and cellular-signaling research. Lyophilized for stability and shipped ambient. No cold-chain packaging needed."
   },
   {
     "slug": "nvr-tesa-10",
@@ -573,7 +573,7 @@ export const PRODUCTS: Product[] = [
     "price": 94.99,
     "image": "/images/vertalis-prod-tesa-01.jpg",
     "imgAlt": "Tesamorelin research peptide vial 10 mg / vial",
-    "imgTitle": "Tesamorelin — 10 mg / vial",
+    "imgTitle": "Tesamorelin · 10 mg / vial",
     "category": "Longevity",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -582,7 +582,7 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null,
-    "description": "Tesamorelin is a growth-hormone-releasing hormone (GHRH) analog studied in metabolic and body-composition research models. Supplied lyophilized — ambient-stable during transit, no cold-chain shipping required."
+    "description": "Tesamorelin is a growth-hormone-releasing hormone (GHRH) analog studied in metabolic and body-composition research models. Supplied lyophilized. Ambient-stable during transit, no cold-chain shipping required."
   },
   {
     "slug": "nvr-tesa-20",
@@ -591,7 +591,7 @@ export const PRODUCTS: Product[] = [
     "price": 149.99,
     "image": "/images/vertalis-prod-tesa-01.jpg",
     "imgAlt": "Tesamorelin research peptide vial 20 mg / vial",
-    "imgTitle": "Tesamorelin — 20 mg / vial",
+    "imgTitle": "Tesamorelin · 20 mg / vial",
     "category": "Longevity",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -611,7 +611,7 @@ export const PRODUCTS: Product[] = [
     "price": 49.99,
     "image": "/images/vertalis-prod-selank-01.jpg",
     "imgAlt": "Selank research peptide vial 10 mg / vial",
-    "imgTitle": "Selank — 10 mg / vial",
+    "imgTitle": "Selank · 10 mg / vial",
     "category": "Cognitive",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -620,7 +620,7 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null,
-    "description": "Selank is a synthetic peptide analog studied in anxiolytic and cognitive-function research models. Lyophilized for stability — ships ambient, no cold-chain required."
+    "description": "Selank is a synthetic peptide analog studied in anxiolytic and cognitive-function research models. Lyophilized for stability. Ships ambient, no cold-chain required."
   },
   {
     "slug": "nvr-semax-10",
@@ -629,7 +629,7 @@ export const PRODUCTS: Product[] = [
     "price": 49.99,
     "image": "/images/vertalis-prod-semax-01.jpg",
     "imgAlt": "Semax research peptide vial 10 mg / vial",
-    "imgTitle": "Semax — 10 mg / vial",
+    "imgTitle": "Semax · 10 mg / vial",
     "category": "Cognitive",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -638,7 +638,7 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null,
-    "description": "Semax is a heptapeptide studied for neurotrophic and BDNF-signaling research. Supplied lyophilized — ships ambient, no cold-chain packaging needed."
+    "description": "Semax is a heptapeptide studied for neurotrophic and BDNF-signaling research. Supplied lyophilized. Ships ambient, no cold-chain packaging needed."
   },
   {
     "slug": "nvr-oxytocin-10",
@@ -647,7 +647,7 @@ export const PRODUCTS: Product[] = [
     "price": 39.99,
     "image": "/images/vertalis-prod-oxytocin-01.jpg",
     "imgAlt": "Oxytocin research peptide vial 10 mg / vial",
-    "imgTitle": "Oxytocin — 10 mg / vial",
+    "imgTitle": "Oxytocin · 10 mg / vial",
     "category": "Cognitive",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -656,7 +656,7 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null,
-    "description": "Oxytocin is a nonapeptide studied extensively in social-behavior and neuroendocrine signaling research. Lyophilized and sealed under inert atmosphere for maximum shelf stability — ships ambient, no cold-chain needed."
+    "description": "Oxytocin is a nonapeptide studied extensively in social-behavior and neuroendocrine signaling research. Lyophilized and sealed under inert atmosphere for maximum shelf stability. Ships ambient, no cold-chain needed."
   },
   {
     "slug": "nvr-nsi-4",
@@ -665,7 +665,7 @@ export const PRODUCTS: Product[] = [
     "price": 95.0,
     "image": "/images/shop-nsi-01.webp",
     "imgAlt": "NSI-189 research peptide vial 4 mg / vial",
-    "imgTitle": "NSI-189 — 4 mg / vial",
+    "imgTitle": "NSI-189 · 4 mg / vial",
     "category": "Cognitive",
     "statusDot": "text-signal shadow-[0_0_5px_1px_currentColor]",
     "statusLabel": "Backordered",
@@ -684,7 +684,7 @@ export const PRODUCTS: Product[] = [
     "price": 148.0,
     "image": "/images/shop-blend-rec-01.webp",
     "imgAlt": "Recovery Stack research peptide vial 5 mg + 5 mg / kit",
-    "imgTitle": "Recovery Stack — 5 mg + 5 mg / kit",
+    "imgTitle": "Recovery Stack · 5 mg + 5 mg / kit",
     "category": "Peptide Blends",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -701,7 +701,7 @@ export const PRODUCTS: Product[] = [
     "price": 178.0,
     "image": "/images/shop-blend-long-01.webp",
     "imgAlt": "Longevity Stack research peptide vial 50 mg + 10 mg / kit",
-    "imgTitle": "Longevity Stack — 50 mg + 10 mg / kit",
+    "imgTitle": "Longevity Stack · 50 mg + 10 mg / kit",
     "category": "Peptide Blends",
     "statusDot": LIMITED,
     "statusLabel": "Limited",
@@ -718,7 +718,7 @@ export const PRODUCTS: Product[] = [
     "price": 139.99,
     "image": "/images/vertalis-prod-glow-01.jpg",
     "imgAlt": "GLOW Blend research peptide vial 70 mg / vial",
-    "imgTitle": "GLOW Blend — 70 mg / vial",
+    "imgTitle": "GLOW Blend · 70 mg / vial",
     "category": "Peptide Blends",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -727,7 +727,7 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null,
-    "description": "GLOW is a multi-compound research blend formulated for skin, tissue, and metabolic research protocols. Lyophilized and sealed for stability — ships ambient with no cold-chain required."
+    "description": "GLOW is a multi-compound research blend formulated for skin, tissue, and metabolic research protocols. Lyophilized and sealed for stability. Ships ambient with no cold-chain required."
   },
   {
     "slug": "nvr-blend-klow-80",
@@ -736,7 +736,7 @@ export const PRODUCTS: Product[] = [
     "price": 149.99,
     "image": "/images/vertalis-prod-klow-01.jpg",
     "imgAlt": "KLOW Blend research peptide vial 80 mg / vial",
-    "imgTitle": "KLOW Blend — 80 mg / vial",
+    "imgTitle": "KLOW Blend · 80 mg / vial",
     "category": "Peptide Blends",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -745,7 +745,7 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null,
-    "description": "KLOW is a multi-compound research blend formulated for tissue-repair and regenerative-signaling protocols. Supplied lyophilized — stable at ambient temperature in transit, no cold-chain courier required."
+    "description": "KLOW is a multi-compound research blend formulated for tissue-repair and regenerative-signaling protocols. Supplied lyophilized. Stable at ambient temperature in transit, no cold-chain courier required."
   },
   {
     "slug": "nvr-blend-cjcipa-10",
@@ -754,7 +754,7 @@ export const PRODUCTS: Product[] = [
     "price": 74.99,
     "image": "/images/vertalis-prod-cjcipa-01.jpg",
     "imgAlt": "CJC-1295 / Ipamorelin Blend research peptide vial 10 mg / vial",
-    "imgTitle": "CJC-1295 / Ipamorelin Blend — 10 mg / vial",
+    "imgTitle": "CJC-1295 / Ipamorelin Blend · 10 mg / vial",
     "category": "Peptide Blends",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -763,7 +763,7 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null,
-    "description": "A precision-formulated blend of CJC-1295 and Ipamorelin for combined growth-hormone secretagogue research protocols. Lyophilized and sealed under inert atmosphere — ships ambient, no cold-chain needed."
+    "description": "A precision-formulated blend of CJC-1295 and Ipamorelin for combined growth-hormone secretagogue research protocols. Lyophilized and sealed under inert atmosphere. Ships ambient, no cold-chain needed."
   },
   {
     "slug": "nvr-blend-cjcipa-20",
@@ -772,7 +772,7 @@ export const PRODUCTS: Product[] = [
     "price": 129.99,
     "image": "/images/vertalis-prod-cjcipa-01.jpg",
     "imgAlt": "CJC-1295 / Ipamorelin Blend research peptide vial 20 mg / vial",
-    "imgTitle": "CJC-1295 / Ipamorelin Blend — 20 mg / vial",
+    "imgTitle": "CJC-1295 / Ipamorelin Blend · 20 mg / vial",
     "category": "Peptide Blends",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -790,7 +790,7 @@ export const PRODUCTS: Product[] = [
     "price": 74.99,
     "image": "/images/vertalis-prod-wolverine-01.jpg",
     "imgAlt": "Wolverine Blend research peptide vial 10 mg / vial",
-    "imgTitle": "Wolverine Blend — 10 mg / vial",
+    "imgTitle": "Wolverine Blend · 10 mg / vial",
     "category": "Peptide Blends",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -808,7 +808,7 @@ export const PRODUCTS: Product[] = [
     "price": 109.99,
     "image": "/images/vertalis-prod-wolverine-01.jpg",
     "imgAlt": "Wolverine Blend research peptide vial 20 mg / vial",
-    "imgTitle": "Wolverine Blend — 20 mg / vial",
+    "imgTitle": "Wolverine Blend · 20 mg / vial",
     "category": "Peptide Blends",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -817,7 +817,7 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null,
-    "description": "Wolverine Blend combines BPC-157 and TB-500 in a single formulation for combined tissue-repair research protocols. Supplied lyophilized — ambient-stable in transit, no cold-chain shipping needed."
+    "description": "Wolverine Blend combines BPC-157 and TB-500 in a single formulation for combined tissue-repair research protocols. Supplied lyophilized. Ambient-stable in transit, no cold-chain shipping needed."
   },
 
   // ───────────────────────── Research Supplies ─────────────────────────
@@ -828,7 +828,7 @@ export const PRODUCTS: Product[] = [
     "price": 14.0,
     "image": "/images/shop-bac-01.jpg",
     "imgAlt": "Bacteriostatic Water research peptide vial 30 mL / vial",
-    "imgTitle": "Bacteriostatic Water — 30 mL / vial",
+    "imgTitle": "Bacteriostatic Water · 30 mL / vial",
     "category": "Research Supplies",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -845,7 +845,7 @@ export const PRODUCTS: Product[] = [
     "price": 28.0,
     "image": "/images/shop-syringes-01.jpg",
     "imgAlt": "Insulin Syringes research peptide vial 1 mL · 31G",
-    "imgTitle": "Insulin Syringes — 1 mL · 31G",
+    "imgTitle": "Insulin Syringes · 1 mL · 31G",
     "category": "Research Supplies",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -862,7 +862,7 @@ export const PRODUCTS: Product[] = [
     "price": 10.0,
     "image": "/images/vertalis-prod-bacwater-5ml-01.jpg",
     "imgAlt": "Bacteriostatic Water 5 mL",
-    "imgTitle": "Bacteriostatic Water — 5 mL",
+    "imgTitle": "Bacteriostatic Water · 5 mL",
     "category": "Research Supplies",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
@@ -881,7 +881,7 @@ export const PRODUCTS: Product[] = [
     "price": 10.0,
     "image": "/images/vertalis-prod-bacwater-10ml-01.jpg",
     "imgAlt": "Bacteriostatic Water 10 mL",
-    "imgTitle": "Bacteriostatic Water — 10 mL",
+    "imgTitle": "Bacteriostatic Water · 10 mL",
     "category": "Research Supplies",
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",

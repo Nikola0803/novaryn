@@ -97,7 +97,7 @@ export default function HeroSection() {
         }} />
       ))}
 
-      {/* Live HPLC trace panel — right half (kept clear of the fixed banner + nav, which together occupy the top 112px) */}
+      {/* Live HPLC trace panel · right half (kept clear of the fixed banner + nav, which together occupy the top 112px) */}
       <div className="absolute right-0 top-[112px] bottom-0 z-[5] hidden lg:flex items-center" style={{ width: "50%" }}>
         <div className="relative w-full px-10">
           {/* Ambient glow behind the panel */}
@@ -180,6 +180,42 @@ export default function HeroSection() {
               ))}
             </div>
 
+            {/* MS confirmation — second chart, BPC-157 */}
+            <div className="px-5 pt-4 pb-3 border-t border-background-200/50">
+              <div className="flex items-center justify-between mb-3">
+                <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9, letterSpacing: "0.16em", color: TEAL_D, textTransform: "uppercase" }}>
+                  MS Confirmation · BPC-157
+                </span>
+                <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9, color: "rgba(233,237,242,0.3)" }}>
+                  [M+H]⁺
+                </span>
+              </div>
+              <svg viewBox="0 0 400 70" className="w-full h-auto overflow-visible" preserveAspectRatio="none">
+                <line x1="0" x2="400" y1="70" y2="70" stroke="rgba(94,232,213,0.15)" strokeWidth="1" />
+                {[
+                  { x: 40, h: 7 }, { x: 68, h: 4 }, { x: 100, h: 9 }, { x: 140, h: 5 },
+                  { x: 190, h: 24 }, { x: 210, h: 14 },
+                  { x: 280, h: 66 },
+                  { x: 300, h: 10 }, { x: 335, h: 13 }, { x: 365, h: 6 },
+                ].map((peak, i) => (
+                  <line
+                    key={i}
+                    x1={peak.x} x2={peak.x} y1={70} y2={70 - peak.h}
+                    stroke={peak.x === 280 ? TEAL_L : TEAL}
+                    strokeWidth={peak.x === 280 ? 2.5 : 1.5}
+                    strokeLinecap="round"
+                    opacity={peak.x === 280 ? 1 : 0.6}
+                  />
+                ))}
+                <circle cx="280" cy="4" r="2.5" fill={TEAL_L}>
+                  <animate attributeName="opacity" values="1;0.35;1" dur="2.4s" repeatCount="indefinite" />
+                </circle>
+              </svg>
+              <p className="mt-2" style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9.5, color: "rgba(233,237,242,0.4)" }}>
+                CAS 137525-51-0 · C₆₂H₉₈N₁₆O₂₂ · ~1419.5 Da · 99.15% Purity
+              </p>
+            </div>
+
             {/* Footer */}
             <Link
               href="/coa"
@@ -197,7 +233,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* ── Text — constrained to same 1440px grid as rest of page ── */}
+      {/* ── Text · constrained to same 1440px grid as rest of page ── */}
       <div className="relative z-[8] h-full w-full max-w-[1440px] mx-auto px-6 md:px-10 flex flex-col justify-center">
         <div className="max-w-[580px]">
 
@@ -209,7 +245,7 @@ export default function HeroSection() {
             </p>
           </div>
 
-          {/* Main headline — Vertalis's own copy */}
+          {/* Main headline · Vertalis's own copy */}
           <div style={{ marginBottom: 14 }}>
             <h1 style={{
               fontSize: "clamp(44px, 5.8vw, 82px)", lineHeight: 0.9,

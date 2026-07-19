@@ -151,7 +151,7 @@ export default function CartDrawer() {
                         }
                         className="flex-1 h-9 rounded-md border border-signal/40 text-signal text-[12px] font-medium hover:bg-signal/10 transition-colors cursor-pointer whitespace-nowrap"
                       >
-                        {bac.shortLabel ?? bac.name} — ${bac.price.toFixed(2)}
+                        {bac.shortLabel ?? bac.name} · ${bac.price.toFixed(2)}
                       </button>
                     ))}
                   </div>

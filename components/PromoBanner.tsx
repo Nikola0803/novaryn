@@ -13,16 +13,16 @@ const MESSAGES: BannerMessage[] = [
     type: "code",
     label: "Use code",
     code: "WELCOME10",
-    suffix: "for 10% off your first order — tap to copy",
+    suffix: "for 10% off your first order, tap to copy",
   },
   { type: "text", label: "Want to know about our standards?", href: "/quality" },
   { type: "text", label: "Third-party COA on every batch, no exceptions", href: "/coa" },
   { type: "text", label: "Fast US shipping on every order" },
   {
     type: "cta",
-    label: "Active Military, Veterans & First Responders: 23% Off for Life. Contact us for your personal code.",
-    ctaLabel: "Contact",
-    ctaHref: "/contact",
+    label: "Active Military, Veterans & First Responders: 23% Off for Life. See how we honor your service.",
+    ctaLabel: "Learn More",
+    ctaHref: "/veterans",
   },
 ];
 
@@ -30,7 +30,7 @@ const ROTATE_MS = 4200;
 const FADE_MS = 250;
 
 /**
- * PromoBanner — persistent strip above the main navbar.
+ * PromoBanner: persistent strip above the main navbar.
  * Rotates through MESSAGES, starting at a random index and advancing on an
  * interval. Fixed height (h-10 / 40px) so Header.tsx can sit at a known
  * top-10 offset and every page's pt-[112px] (72px header + 40px banner)
@@ -68,7 +68,7 @@ export default function PromoBanner() {
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1800);
     } catch {
-      // Clipboard API unavailable (e.g. insecure context) — code is still readable to copy manually.
+      // Clipboard API unavailable (e.g. insecure context). Code is still readable to copy manually.
     }
   };
 

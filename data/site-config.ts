@@ -1,5 +1,5 @@
 /* ------------------------------------------------------------------ *
- * VERTALIS — Central compliance & site configuration
+ * VERTALIS · Central compliance & site configuration
  * ------------------------------------------------------------------ *
  * Every legal page, the access gate, and the compliance banners read
  * from this single file. Edit the values below once and the whole site
@@ -23,10 +23,10 @@ export const SITE = {
   minimumAge: 21,
 
   /* --- Contact (blank fields are hidden on legal pages) --- */
-  contactEmail: "", // TODO e.g. "compliance@vertalispeptides.com" — leave "" to route users to /contact
-  contactPhone: "", // TODO e.g. "(000) 000-0000" — leave "" to hide
+  contactEmail: "", // TODO e.g. "compliance@vertalispeptides.com"; leave "" to route users to /contact
+  contactPhone: "", // TODO e.g. "(000) 000-0000"; leave "" to hide
   /** Registered business mailing address, one line or blank */
-  businessAddress: "", // TODO — leave "" to hide
+  businessAddress: "", // TODO: leave "" to hide
 
   /* --- Jurisdiction & fulfilment --- */
   // TODO Confirm with counsel. Used in the Terms "Governing Law" section.
@@ -39,6 +39,15 @@ export const SITE = {
 
   /* --- Testing partners shown in trust strips (edit freely) --- */
   testingPartners: ["Janoshik", "SIMEC", "Anresco"],
+
+  /* --- Payment receiving details, shown at checkout once a gateway is
+     selected. Leave a field blank and its checkout panel shows a
+     "confirmed by email" fallback instead of blank/fake info. --- */
+  paymentHandles: {
+    venmo: "", // TODO e.g. "@Vertalis-Peptides"
+    cashapp: "", // TODO e.g. "$VertalisPeptides"
+    zelle: "", // TODO e.g. "payments@vertalispeptides.com" or a phone number
+  },
 
   /** Last time the legal documents were reviewed/updated */
   legalLastUpdated: "January 1, 2026",

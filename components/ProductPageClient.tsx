@@ -181,7 +181,7 @@ export default function ProductPageClient({ slug }: { slug: string }) {
                             <td className={`py-2.5 px-3 text-[13px] font-semibold ${active ? "text-primary-500" : "text-foreground-200"}`}>{t.qty}</td>
                             <td className={`py-2.5 px-3 font-mono text-[12px] ${active ? "text-primary-500" : "text-foreground-300"}`}>{fmt(unitP)}</td>
                             <td className={`py-2.5 px-3 font-mono text-[12px] ${active ? "text-primary-500" : "text-foreground-300"}`}>{fmt(totalP)}</td>
-                            <td className="py-2.5 px-3 font-mono text-[12px] text-right text-secondary-500">{t.pct > 0 ? `${t.pct}%` : "—"}</td>
+                            <td className="py-2.5 px-3 font-mono text-[12px] text-right text-secondary-500">{t.pct > 0 ? `${t.pct}%` : "0%"}</td>
                           </tr>
                         );
                       })}
@@ -204,7 +204,7 @@ export default function ProductPageClient({ slug }: { slug: string }) {
                   {product.statusLabel !== "In Stock" && (
                     <div className="flex items-center gap-2 mb-5">
                       <span className="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
-                      <span className="text-[12px] font-medium text-yellow-400">{product.statusLabel} — order soon</span>
+                      <span className="text-[12px] font-medium text-yellow-400">{product.statusLabel} · order soon</span>
                     </div>
                   )}
                   <div className="flex items-center gap-3 mb-5 p-3 rounded-md bg-background-100/50 border border-background-200/40">
@@ -225,10 +225,10 @@ export default function ProductPageClient({ slug }: { slug: string }) {
                     className="w-full h-12 rounded-md bg-primary-500 text-background-900 text-[13px] font-semibold hover:bg-primary-400 transition-all duration-300 ease-precision hover:shadow-[0_0_24px_-4px_rgba(94,232,213,0.6)] flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <i className="ri-shopping-bag-3-line text-[15px]"></i>
-                    {product.disabled ? "Out of Stock" : `Add to Cart — ${fmt(tierPrice)}`}
+                    {product.disabled ? "Out of Stock" : `Add to Cart · ${fmt(tierPrice)}`}
                   </button>
                   <p className="mt-4 flex items-center gap-1.5 text-[11px] text-foreground-500">
-                    <i className="ri-flask-line text-[13px]"></i>Lyophilized — ships ambient within 24 hours, no cold-chain needed
+                    <i className="ri-flask-line text-[13px]"></i>Lyophilized, ships ambient within 24 hours, no cold-chain needed
                   </p>
                 </div>
               </div>
@@ -283,7 +283,7 @@ export default function ProductPageClient({ slug }: { slug: string }) {
                     <p className="text-[14px] text-foreground-400 leading-relaxed">
                       {product.description ??
                         `${product.name} (${product.spec}) is a research-grade peptide compound supplied for laboratory use. Vertalis maintains every batch under pharmaceutical-grade synthesis controls with independent third-party HPLC and mass-spec verification before release.`}
-                      {" "}Each vial is lyophilized and sealed under inert atmosphere for maximum stability — shelf-stable at ambient temperature in transit, so no cold-chain shipping is required.
+                      {" "}Each vial is lyophilized and sealed under inert atmosphere for maximum stability. Shelf-stable at ambient temperature in transit, so no cold-chain shipping is required.
                     </p>
                   </div>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -306,7 +306,7 @@ export default function ProductPageClient({ slug }: { slug: string }) {
                     <div>
                       <p className="text-[13px] text-foreground-300 font-medium mb-1">Research Context</p>
                       <p className="text-[12px] text-foreground-500 leading-relaxed">
-                        This compound is supplied for laboratory research use only. Published literature citations are provided as research context — they do not constitute usage instructions or therapeutic recommendations.
+                        This compound is supplied for laboratory research use only. Published literature citations are provided as research context. They do not constitute usage instructions or therapeutic recommendations.
                       </p>
                     </div>
                   </div>
@@ -349,7 +349,7 @@ export default function ProductPageClient({ slug }: { slug: string }) {
                       onClick={() => setShowCoa(true)}
                       className="inline-flex items-center gap-2 h-10 px-6 rounded-md bg-primary-500 text-background-900 text-[13px] font-semibold hover:bg-primary-400 transition-all cursor-pointer"
                     >
-                      <i className="ri-shield-check-line text-[14px]"></i>View COA — Batch {batchCode}
+                      <i className="ri-shield-check-line text-[14px]"></i>View COA · Batch {batchCode}
                     </button>
                     <Link
                       href="/coa"
@@ -365,7 +365,7 @@ export default function ProductPageClient({ slug }: { slug: string }) {
                   <h3 className="font-display text-[17px] text-foreground-100 mb-3">Shipping & Handling</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     {[
-                      { icon: "ri-flask-line", title: "Ambient Shipping", desc: "Peptides are lyophilized (freeze-dried) and fully stable at ambient temperature in transit — no ice packs or cold-chain packaging required." },
+                      { icon: "ri-flask-line", title: "Ambient Shipping", desc: "Peptides are lyophilized (freeze-dried) and fully stable at ambient temperature in transit, no ice packs or cold-chain packaging required." },
                       { icon: "ri-truck-line", title: "24h Dispatch", desc: "Orders confirmed before 2pm EST dispatch same business day via standard courier." },
                       { icon: "ri-global-line", title: "International", desc: "We ship worldwide. International buyers are responsible for import compliance in their jurisdiction." },
                     ].map((item) => (
@@ -388,7 +388,7 @@ export default function ProductPageClient({ slug }: { slug: string }) {
                     {[
                       { journal: "Nature Medicine", year: "2023", title: "Receptor binding dynamics in GLP-1 analogue research." },
                       { journal: "Journal of Peptide Science", year: "2022", title: "Stability and bioactivity profiles of lyophilized research peptides." },
-                      { journal: "Cell Metabolism", year: "2023", title: "Incretin signaling pathways and metabolic regulation — a review." },
+                      { journal: "Cell Metabolism", year: "2023", title: "Incretin signaling pathways and metabolic regulation: a review." },
                     ].map((ref, i) => (
                       <div key={i} className="p-4 rounded-md bg-background-100/60 border border-background-200/40 flex items-start gap-3">
                         <span className="font-mono text-[10px] text-foreground-600 mt-0.5 w-5 shrink-0">{String(i + 1).padStart(2, "0")}</span>

@@ -7,6 +7,7 @@ import PromoBanner from "@/components/PromoBanner";
 import Footer from "@/components/Footer";
 import CheckoutSummary from "@/components/CheckoutSummary";
 import { useCart } from "@/lib/cart-context";
+import { SITE } from "@/data/site-config";
 
 const MEMO_CHARS = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"; // avoids ambiguous 0/O/1/I/L
 const RESERVATION_MS = 2 * 60 * 60 * 1000; // 2 hours
@@ -28,9 +29,27 @@ function formatCountdown(ms: number) {
 }
 
 const GATEWAYS = [
-  { id: "cashapp", label: "Cash App", icon: "ri-money-dollar-circle-line" },
-  { id: "zelle", label: "Zelle", icon: "ri-bank-line" },
-  { id: "venmo", label: "Venmo", icon: "ri-smartphone-line" },
+  {
+    id: "cashapp",
+    label: "Cash App",
+    icon: "ri-money-dollar-circle-line",
+    handle: SITE.paymentHandles.cashapp,
+    handleNote: "Send as a personal payment, not \"for goods and services.\"",
+  },
+  {
+    id: "zelle",
+    label: "Zelle",
+    icon: "ri-bank-line",
+    handle: SITE.paymentHandles.zelle,
+    handleNote: "Zelle transfers are instant and free between US banks.",
+  },
+  {
+    id: "venmo",
+    label: "Venmo",
+    icon: "ri-smartphone-line",
+    handle: SITE.paymentHandles.venmo,
+    handleNote: "Send via Friends & Family. Do not use Goods & Services.",
+  },
 ] as const;
 
 export default function CheckoutPage() {
@@ -42,6 +61,7 @@ export default function CheckoutPage() {
   const [expiresAt, setExpiresAt] = useState(() => Date.now() + RESERVATION_MS);
   const [now, setNow] = useState(() => Date.now());
   const [copied, setCopied] = useState(false);
+  const [handleCopied, setHandleCopied] = useState(false);
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(Date.now()), 1000);
@@ -62,7 +82,20 @@ export default function CheckoutPage() {
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1800);
     } catch {
-      // Clipboard API unavailable — code is still visible to copy manually.
+      // Clipboard API unavailable. Code is still visible to copy manually.
+    }
+  };
+
+  const selectedGatewayInfo = GATEWAYS.find((g) => g.id === selectedGateway) ?? null;
+
+  const handleCopyGatewayHandle = async () => {
+    if (!selectedGatewayInfo?.handle) return;
+    try {
+      await navigator.clipboard.writeText(selectedGatewayInfo.handle);
+      setHandleCopied(true);
+      window.setTimeout(() => setHandleCopied(false), 1800);
+    } catch {
+      // Clipboard API unavailable. Handle is still visible to copy manually.
     }
   };
 
@@ -91,7 +124,10 @@ export default function CheckoutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
             <div className="lg:col-span-7 flex flex-col gap-10">
               <div>
-                <h2 className="font-display text-[20px] text-foreground-100 mb-1">Shipping Information</h2>
+                <div className="flex items-center gap-3 mb-1">
+                  <span className="font-mono text-[10px] tracking-[0.22em] text-primary-500">01</span>
+                  <h2 className="font-display text-[20px] text-foreground-100">Shipping Information</h2>
+                </div>
                 <p className="text-[12px] text-foreground-500 mb-6">All fields marked with * are required.</p>
                 <div className="rounded-lg border border-background-200/60 bg-background-900/50 p-5 md:p-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -130,12 +166,15 @@ export default function CheckoutPage() {
                   </div>
                   <div className="mt-5 flex items-start gap-3 p-3 rounded-md bg-background-100/40 border border-background-200/60">
                     <input type="checkbox" id="sms-consent" className="mt-0.5 w-4 h-4 shrink-0 accent-primary-500 cursor-pointer" />
-                    <label htmlFor="sms-consent" className="text-[11px] text-foreground-500 leading-relaxed cursor-pointer">By checking this box, you agree to receive text messages from Vintage Peptides at the number provided. Consent is not a condition to purchase. Message frequency varies. Message and data rates may apply. Reply STOP to cancel or HELP for help. View our <a href="https://vintagepeptides.com/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-primary-500 hover:text-primary-400 underline transition-colors">Privacy Policy</a> and <a href="https://vintagepeptides.com/terms-of-service" target="_blank" rel="noopener noreferrer" className="text-primary-500 hover:text-primary-400 underline transition-colors">Terms of Service</a>.</label>
+                    <label htmlFor="sms-consent" className="text-[11px] text-foreground-500 leading-relaxed cursor-pointer">By checking this box, you agree to receive text messages from Vertalis Peptides at the number provided. Consent is not a condition to purchase. Message frequency varies. Message and data rates may apply. Reply STOP to cancel or HELP for help. View our <a href="https://vertalispeptides.com/legal/privacy" target="_blank" rel="noopener noreferrer" className="text-primary-500 hover:text-primary-400 underline transition-colors">Privacy Policy</a> and <a href="https://vertalispeptides.com/legal/terms" target="_blank" rel="noopener noreferrer" className="text-primary-500 hover:text-primary-400 underline transition-colors">Terms of Service</a>.</label>
                   </div>
                 </div>
               </div>
               <div>
-                <h2 className="font-display text-[20px] text-foreground-100 mb-5">Order Summary</h2>
+                <div className="flex items-center gap-3 mb-5">
+                  <span className="font-mono text-[10px] tracking-[0.22em] text-primary-500">02</span>
+                  <h2 className="font-display text-[20px] text-foreground-100">Order Summary</h2>
+                </div>
                 <div className="rounded-lg border border-background-200/60 bg-background-900/50 overflow-hidden">
                   <CheckoutSummary />
                 </div>
@@ -155,7 +194,10 @@ export default function CheckoutPage() {
                   <p className="mt-2 text-[10px] text-foreground-600">Try <span className="font-mono text-foreground-500">VERTALIS10</span>, <span className="font-mono text-foreground-500">LABVIP</span>, or <span className="font-mono text-foreground-500">WELCOME5</span></p>
                 </div>
               </div>
-              <h2 className="font-display text-[20px] text-foreground-100 mb-5">Payment Method</h2>
+              <div className="flex items-center gap-3 mb-5">
+                <span className="font-mono text-[10px] tracking-[0.22em] text-primary-500">03</span>
+                <h2 className="font-display text-[20px] text-foreground-100">Payment Method</h2>
+              </div>
               <form className="space-y-6" onSubmit={handlePlaceOrder}>
                 <div className="grid grid-cols-3 gap-3">
                   {GATEWAYS.map((gw) => {
@@ -164,7 +206,10 @@ export default function CheckoutPage() {
                       <button
                         key={gw.id}
                         type="button"
-                        onClick={() => setSelectedGateway(gw.id)}
+                        onClick={() => {
+                          setSelectedGateway(gw.id);
+                          setHandleCopied(false);
+                        }}
                         aria-pressed={active}
                         className={`relative flex flex-col items-center gap-2 p-4 rounded-lg border transition-all duration-300 cursor-pointer ${
                           active
@@ -181,6 +226,37 @@ export default function CheckoutPage() {
                     );
                   })}
                 </div>
+
+                {selectedGatewayInfo && (
+                  <div className="rounded-lg border border-background-200/60 bg-background-100/40 p-4">
+                    <div className="flex items-center gap-2 mb-3">
+                      <i className={`${selectedGatewayInfo.icon} text-[15px] text-primary-500`}></i>
+                      <span className="text-[12px] font-medium text-foreground-200">Send your {selectedGatewayInfo.label} payment to</span>
+                    </div>
+                    {selectedGatewayInfo.handle ? (
+                      <>
+                        <div className="flex items-center gap-2">
+                          <span className="flex-1 h-11 px-4 rounded-md bg-background-100 border border-primary-500/40 flex items-center font-mono text-[15px] text-primary-500 truncate">
+                            {selectedGatewayInfo.handle}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={handleCopyGatewayHandle}
+                            className="h-11 px-4 rounded-md bg-background-100 border border-background-200 text-foreground-300 text-[12px] font-medium hover:border-primary-500 hover:text-primary-500 transition-all cursor-pointer whitespace-nowrap"
+                          >
+                            {handleCopied ? "Copied ✓" : "Copy"}
+                          </button>
+                        </div>
+                        <p className="mt-2 text-[11px] text-foreground-500 leading-relaxed">{selectedGatewayInfo.handleNote}</p>
+                      </>
+                    ) : (
+                      <p className="text-[12px] text-foreground-500 leading-relaxed flex items-start gap-2">
+                        <i className="ri-mail-send-line text-[14px] text-primary-500 mt-0.5 shrink-0"></i>
+                        We&#39;ll email your {selectedGatewayInfo.label} payment details right after you place this order, along with your memo code below.
+                      </p>
+                    )}
+                  </div>
+                )}
 
                 <div className="rounded-lg border border-primary-500/25 bg-primary-500/[0.04] p-4">
                   <div className="flex items-center justify-between mb-2">
@@ -211,7 +287,7 @@ export default function CheckoutPage() {
                     </button>
                   </div>
                   <p className="mt-2 text-[11px] text-foreground-500 leading-relaxed">
-                    Include this exact code in your {selectedGateway ? GATEWAYS.find((g) => g.id === selectedGateway)?.label : "payment"} note so we can match your payment and dispatch faster. Your items are held for 2 hours — after that, stock releases back to general inventory.
+                    Include this exact code in your {selectedGateway ? GATEWAYS.find((g) => g.id === selectedGateway)?.label : "payment"} note so we can match your payment and dispatch faster. Your items are held for 2 hours. After that, stock releases back to general inventory.
                   </p>
                   {expired && (
                     <button
@@ -240,7 +316,7 @@ export default function CheckoutPage() {
                   disabled={items.length === 0 || !selectedGateway || expired}
                   className="w-full h-12 rounded-md bg-primary-500 text-background-900 text-[13px] font-semibold hover:bg-primary-400 transition-all duration-300 ease-precision hover:shadow-[0_0_24px_-4px_rgba(94,232,213,0.6)] flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:shadow-none"
                 >
-                  <i className="ri-lock-line text-[14px]"></i>Confirm Order — $190.00
+                  <i className="ri-lock-line text-[14px]"></i>Confirm Order · $190.00
                 </button>
               </form>
             </div>

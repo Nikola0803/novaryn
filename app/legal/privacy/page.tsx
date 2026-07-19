@@ -11,7 +11,7 @@ import {
 import { SITE, LEGAL_ROUTES } from "@/data/site-config";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — VERTALIS",
+  title: "Privacy Policy · VERTALIS",
   description:
     "How Vertalis Peptides collects, uses, and protects your personal information.",
 };
@@ -46,10 +46,10 @@ export default function PrivacyPage() {
         <p>We may collect the following types of information:</p>
         <CheckList
           items={[
-            "Personal identification information — name, email address, phone number, billing and shipping address",
-            "Payment information — processed securely through third-party payment providers; we do not store full card numbers",
-            "Usage data — IP address, browser type, pages visited, time and date of visit, referring URLs",
-            "Communications — any messages or inquiries you send us via email or contact forms",
+            "Personal identification information: name, email address, phone number, billing and shipping address",
+            "Payment information: processed securely through third-party payment providers; we do not store full card numbers",
+            "Usage data: IP address, browser type, pages visited, time and date of visit, referring URLs",
+            "Communications: any messages or inquiries you send us via email or contact forms",
           ]}
         />
       </LegalSection>

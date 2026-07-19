@@ -11,7 +11,7 @@ const PILLARS = [
   {
     icon: "ri-focus-3-line",
     title: "Specifics over adjectives.",
-    body: "Purity percentage, molecular weight, endotoxin level, lab of record — stated plainly, sourced from independent testing, not marketing copy.",
+    body: "Purity percentage, molecular weight, endotoxin level, lab of record. Stated plainly, sourced from independent testing, not marketing copy.",
   },
   {
     icon: "ri-user-star-line",
@@ -21,9 +21,9 @@ const PILLARS = [
 ];
 
 const STANDARD_STEPS = [
-  { n: "01", title: "Sourced from vetted partners", body: "Raw material from synthesis partners under NDA and audit — not open-market grey supply." },
+  { n: "01", title: "Sourced from vetted partners", body: "Raw material from synthesis partners under NDA and audit. Not open-market grey supply." },
   { n: "02", title: "Tested before it's listed", body: "HPLC, LC-MS/MS, and endotoxin screening from independent labs, before a product goes live." },
-  { n: "03", title: "COA published, not promised", body: "Every batch's certificate is public and searchable by code — you check it before you buy, not after." },
+  { n: "03", title: "COA published, not promised", body: "Every batch's certificate is public and searchable by code. You check it before you buy, not after." },
 ];
 
 export default function AboutPage() {
@@ -45,7 +45,7 @@ export default function AboutPage() {
               Research peptides, <span className="text-platinum">without the guesswork.</span>
             </h1>
             <p className="text-[16px] text-foreground-400 leading-relaxed max-w-xl">
-              The research peptide market grew faster than its standards did. Most suppliers sell on confidence and a nice label — purity claims you can't check, sourcing you can't see. Vertalis exists to be the supplier where you don't have to take our word for it.
+              The research peptide market grew faster than its standards did. Most suppliers sell on confidence and a nice label. Purity claims you can't check, sourcing you can't see. Vertalis exists to be the supplier where you don't have to take our word for it.
             </p>
           </div>
         </section>
@@ -65,7 +65,7 @@ export default function AboutPage() {
               </div>
               <div className="lg:col-span-7 lg:col-start-6">
                 <p className="text-[15px] text-foreground-400 leading-relaxed mb-5">
-                  Every research-peptide site says "lab tested." Very few make it easy to see what that actually means for the vial in front of you — which lab, what method, what the result was, and whether it's still current. We built Vertalis around the parts most vendors treat as an afterthought.
+                  Every research-peptide site says "lab tested." Very few make it easy to see what that actually means for the vial in front of you. Which lab, what method, what the result was, and whether it's still current. We built Vertalis around the parts most vendors treat as an afterthought.
                 </p>
                 <p className="text-[15px] text-foreground-400 leading-relaxed">
                   That means leading with documentation instead of adjectives, treating the researcher on the other end of the order as someone who wants the actual numbers, and never dressing up a claim we can't back with paperwork.
@@ -101,7 +101,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Our standard (condensed — full detail lives on /quality) */}
+        {/* Our standard (condensed · full detail lives on /quality) */}
         <section className="py-24 md:py-32">
           <div className="w-full max-w-[1440px] mx-auto px-6 md:px-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-14">
@@ -114,7 +114,7 @@ export default function AboutPage() {
                   We only list what we can stand behind.
                 </h2>
                 <p className="text-[15px] text-foreground-400 leading-relaxed max-w-md">
-                  Every Vertalis product goes through the same pipeline before it's allowed on the shelf. Independent labs report the results — not us.
+                  Every Vertalis product goes through the same pipeline before it's allowed on the shelf. Independent labs report the results. Not us.
                 </p>
                 <Link href="/quality" className="group inline-flex items-center gap-2 mt-6 text-[13px] font-medium text-primary-500 hover:text-primary-400 transition-colors cursor-pointer">
                   See the full six-stage pipeline
@@ -149,7 +149,7 @@ export default function AboutPage() {
                 <span className="w-8 h-px bg-primary-500/40"></span>
               </div>
               <p className="text-[15px] text-foreground-300 leading-relaxed mb-4">
-                Vertalis is a research-use-only supplier. Our products are sold strictly for laboratory and in-vitro research — not for human consumption, not for medical use, and not as a treatment or cure for any condition. We don't make therapeutic claims, and we're not going to start.
+                Vertalis is a research-use-only supplier. Our products are sold strictly for laboratory and in-vitro research. Not for human consumption, not for medical use, and not as a treatment or cure for any condition. We don't make therapeutic claims, and we're not going to start.
               </p>
               <p className="text-[14px] text-foreground-500 leading-relaxed">
                 We'd rather tell you what we can prove than dress up what we can't. No grey-market sourcing. No inflated purity numbers. If we can't back a claim on paper, we don't make it.
@@ -207,7 +207,7 @@ export default function AboutPage() {
             <div>
               <h2 className="font-display text-[22px] text-foreground-100 mb-1">Real people, real support.</h2>
               <p className="text-[14px] text-foreground-500 max-w-lg">
-                A question about a batch, an order, or a compound spec? You'll reach a person who works here — not a script. No black-box sourcing, no miracle claims, just documented peptides you can actually find what you need on.
+                A question about a batch, an order, or a compound spec? You'll reach a person who works here. Not a script. No black-box sourcing, no miracle claims, just documented peptides you can actually find what you need on.
               </p>
             </div>
             <Link href="/contact" className="shrink-0 h-10 px-6 rounded-md bg-primary-500 text-background-900 text-[13px] font-semibold hover:bg-primary-400 transition-all cursor-pointer inline-flex items-center gap-2">

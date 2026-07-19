@@ -14,7 +14,7 @@ export function captureAffiliateRef(): void {
     const ref = new URLSearchParams(window.location.search).get("ref");
     if (ref) localStorage.setItem(REF_KEY, ref);
   } catch {
-    /* storage unavailable (e.g. privacy mode) — ignore */
+    /* storage unavailable (e.g. privacy mode), ignore */
   }
 }
 

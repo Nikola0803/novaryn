@@ -12,7 +12,7 @@ import {
 import { SITE, LEGAL_ROUTES } from "@/data/site-config";
 
 export const metadata: Metadata = {
-  title: "Research Use Only Policy — VERTALIS",
+  title: "Research Use Only Policy · VERTALIS",
   description:
     "All Vertalis Peptides products are supplied exclusively for in vitro research and laboratory use by qualified professionals. Not for human consumption.",
 };
@@ -121,7 +121,7 @@ export default function ResearchUsePage() {
           items={[
             "Always wear appropriate personal protective equipment (PPE) including lab coat, gloves, and eye protection",
             "Handle in well-ventilated areas or a fume hood as appropriate",
-            "Store according to product specifications — many peptides require cold storage (-20°C or -80°C)",
+            "Store according to product specifications: many peptides require cold storage (-20°C or -80°C)",
             "Keep out of reach of children and unauthorised personnel",
             "Dispose of products in accordance with applicable environmental and safety regulations",
             "Review Safety Data Sheets (SDS) before handling any chemical",

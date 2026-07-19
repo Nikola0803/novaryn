@@ -79,7 +79,7 @@ export default function CoaModal({
             <div className="text-right">
               <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-secondary-500/30 bg-secondary-500/10">
                 <i className="ri-checkbox-circle-fill text-secondary-500 text-[13px]"></i>
-                <span className="font-mono text-[11px] text-secondary-500 font-semibold">CERTIFIED — PASS</span>
+                <span className="font-mono text-[11px] text-secondary-500 font-semibold">CERTIFIED · PASS</span>
               </div>
             </div>
           </div>

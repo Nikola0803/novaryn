@@ -18,7 +18,7 @@ export default function ContactPage() {
               Talk to the team.
             </h1>
             <p className="text-[15px] text-foreground-400 max-w-lg">
-              US-based support available 7 days a week. Whether you have a product question, bulk order inquiry, or need documentation — we respond within 24 hours.
+              US-based support available 7 days a week. Whether you have a product question, bulk order inquiry, or need documentation. We respond within 24 hours.
             </p>
           </div>
         </section>
