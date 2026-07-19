@@ -60,8 +60,8 @@ const SHOP_CATEGORIES = [
   {
     slug: "research-supplies",
     name: "Research Supplies",
-    desc: "Bacteriostatic water, reconstitution & lab essentials.",
-    icon: "ri-syringe-line",
+    desc: "Bacteriostatic water for reconstitution.",
+    icon: "ri-water-flash-line",
   },
 ];
 

@@ -22,7 +22,7 @@ const CATEGORY_DESC: Record<string, string> = {
   "Longevity": "Cellular, mitochondrial, and telomere research peptides for longevity science.",
   "Cognitive": "Neurotropic sequences for synaptic plasticity, BDNF signaling, and cognitive research.",
   "Peptide Blends": "Precision-formulated multi-compound blends for complex research protocols.",
-  "Research Supplies": "Bacteriostatic water, reconstitution supplies, and laboratory essentials.",
+  "Research Supplies": "Bacteriostatic water for peptide reconstitution.",
 };
 
 export function generateStaticParams() {

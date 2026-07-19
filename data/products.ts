@@ -313,6 +313,24 @@ export const PRODUCTS: Product[] = [
     "footText": null,
     "hidden": true
   },
+  {
+    "slug": "nvr-aod9604-10",
+    "name": "AOD-9604",
+    "spec": "10 mg / vial",
+    "price": 64.99,
+    "image": "/images/vertalis-prod-aod9604-01.jpg",
+    "imgAlt": "AOD-9604 research peptide vial 10 mg / vial",
+    "imgTitle": "AOD-9604 · 10 mg / vial",
+    "category": "Fat Loss & Metabolic",
+    "statusDot": IN_STOCK,
+    "statusLabel": "In Stock",
+    "purity": "99.28%",
+    "disabled": false,
+    "buttonText": "Add to Cart",
+    "footClass": null,
+    "footText": null,
+    "description": "AOD-9604 is a modified fragment of human growth hormone studied for its role in lipid metabolism research. Supplied as a lyophilized powder. Ambient-stable in transit, no cold-chain shipping required."
+  },
 
   // ───────────────────────── Recovery & Repair ─────────────────────────
   {
@@ -492,6 +510,42 @@ export const PRODUCTS: Product[] = [
     "footClass": null,
     "footText": null,
     "description": "Cartalax is a synthetic dipeptide studied in cartilage and connective-tissue regeneration research. Supplied as a lyophilized powder. Ambient-stable in transit, no cold-chain shipping required."
+  },
+  {
+    "slug": "nvr-igf1lr3-1",
+    "name": "IGF-1LR3",
+    "spec": "1 mg / vial",
+    "price": 59.99,
+    "image": "/images/vertalis-prod-igf1lr3-01.jpg",
+    "imgAlt": "IGF-1LR3 research peptide vial 1 mg / vial",
+    "imgTitle": "IGF-1LR3 · 1 mg / vial",
+    "category": "Recovery & Repair",
+    "statusDot": IN_STOCK,
+    "statusLabel": "In Stock",
+    "purity": "99.24%",
+    "disabled": false,
+    "buttonText": "Add to Cart",
+    "footClass": null,
+    "footText": null,
+    "description": "IGF-1 LR3 is a long-arginine analog of insulin-like growth factor 1, studied in tissue-growth and recovery research. Supplied as a lyophilized powder. Ambient-stable in transit, no cold-chain shipping required."
+  },
+  {
+    "slug": "nvr-igf1lr3b-1",
+    "name": "IGF-1LR3 (Alt SKU, placeholder name)",
+    "spec": "1 mg / vial",
+    "price": 74.99,
+    "image": "/images/vertalis-prod-igf1lr3-01.jpg",
+    "imgAlt": "IGF-1LR3 research peptide vial 1 mg / vial",
+    "imgTitle": "IGF-1LR3 · 1 mg / vial",
+    "category": "Recovery & Repair",
+    "statusDot": IN_STOCK,
+    "statusLabel": "In Stock",
+    "purity": "99.24%",
+    "disabled": false,
+    "buttonText": "Add to Cart",
+    "footClass": null,
+    "footText": null,
+    "description": "IGF-1 LR3 is a long-arginine analog of insulin-like growth factor 1, studied in tissue-growth and recovery research. Supplied as a lyophilized powder. Ambient-stable in transit, no cold-chain shipping required."
   },
 
   // ───────────────────────── Longevity ─────────────────────────
@@ -833,23 +887,6 @@ export const PRODUCTS: Product[] = [
     "statusDot": IN_STOCK,
     "statusLabel": "In Stock",
     "purity": "USP Grade",
-    "disabled": false,
-    "buttonText": "Add to Cart",
-    "footClass": null,
-    "footText": null
-  },
-  {
-    "slug": "nvr-syringes-100",
-    "name": "Insulin Syringes",
-    "spec": "1 mL · 31G",
-    "price": 28.0,
-    "image": "/images/shop-syringes-01.jpg",
-    "imgAlt": "Insulin Syringes research peptide vial 1 mL · 31G",
-    "imgTitle": "Insulin Syringes · 1 mL · 31G",
-    "category": "Research Supplies",
-    "statusDot": IN_STOCK,
-    "statusLabel": "In Stock",
-    "purity": "Sterile · EO",
     "disabled": false,
     "buttonText": "Add to Cart",
     "footClass": null,
