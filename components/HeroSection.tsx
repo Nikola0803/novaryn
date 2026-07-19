@@ -98,32 +98,32 @@ export default function HeroSection() {
       ))}
 
       {/* Live MS trace panel · right side (kept clear of the fixed banner + nav, which together occupy the top 112px) */}
-      <div className="absolute right-0 top-[112px] bottom-0 z-[5] hidden lg:flex items-center justify-end" style={{ width: "46%" }}>
-        <div className="relative w-full max-w-[440px] px-8">
+      <div className="absolute right-0 top-[112px] bottom-0 z-[5] hidden lg:flex items-center justify-end" style={{ width: "62%" }}>
+        <div className="relative w-full max-w-[820px] px-10">
           {/* Ambient glow behind the panel */}
           <div className="absolute inset-0 pointer-events-none" style={{
-            background: "radial-gradient(ellipse 65% 65% at 50% 50%, rgba(94,232,213,0.11) 0%, transparent 70%)",
+            background: "radial-gradient(ellipse 70% 70% at 50% 50%, rgba(94,232,213,0.13) 0%, transparent 70%)",
           }} />
 
           <div
-            className="relative rounded-xl border border-background-200/60 bg-background-900/70 backdrop-blur-sm overflow-hidden"
-            style={{ boxShadow: "0 34px 80px -28px rgba(0,0,0,0.62)" }}
+            className="relative rounded-2xl border border-background-200/60 bg-background-900/70 backdrop-blur-sm overflow-hidden"
+            style={{ boxShadow: "0 50px 120px -30px rgba(0,0,0,0.65)" }}
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-5 py-3 border-b border-background-200/50" style={{ background: "rgba(94,232,213,0.04)" }}>
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary-500" style={{ animation: "nvPulse 2s ease-in-out infinite" }} />
-                <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, letterSpacing: "0.15em", color: TEAL_D, textTransform: "uppercase" }}>
+            <div className="flex items-center justify-between px-9 py-6 border-b border-background-200/50" style={{ background: "rgba(94,232,213,0.04)" }}>
+              <div className="flex items-center gap-3">
+                <span className="w-2.5 h-2.5 rounded-full bg-primary-500" style={{ animation: "nvPulse 2s ease-in-out infinite" }} />
+                <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 17, letterSpacing: "0.15em", color: TEAL_D, textTransform: "uppercase" }}>
                   MS Confirmation · BPC-157
                 </span>
               </div>
-              <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9.5, color: "rgba(233,237,242,0.35)" }}>
+              <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 16, color: "rgba(233,237,242,0.35)" }}>
                 BATCH VTX-24-1142-C
               </span>
             </div>
 
             {/* Mass spectrum */}
-            <div className="px-5 pt-6 pb-3">
+            <div className="px-9 pt-10 pb-5">
               <svg viewBox="0 0 400 150" className="w-full h-auto overflow-visible" preserveAspectRatio="none">
                 {[0, 1, 2, 3].map((i) => (
                   <line key={`h${i}`} x1="0" x2="400" y1={i * 38} y2={i * 38} stroke="rgba(94,232,213,0.08)" strokeWidth="1" />
@@ -149,10 +149,10 @@ export default function HeroSection() {
                   />
                 ))}
 
-                <text x="280" y="0" textAnchor="middle" fill={TEAL_L} style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10.5 }}>
+                <text x="280" y="0" textAnchor="middle" fill={TEAL_L} style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 17 }}>
                   1419.6 [M+H]⁺
                 </text>
-                <circle cx="280" cy="7" r="3" fill={TEAL_L}>
+                <circle cx="280" cy="7" r="5" fill={TEAL_L}>
                   <animate attributeName="opacity" values="1;0.35;1" dur="2.4s" repeatCount="indefinite" />
                 </circle>
 
@@ -161,7 +161,7 @@ export default function HeroSection() {
                   <animate attributeName="opacity" values="0.45;0.1;0.45" dur="7s" repeatCount="indefinite" />
                 </rect>
               </svg>
-              <p className="mt-2.5" style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9.5, color: "rgba(233,237,242,0.4)" }}>
+              <p className="mt-4" style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 15, color: "rgba(233,237,242,0.4)" }}>
                 CAS 137525-51-0 · C₆₂H₉₈N₁₆O₂₂
               </p>
             </div>
@@ -173,11 +173,11 @@ export default function HeroSection() {
                 { label: "MW", value: "1,419.5 Da" },
                 { label: "m/z [M+H]⁺", value: "1419.6" },
               ].map((s) => (
-                <div key={s.label} className="px-3.5 py-3 text-center">
-                  <p style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 8.5, letterSpacing: "0.15em", color: "rgba(233,237,242,0.35)", textTransform: "uppercase", marginBottom: 4 }}>
+                <div key={s.label} className="px-6 py-6 text-center">
+                  <p style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 13, letterSpacing: "0.15em", color: "rgba(233,237,242,0.35)", textTransform: "uppercase", marginBottom: 8 }}>
                     {s.label}
                   </p>
-                  <p style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: 14.5, color: TEAL_L }}>
+                  <p style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: 24, color: TEAL_L }}>
                     {s.value}
                   </p>
                 </div>
@@ -187,13 +187,13 @@ export default function HeroSection() {
             {/* Footer */}
             <Link
               href="/coa"
-              className="flex items-center justify-between px-5 py-3 border-t border-background-200/50 hover:bg-primary-500/[0.04] transition-colors duration-300 cursor-pointer"
+              className="flex items-center justify-between px-9 py-6 border-t border-background-200/50 hover:bg-primary-500/[0.04] transition-colors duration-300 cursor-pointer"
             >
-              <span className="flex items-center gap-1.5" style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9.5, color: "rgba(233,237,242,0.45)" }}>
+              <span className="flex items-center gap-2" style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 15, color: "rgba(233,237,242,0.45)" }}>
                 <i className="ri-shield-check-line" style={{ color: TEAL }}></i>
                 Verified · Janoshik Analytical
               </span>
-              <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9.5, color: TEAL }}>
+              <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 15, color: TEAL }}>
                 View COA →
               </span>
             </Link>
