@@ -100,9 +100,9 @@ export default function HeroSection() {
         }} />
       ))}
 
-      {/* 3D rotating vial — right half (kept clear of the fixed banner + nav, which together occupy the top 112px) */}
+      {/* 3D rotating peptide chain — right half (kept clear of the fixed banner + nav, which together occupy the top 112px) */}
       <div className="absolute right-0 top-[112px] bottom-0 z-[5] hidden lg:block" style={{ width: "50%" }}>
-        {/* Ambient glow behind the vial */}
+        {/* Ambient glow behind the chain */}
         <div className="absolute inset-0 pointer-events-none" style={{
           background: "radial-gradient(ellipse 42% 50% at 55% 48%, rgba(94,232,213,0.12) 0%, transparent 70%)",
         }} />
