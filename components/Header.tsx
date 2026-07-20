@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/lib/cart-context";
+import { getProduct } from "@/data/products";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -20,48 +21,49 @@ const CONTACT_DROPDOWN = [
   { slug: "contact", href: "/contact", name: "Contact Us", desc: "Talk to a person, 7 days a week.", icon: "ri-mail-line" },
 ];
 
-const SHOP_CATEGORIES = [
+/** Mega-menu: research "protocol" groupings, each pointing at real catalog products. */
+const SHOP_PROTOCOLS = [
   {
-    slug: "peptides",
-    name: "Peptides",
-    desc: "High-purity sequences for receptor & signaling research.",
-    icon: "ri-flask-line",
-  },
-  {
-    slug: "fat-loss-metabolic",
-    name: "Fat Loss & Metabolic",
-    desc: "GLP-1 agonists and metabolic pathway compounds.",
-    icon: "ri-fire-line",
-  },
-  {
-    slug: "recovery-repair",
-    name: "Recovery & Repair",
-    desc: "Tissue repair and regenerative signaling research.",
+    slug: "recovery",
+    label: "Recovery & Repair",
+    href: "/shop/recovery-repair",
     icon: "ri-heart-pulse-line",
+    productSlugs: ["nvr-bpc-5", "nvr-tb500-5", "nvr-kpv-10", "nvr-wolverine-20"],
   },
   {
     slug: "longevity",
-    name: "Longevity",
-    desc: "Cellular, mitochondrial & telomere research.",
+    label: "Longevity & Cellular Health",
+    href: "/shop/longevity",
     icon: "ri-infinity-line",
+    productSlugs: ["nvr-nad-500", "nvr-ta1-5", "nvr-epitalon-10", "nvr-ghk-50"],
   },
   {
-    slug: "cognitive",
-    name: "Cognitive",
-    desc: "Neurotropic sequences for synaptic research.",
+    slug: "metabolic",
+    label: "Metabolic & Weight",
+    href: "/shop/fat-loss-metabolic",
+    icon: "ri-fire-line",
+    productSlugs: ["nvr-sema-10", "nvr-tirz-10", "nvr-reta-10", "nvr-motsc-10"],
+  },
+  {
+    slug: "growth",
+    label: "Growth & Performance",
+    href: "/shop",
+    icon: "ri-rocket-2-line",
+    productSlugs: ["nvr-tesa-10", "nvr-cjc-2", "nvr-blend-cjcipa-10", "nvr-igf1lr3-1"],
+  },
+  {
+    slug: "cognition",
+    label: "Cognition & Mood",
+    href: "/shop/cognitive",
     icon: "ri-brain-line",
+    productSlugs: ["nvr-semax-10", "nvr-selank-10"],
   },
   {
-    slug: "peptide-blends",
-    name: "Peptide Blends",
-    desc: "Precision multi-compound research blends.",
-    icon: "ri-drop-line",
-  },
-  {
-    slug: "research-supplies",
-    name: "Research Supplies",
-    desc: "Bacteriostatic water for reconstitution.",
-    icon: "ri-water-flash-line",
+    slug: "vitality",
+    label: "Vitality",
+    href: "/shop",
+    icon: "ri-sparkling-2-line",
+    productSlugs: ["nvr-pt141-10", "nvr-mt2-10", "nvr-oxytocin-10"],
   },
 ];
 
@@ -148,15 +150,15 @@ export default function Header() {
 
                 {/* Mega menu */}
                 <div
-                  className={`absolute left-1/2 -translate-x-1/2 top-[calc(100%+18px)] w-[640px] max-w-[90vw] rounded-lg bg-background-800/95 backdrop-blur-xl border border-background-200/60 shadow-[0_24px_60px_-16px_rgba(0,0,0,0.6)] transition-all duration-300 ease-precision ${
+                  className={`absolute left-1/2 -translate-x-1/2 top-[calc(100%+18px)] w-[940px] max-w-[92vw] rounded-lg bg-background-800/95 backdrop-blur-xl border border-background-200/60 shadow-[0_24px_60px_-16px_rgba(0,0,0,0.6)] transition-all duration-300 ease-precision ${
                     shopMenuOpen
                       ? "opacity-100 translate-y-0 pointer-events-auto"
                       : "opacity-0 -translate-y-2 pointer-events-none"
                   }`}
                 >
-                  <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-background-200/50">
+                  <div className="flex items-center justify-between px-7 pt-6 pb-4 border-b border-background-200/50">
                     <span className="font-mono text-[10px] tracking-[0.24em] text-primary-500 uppercase">
-                      Shop by Category
+                      Shop by Research Protocol
                     </span>
                     <Link
                       href="/shop"
@@ -166,26 +168,61 @@ export default function Header() {
                       <i className="ri-arrow-right-line text-[13px]"></i>
                     </Link>
                   </div>
-                  <div className="grid grid-cols-2 gap-1 p-3">
-                    {SHOP_CATEGORIES.map((cat) => (
-                      <Link
-                        key={cat.slug}
-                        href={`/shop/${cat.slug}`}
-                        className="group/cat flex items-start gap-3 rounded-md p-3 hover:bg-background-100/70 transition-colors duration-300 ease-precision"
-                      >
-                        <span className="w-8 h-8 flex items-center justify-center rounded-md bg-primary-500/10 text-primary-500 shrink-0 group-hover/cat:bg-primary-500 group-hover/cat:text-background-900 transition-all duration-300 ease-precision">
-                          <i className={`${cat.icon} text-[15px]`}></i>
-                        </span>
-                        <span className="flex flex-col">
-                          <span className="text-[13px] font-medium text-foreground-100 group-hover/cat:text-primary-500 transition-colors">
-                            {cat.name}
+                  <div className="grid grid-cols-3 gap-x-4 gap-y-7 p-7">
+                    {SHOP_PROTOCOLS.map((proto) => (
+                      <div key={proto.slug}>
+                        <Link href={proto.href} className="group/proto flex items-center gap-2 mb-3">
+                          <span className="w-7 h-7 flex items-center justify-center rounded-md bg-primary-500/10 text-primary-500 shrink-0 group-hover/proto:bg-primary-500 group-hover/proto:text-background-900 transition-all duration-300 ease-precision">
+                            <i className={`${proto.icon} text-[13px]`}></i>
                           </span>
-                          <span className="text-[11px] text-foreground-500 leading-snug mt-0.5">
-                            {cat.desc}
+                          <span className="text-[12px] font-semibold text-foreground-100 group-hover/proto:text-primary-500 transition-colors uppercase tracking-wide">
+                            {proto.label}
                           </span>
-                        </span>
-                      </Link>
+                        </Link>
+                        <div className="flex flex-col gap-0.5 pl-9">
+                          {proto.productSlugs.map((slug) => {
+                            const product = getProduct(slug);
+                            if (!product) return null;
+                            return (
+                              <Link
+                                key={slug}
+                                href={`/product/${slug}`}
+                                className="group/item flex items-center gap-2.5 py-1.5 text-[12.5px] text-foreground-400 hover:text-primary-500 transition-colors"
+                              >
+                                <span className="w-6 h-6 rounded overflow-hidden bg-background-200 shrink-0">
+                                  <img src={product.image} alt="" className="w-full h-full object-cover object-top" />
+                                </span>
+                                <span className="truncate">{product.name}</span>
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </div>
                     ))}
+                  </div>
+                  <div
+                    className="flex items-center justify-between px-7 py-4 border-t border-background-200/50"
+                    style={{ background: "rgba(94,232,213,0.03)" }}
+                  >
+                    <span className="flex items-center gap-2 text-[11px] text-foreground-500">
+                      <i className="ri-shield-check-line text-[13px] text-primary-500"></i>
+                      Every listing is HPLC-verified and COA-backed.
+                    </span>
+                    <div className="flex items-center gap-4">
+                      <Link
+                        href="/quiz"
+                        className="inline-flex items-center gap-1.5 text-[12px] font-medium text-primary-500 hover:text-primary-400 transition-colors"
+                      >
+                        Take the Quiz
+                        <i className="ri-arrow-right-line text-[13px]"></i>
+                      </Link>
+                      <Link
+                        href="/shop"
+                        className="inline-flex items-center h-8 px-4 rounded-md bg-primary-500 text-background-900 text-[11px] font-semibold hover:bg-primary-400 transition-all duration-300 ease-precision whitespace-nowrap"
+                      >
+                        Shop All
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -318,18 +355,51 @@ export default function Header() {
                     </button>
                   </div>
                   {mobileShopOpen && (
-                    <div className="pb-3 grid grid-cols-1 gap-0.5">
-                      {SHOP_CATEGORIES.map((cat) => (
-                        <Link
-                          key={cat.slug}
-                          href={`/shop/${cat.slug}`}
-                          onClick={() => setMenuOpen(false)}
-                          className="flex items-center gap-2.5 py-2 pl-2 text-[12px] text-foreground-400 hover:text-primary-500 transition-colors"
-                        >
-                          <i className={`${cat.icon} text-[13px]`}></i>
-                          {cat.name}
-                        </Link>
+                    <div className="pb-4 flex flex-col gap-4">
+                      {SHOP_PROTOCOLS.map((proto) => (
+                        <div key={proto.slug}>
+                          <Link
+                            href={proto.href}
+                            onClick={() => setMenuOpen(false)}
+                            className="flex items-center gap-2 pl-2 text-[12px] font-semibold text-foreground-300 hover:text-primary-500 transition-colors uppercase tracking-wide"
+                          >
+                            <i className={`${proto.icon} text-[13px]`}></i>
+                            {proto.label}
+                          </Link>
+                          <div className="mt-1.5 flex flex-col gap-0.5 pl-8">
+                            {proto.productSlugs.map((slug) => {
+                              const product = getProduct(slug);
+                              if (!product) return null;
+                              return (
+                                <Link
+                                  key={slug}
+                                  href={`/product/${slug}`}
+                                  onClick={() => setMenuOpen(false)}
+                                  className="py-1.5 text-[12px] text-foreground-500 hover:text-primary-500 transition-colors"
+                                >
+                                  {product.name}
+                                </Link>
+                              );
+                            })}
+                          </div>
+                        </div>
                       ))}
+                      <div className="flex items-center gap-4 pl-2 pt-1">
+                        <Link
+                          href="/quiz"
+                          onClick={() => setMenuOpen(false)}
+                          className="inline-flex items-center gap-1.5 text-[12px] font-medium text-primary-500"
+                        >
+                          Take the Quiz <i className="ri-arrow-right-line text-[13px]"></i>
+                        </Link>
+                        <Link
+                          href="/shop"
+                          onClick={() => setMenuOpen(false)}
+                          className="inline-flex items-center h-8 px-4 rounded-md bg-primary-500 text-background-900 text-[11px] font-semibold whitespace-nowrap"
+                        >
+                          Shop All
+                        </Link>
+                      </div>
                     </div>
                   )}
                 </div>
