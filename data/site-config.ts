@@ -49,6 +49,12 @@ export const SITE = {
     zelle: "", // TODO e.g. "payments@vertalispeptides.com" or a phone number
   },
 
+  /* --- Live chat. Leave whatsappNumber "" and the floating WhatsApp
+     button routes to /contact instead of a wa.me link, so it never
+     points at a wrong or fake number. --- */
+  whatsappNumber: "", // TODO real WhatsApp Business number, digits only with country code, e.g. "15551234567"
+  whatsappDefaultMessage: "Hi Vertalis, I have a question about an order.",
+
   /** Last time the legal documents were reviewed/updated */
   legalLastUpdated: "January 1, 2026",
 

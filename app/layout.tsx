@@ -6,6 +6,8 @@ import { CartProvider } from "@/lib/cart-context";
 import CartDrawer from "@/components/CartDrawer";
 import SiteFooter from "@/components/SiteFooter";
 import VertalisGate from "@/components/VertalisGate";
+import QuizPopup from "@/components/QuizPopup";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -50,6 +52,8 @@ export default function RootLayout({
             {children}
             <SiteFooter />
             <CartDrawer />
+            <QuizPopup />
+            <WhatsAppButton />
           </VertalisGate>
         </CartProvider>
       </body>
