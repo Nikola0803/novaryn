@@ -55,6 +55,14 @@ export const SITE = {
   whatsappNumber: "", // TODO real WhatsApp Business number, digits only with country code, e.g. "15551234567"
   whatsappDefaultMessage: "Hi Vertalis, I have a question about an order.",
 
+  /* --- Affiliate portal. Leave blank and the /affiliate page's Apply/Log In
+     links route to /contact instead of a broken or placeholder domain.
+     Once integrations/vp-affiliate-portal is deployed (its own Vercel
+     project), set this to that deployment's base URL, e.g.
+     "https://affiliates.vertalispeptides.com". Register/login routes are
+     appended as /vertalis/register and /vertalis/login. --- */
+  affiliatePortalUrl: "", // TODO real deployed URL of integrations/vp-affiliate-portal
+
   /** Last time the legal documents were reviewed/updated */
   legalLastUpdated: "January 1, 2026",
 

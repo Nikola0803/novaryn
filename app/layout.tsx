@@ -8,6 +8,7 @@ import SiteFooter from "@/components/SiteFooter";
 import VertalisGate from "@/components/VertalisGate";
 import QuizPopup from "@/components/QuizPopup";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import AffiliateTracker from "@/components/AffiliateTracker";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -54,6 +55,7 @@ export default function RootLayout({
             <CartDrawer />
             <QuizPopup />
             <WhatsAppButton />
+            <AffiliateTracker />
           </VertalisGate>
         </CartProvider>
       </body>

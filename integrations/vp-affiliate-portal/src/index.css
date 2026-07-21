@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  min-height: 100%;
+}
+
+body {
+  background: var(--vp-bg, #08090B);
+  color: var(--vp-text, #E9EDF2);
+}
+
+/* ── Vertalis portal look ───────────────────────────────────────────────
+ * The portal's per-page markup styles every card/input/button via Tailwind's
+ * generic `.border` utility + inline CSS custom properties (see themes.ts),
+ * not bespoke component classes. Rather than touch every className in every
+ * page (Login/Register/ForgotPassword/ResetPassword/Dashboard/Account/
+ * Materials all follow the same pattern), these two rules give the whole
+ * portal a rounded, shadowed "premium membership" panel look and
+ * pill-shaped primary buttons in one place. Source order means these win
+ * over Tailwind's own `rounded-sm`/etc. utilities of equal specificity.
+ */
+.border {
+  border-radius: 14px;
+}
+input.border,
+select.border,
+textarea.border {
+  border-radius: 8px;
+}
+/* Primary CTA buttons all share this exact Tailwind class fragment across
+   every page (login/submit/save/request-payout/etc.) — turn them into
+   Vertalis's teal pill buttons without touching seven separate files. */
+button[class*="tracking-[0.2em] uppercase"] {
+  border-radius: 9999px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.2s ease;
+}
+button[class*="tracking-[0.2em] uppercase"]:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(94,232,213,0.35);
+}
+/* Secondary/outline buttons (Materials, Account, Log Out nav links) — keep
+   the pill shape but skip the accent glow since they aren't the primary action. */
+a[class*="tracking-[0.15em] uppercase"],
+button[class*="tracking-[0.15em] uppercase"] {
+  border-radius: 9999px;
+}
+
+/* ── Landing page (Home.tsx) ───────────────────────────────────────────
+ * A minimal "sign in or apply" gate, not a marketing microsite — the
+ * hero/why-partners/how-it-works/terms/compliance sections were cut: they
+ * added clicks in front of the two things anyone here actually wants —
+ * Apply, or Sign In — both of which now go straight to the real form.
+ */
+.calibrate-landing { background: #08090B; color: #E9EDF2; font-family: "Inter","Segoe UI",Arial,sans-serif; }
+.calibrate-landing h1, .calibrate-landing h2, .calibrate-landing h3 {
+  font-family: "Space Grotesk",-apple-system,sans-serif;
+  font-weight: 700; letter-spacing: -0.01em; margin: 0; color: #E9EDF2;
+}
+.calibrate-landing .eyebrow { font-family: "JetBrains Mono","SFMono-Regular","Courier New",monospace; text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.68rem; color: rgba(233,237,242,0.55); }
+.calibrate-landing a { color: inherit; text-decoration: none; }
+.calibrate-landing .cta { display:inline-block;background:#5EE8D5;color:#08090B;padding:14px 28px;border-radius:30px;font-size:0.85rem;letter-spacing:0.02em;font-weight:600;text-decoration:none;border:1px solid #5EE8D5;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease; }
+.calibrate-landing .cta:hover{box-shadow:0 8px 24px rgba(94,232,213,0.35);transform:translateY(-1px);}
+.calibrate-landing .cta.ghost{background:transparent;color:#E9EDF2;border-color:rgba(94,232,213,0.16);}
+.calibrate-landing .cta.ghost:hover{border-color:#5EE8D5;box-shadow:none;transform:none;}
+.calibrate-landing .page{max-width:1200px;margin:0 auto;background:#101215;border:1px solid rgba(94,232,213,0.16);border-radius:14px;box-shadow:0 1px 2px rgba(0,0,0,0.4), 0 16px 40px rgba(0,0,0,0.45);overflow:hidden;position:relative;}
+.calibrate-landing .house-btn{display:block;border:1.5px solid rgba(94,232,213,0.16);border-radius:12px;padding:16px 18px;text-align:left;transition:border-color .15s ease;background:#16181C;}
+.calibrate-landing .house-btn:hover{border-color:#5EE8D5;}
+.calibrate-landing .house-btn .hb-name{font-family:"Space Grotesk",-apple-system,sans-serif;font-weight:700;font-size:1rem;color:#E9EDF2;}
+.calibrate-landing .house-btn .hb-sub{font-size:0.78rem;color:rgba(233,237,242,0.55);margin-top:4px;}

@@ -1,21 +1,34 @@
 import Link from "next/link";
 import Header from "@/components/Header";
 import PromoBanner from "@/components/PromoBanner";
+import { SITE } from "@/data/site-config";
 
 const BENEFITS = [
-  { icon: "ri-percent-line", title: "Commission on Every Order", body: "Earn a percentage on every verified order placed through your unique referral link. Commission structure scales with volume." },
+  { icon: "ri-percent-line", title: "Commission on Every Order", body: "Earn a percentage on every verified order placed through your unique referral link or personal discount code." },
   { icon: "ri-dashboard-line", title: "Affiliate Dashboard", body: "Track clicks, conversions, and earnings in real time through your dedicated affiliate portal." },
   { icon: "ri-gift-line", title: "Personal Discount", body: "Affiliates receive a personal discount code for their own research procurement in addition to commission earnings." },
-  { icon: "ri-time-line", title: "60-Day Cookie Window", body: "Referral attribution is tracked for 60 days from the initial click. Not just the first session." },
-  { icon: "ri-secure-payment-line", title: "Monthly Payouts", body: "Earnings are paid out monthly via Zelle, Venmo, or Cash App with no minimum threshold." },
+  { icon: "ri-time-line", title: "30-Day Cookie Window", body: "Referral attribution is tracked for 30 days from the initial click. Not just the first session." },
+  { icon: "ri-secure-payment-line", title: "Monthly Payouts", body: "Earnings are paid out monthly via Zelle, Venmo, or Cash App once your confirmed balance reaches the $25 minimum." },
   { icon: "ri-community-line", title: "Priority Support", body: "Lab affiliates get dedicated priority support for their own orders and a direct contact line to the team." },
 ];
 
+// Illustrative starting points, not an automated real-time tier system — the
+// program currently sets each affiliate's commission % individually when an
+// account is approved (see commission_pct in the affiliate portal). Higher
+// tiers are available on request once your referral volume grows; they are
+// reviewed and applied manually, not triggered automatically.
 const TIERS = [
-  { label: "Researcher", commission: "8%", minVolume: "$0", color: "border-foreground-500/30 text-foreground-400" },
-  { label: "Lab Associate", commission: "12%", minVolume: "$2,000/mo referred", color: "border-primary-500/40 text-primary-500" },
-  { label: "Principal", commission: "16%", minVolume: "$5,000/mo referred", color: "border-secondary-500/40 text-secondary-500" },
+  { label: "Researcher", commission: "8%", minVolume: "Starting rate", color: "border-foreground-500/30 text-foreground-400" },
+  { label: "Lab Associate", commission: "12%", minVolume: "~$2,000/mo referred", color: "border-primary-500/40 text-primary-500" },
+  { label: "Principal", commission: "16%", minVolume: "~$5,000/mo referred", color: "border-secondary-500/40 text-secondary-500" },
 ];
+
+// Blank affiliatePortalUrl routes Apply/Log In to /contact instead of a
+// broken or placeholder domain — see data/site-config.ts.
+const PORTAL_URL = SITE.affiliatePortalUrl.replace(/\/+$/, "");
+const APPLY_HREF = PORTAL_URL ? `${PORTAL_URL}/vertalis/register` : "/contact";
+const LOGIN_HREF = PORTAL_URL ? `${PORTAL_URL}/vertalis/login` : "/contact";
+const PORTAL_LIVE = Boolean(PORTAL_URL);
 
 export default function AffiliatePage() {
   return (
@@ -44,6 +57,9 @@ export default function AffiliatePage() {
               <a href="#tiers" className="h-12 px-8 rounded-md border border-background-200 text-[13px] text-foreground-300 hover:border-primary-500 hover:text-primary-500 transition-all cursor-pointer inline-flex items-center gap-2">
                 View Commission Tiers
               </a>
+              <a href={LOGIN_HREF} className="h-12 px-8 rounded-md text-[13px] text-foreground-500 hover:text-primary-500 transition-all cursor-pointer inline-flex items-center gap-2">
+                Already an affiliate? Log in <i className="ri-arrow-right-line text-[14px]"></i>
+              </a>
             </div>
           </div>
         </section>
@@ -63,8 +79,8 @@ export default function AffiliatePage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
                 { n: "01", icon: "ri-user-add-line", title: "Apply", body: "Submit your affiliate application. We review eligibility within 48 hours and provide access to your dashboard and unique referral link." },
-                { n: "02", icon: "ri-share-line", title: "Refer", body: "Share your link with colleagues, institutions, or in research communities. Every click is tracked for 60 days." },
-                { n: "03", icon: "ri-money-dollar-circle-line", title: "Earn", body: "Earn commission on every confirmed order from your referrals. Paid monthly, no minimum threshold." },
+                { n: "02", icon: "ri-share-line", title: "Refer", body: "Share your link with colleagues, institutions, or in research communities. Every click is tracked for 30 days." },
+                { n: "03", icon: "ri-money-dollar-circle-line", title: "Earn", body: "Earn commission on every confirmed order from your referrals. Paid monthly once your balance reaches the $25 minimum." },
               ].map((step) => (
                 <div key={step.n} className="group relative p-8 rounded-xl bg-background-900/70 border border-background-200/60 hover:border-primary-500/30 transition-all duration-500">
                   <span className="font-mono text-[10px] tracking-[0.2em] text-primary-500 mb-4 block">{step.n}</span>
@@ -124,12 +140,15 @@ export default function AffiliatePage() {
                   <p className="font-display text-[52px] leading-none mb-1">{tier.commission}</p>
                   <p className="font-mono text-[11px] opacity-60 mb-6">commission per order</p>
                   <div className="pt-5 border-t border-background-200/40">
-                    <p className="font-mono text-[10px] tracking-[0.18em] text-foreground-600 uppercase mb-1">Monthly Referrals Required</p>
+                    <p className="font-mono text-[10px] tracking-[0.18em] text-foreground-600 uppercase mb-1">Typical Volume</p>
                     <p className="text-[13px] text-foreground-300">{tier.minVolume}</p>
                   </div>
                 </div>
               ))}
             </div>
+            <p className="text-[12px] text-foreground-600 mt-6 max-w-2xl">
+              Every affiliate starts at the Researcher rate when approved. Tier upgrades are reviewed and applied manually as your referral volume grows, not automatic — reach out any time to request a review.
+            </p>
           </div>
         </section>
 
@@ -140,28 +159,41 @@ export default function AffiliatePage() {
               <h2 className="font-display text-[38px] md:text-[48px] leading-[1.02] tracking-tightest text-foreground-100 mb-3">
                 Apply to the program.
               </h2>
-              <p className="text-[14px] text-foreground-500">Applications are reviewed within 48 hours. We accept researchers, lab managers, and institutional buyers.</p>
+              <p className="text-[14px] text-foreground-500">Applications are reviewed by our team before your account is activated. We accept researchers, lab managers, and institutional buyers.</p>
             </div>
-            <form className="space-y-5 rounded-xl bg-background-900/70 border border-background-200/60 p-8">
-              {[
-                ["Full Name", "text", "Dr. Jane Smith"],
-                ["Email", "email", "you@institution.edu"],
-                ["Institution / Lab", "text", "Harvard Medical School, Biochemistry"],
-                ["Website or Profile URL", "url", "https://lab.university.edu/yourprofile"],
-              ].map(([label, type, ph]) => (
-                <div key={String(label)}>
-                  <label className="block text-[12px] font-medium text-foreground-300 mb-1.5">{label}</label>
-                  <input type={String(type)} placeholder={String(ph)} className="w-full h-10 px-3 rounded-md bg-background-100 border border-background-200 text-foreground-100 text-sm placeholder:text-foreground-600 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500/40 transition" />
-                </div>
-              ))}
-              <div>
-                <label className="block text-[12px] font-medium text-foreground-300 mb-1.5">How do you plan to promote Vertalis?</label>
-                <textarea rows={4} placeholder="Describe your network, platform, or community…" className="w-full px-3 py-3 rounded-md bg-background-100 border border-background-200 text-foreground-100 text-sm placeholder:text-foreground-600 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500/40 transition resize-none"></textarea>
-              </div>
-              <button type="submit" className="w-full h-11 rounded-md bg-primary-500 text-background-900 text-[13px] font-semibold hover:bg-primary-400 transition-all cursor-pointer flex items-center justify-center gap-2">
-                <i className="ri-send-plane-line text-[14px]"></i>Submit Application
-              </button>
-            </form>
+            <div className="rounded-xl bg-background-900/70 border border-background-200/60 p-8 md:p-10 text-center">
+              {PORTAL_LIVE ? (
+                <>
+                  <div className="w-14 h-14 mx-auto flex items-center justify-center rounded-full bg-primary-500/10 text-primary-500 mb-6">
+                    <i className="ri-user-add-line text-[22px]"></i>
+                  </div>
+                  <p className="text-[14px] text-foreground-400 mb-8 max-w-sm mx-auto">
+                    Create your affiliate account in the portal to get your referral link, personal discount code, and dashboard.
+                  </p>
+                  <a href={APPLY_HREF} className="w-full sm:w-auto inline-flex h-11 px-8 rounded-md bg-primary-500 text-background-900 text-[13px] font-semibold hover:bg-primary-400 transition-all cursor-pointer items-center justify-center gap-2">
+                    <i className="ri-send-plane-line text-[14px]"></i>Apply in the Portal
+                  </a>
+                  <p className="text-[13px] text-foreground-500 mt-5">
+                    Already applied?{" "}
+                    <a href={LOGIN_HREF} className="text-primary-500 hover:text-primary-400 transition-colors">
+                      Log in to your dashboard →
+                    </a>
+                  </p>
+                </>
+              ) : (
+                <>
+                  <div className="w-14 h-14 mx-auto flex items-center justify-center rounded-full bg-primary-500/10 text-primary-500 mb-6">
+                    <i className="ri-mail-line text-[22px]"></i>
+                  </div>
+                  <p className="text-[14px] text-foreground-400 mb-8 max-w-sm mx-auto">
+                    The affiliate portal is being finalized. Reach out and we&apos;ll get your account set up directly.
+                  </p>
+                  <Link href="/contact" className="w-full sm:w-auto inline-flex h-11 px-8 rounded-md bg-primary-500 text-background-900 text-[13px] font-semibold hover:bg-primary-400 transition-all cursor-pointer items-center justify-center gap-2">
+                    <i className="ri-send-plane-line text-[14px]"></i>Contact Us to Apply
+                  </Link>
+                </>
+              )}
+            </div>
           </div>
         </section>
       </main>

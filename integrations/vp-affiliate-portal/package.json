@@ -1,0 +1,30 @@
+{
+  "name": "vertalis-affiliate-portal",
+  "private": true,
+  "version": "1.1.0",
+  "type": "module",
+  "description": "Affiliate login/dashboard portal for Vertalis Peptides, ported from the shared VP Affiliates portal codebase. Talks to Vertalis's own WordPress backend (cms.vertalispeptides.com) via the Vertalis Affiliates plugin. Structured to support sibling Vertalis storefronts later (see src/themes.ts).",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit --project tsconfig.app.json"
+  },
+  "dependencies": {
+    "react": "^19.1.2",
+    "react-dom": "^19.1.2",
+    "react-router-dom": "^7.6.3",
+    "recharts": "3.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vercel/node": "^5.3.27",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "typescript": "~5.8.3",
+    "vite": "^5.4.11"
+  }
+}
