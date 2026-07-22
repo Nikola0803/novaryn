@@ -281,7 +281,7 @@ export default function VertalisGate({ children }: { children: React.ReactNode }
                 className="absolute inset-0"
                 style={{
                   background:
-                    "linear-gradient(to bottom, rgba(8,9,11,0.55) 0%, rgba(8,9,11,0.2) 42%, rgba(8,9,11,0.92) 100%)",
+                    "linear-gradient(to bottom, rgb(var(--bg-900) / 0.55) 0%, rgb(var(--bg-900) / 0.2) 42%, rgb(var(--bg-900) / 0.92) 100%)",
                 }}
               />
               <div className="absolute inset-0 grid-overlay opacity-20" />
@@ -295,7 +295,7 @@ export default function VertalisGate({ children }: { children: React.ReactNode }
               <div className="flex items-center gap-2.5">
                 <span className="relative w-6 h-6 flex items-center justify-center">
                   <span className="absolute inset-0 rounded-md border border-primary-500/50 rotate-45" />
-                  <span className="relative w-1.5 h-1.5 rounded-full bg-primary-500 shadow-[0_0_10px_2px_rgba(94,232,213,0.6)]" />
+                  <span className="relative w-1.5 h-1.5 rounded-full bg-primary-500 shadow-[0_0_10px_2px_rgb(var(--primary-500) / 0.6)]" />
                 </span>
                 <span className="font-display text-[22px] tracking-[0.28em] text-foreground-100">
                   {SITE.brand}
@@ -346,8 +346,8 @@ export default function VertalisGate({ children }: { children: React.ReactNode }
                   onClick={() => switchMode(t.key)}
                   className="flex-1 py-4 text-[13px] font-semibold transition-colors cursor-pointer"
                   style={{
-                    color: mode === t.key ? "#E9EDF2" : "#8B93A1",
-                    borderBottom: mode === t.key ? "2px solid #5EE8D5" : "2px solid transparent",
+                    color: mode === t.key ? "rgb(var(--fg-100))" : "rgb(var(--fg-500))",
+                    borderBottom: mode === t.key ? "2px solid rgb(var(--primary-500))" : "2px solid transparent",
                     marginBottom: -1,
                   }}
                 >
@@ -417,7 +417,7 @@ export default function VertalisGate({ children }: { children: React.ReactNode }
                         onKeyDown={onKey}
                         placeholder={mode === "register" ? "Min. 8 characters" : "Your password"}
                         className="w-full h-11 px-4 pr-16 rounded-md bg-background-200 border border-background-300 text-foreground-100 text-sm placeholder:text-foreground-600 outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500/40 transition"
-                        style={{ borderColor: error ? "#FF5C5C" : undefined }}
+                        style={{ borderColor: error ? "rgb(var(--signal))" : undefined }}
                       />
                       <button
                         type="button"
@@ -444,7 +444,7 @@ export default function VertalisGate({ children }: { children: React.ReactNode }
                         onKeyDown={onKey}
                         placeholder="Repeat your password"
                         className="w-full h-11 px-4 rounded-md bg-background-200 border border-background-300 text-foreground-100 text-sm placeholder:text-foreground-600 outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500/40 transition"
-                        style={{ borderColor: error && confirm !== password ? "#FF5C5C" : undefined }}
+                        style={{ borderColor: error && confirm !== password ? "rgb(var(--signal))" : undefined }}
                       />
                     </div>
                   )}
@@ -477,7 +477,7 @@ export default function VertalisGate({ children }: { children: React.ReactNode }
                       setError("");
                     }}
                     className="mt-0.5 shrink-0 cursor-pointer w-4 h-4"
-                    style={{ accentColor: "#5EE8D5" }}
+                    style={{ accentColor: "rgb(var(--primary-500))" }}
                   />
                   <span className="text-[12px] font-medium text-foreground-300 leading-snug">
                     I confirm I am {SITE.minimumAge} or older and agree to the{" "}
@@ -494,7 +494,7 @@ export default function VertalisGate({ children }: { children: React.ReactNode }
                     checked={agreeEmail}
                     onChange={(e) => setAgreeEmail(e.target.checked)}
                     className="mt-0.5 shrink-0 cursor-pointer w-4 h-4"
-                    style={{ accentColor: "#5EE8D5" }}
+                    style={{ accentColor: "rgb(var(--primary-500))" }}
                   />
                   <span className="text-[12px] text-foreground-500 leading-snug">
                     Yes, I&apos;d like to receive occasional research updates from {SITE.brand}. I
@@ -513,7 +513,7 @@ export default function VertalisGate({ children }: { children: React.ReactNode }
               <button
                 onClick={handleSubmit}
                 disabled={loading}
-                className="w-full h-12 rounded-md font-semibold uppercase tracking-widest text-[13px] text-background-900 bg-primary-500 hover:bg-primary-400 hover:shadow-[0_0_28px_-4px_rgba(94,232,213,0.6)] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                className="w-full h-12 rounded-md font-semibold uppercase tracking-widest text-[13px] text-background-900 bg-primary-500 hover:bg-primary-400 hover:shadow-[0_0_28px_-4px_rgb(var(--primary-500) / 0.6)] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
               >
                 {loading ? (
                   <>
@@ -597,7 +597,7 @@ const Field = forwardRef<
       placeholder={placeholder}
       autoComplete={type === "email" ? "email" : type === "password" ? "current-password" : "username"}
       className="w-full h-11 px-4 rounded-md bg-background-200 border border-background-300 text-foreground-100 text-sm placeholder:text-foreground-600 outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500/40 transition"
-      style={{ borderColor: error ? "#FF5C5C" : undefined }}
+      style={{ borderColor: error ? "rgb(var(--signal))" : undefined }}
     />
   </div>
 ));

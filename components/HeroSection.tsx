@@ -3,11 +3,11 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 
-const TEAL   = "#5EE8D5";
-const TEAL_D = "#3bb8a8";
-const TEAL_L = "#a8f5ed";
-const BG     = "#08090B";
-const FG_DIM = "rgba(233,237,242,0.48)";
+const TEAL   = "rgb(var(--primary-500))";
+const TEAL_D = "rgb(var(--hero-dim))";
+const TEAL_L = "rgb(var(--hero-emphasis))";
+const BG     = "rgb(var(--bg-900))";
+const FG_DIM = "rgb(var(--fg-100) / 0.48)";
 
 export default function HeroSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -56,7 +56,7 @@ export default function HeroSection() {
     >
       {/* Radial ambient */}
       <div className="absolute inset-0 z-0" style={{
-        background: `radial-gradient(ellipse 58% 75% at 70% 50%, #0d1a19 0%, transparent 65%), ${BG}`,
+        background: `radial-gradient(ellipse 58% 75% at 70% 50%, rgb(var(--primary-500) / 0.06) 0%, transparent 65%), ${BG}`,
       }} />
 
       {/* Grid */}
@@ -64,7 +64,7 @@ export default function HeroSection() {
 
       {/* Left fade so text stays readable */}
       <div className="absolute inset-0 z-[2] pointer-events-none" style={{
-        background: "linear-gradient(to right, rgba(8,9,11,1) 0%, rgba(8,9,11,0.88) 30%, rgba(8,9,11,0.45) 52%, rgba(8,9,11,0) 68%)",
+        background: "linear-gradient(to right, rgb(var(--bg-900) / 1) 0%, rgb(var(--bg-900) / 0.88) 30%, rgb(var(--bg-900) / 0.45) 52%, rgb(var(--bg-900) / 0) 68%)",
       }} />
 
       {/* Particles */}
@@ -114,7 +114,7 @@ export default function HeroSection() {
             <h1 style={{
               fontSize: "clamp(44px, 5.8vw, 82px)", lineHeight: 0.9,
               fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700,
-              letterSpacing: "-0.03em", color: "#E9EDF2",
+              letterSpacing: "-0.03em", color: "rgb(var(--fg-100))",
               animation: "nvFadeUp 0.9s ease forwards 0.42s", opacity: 0,
             }}>
               Research‑Grade
@@ -152,7 +152,7 @@ export default function HeroSection() {
           {/* Divider */}
           <div style={{
             width: 280, height: 1,
-            background: `linear-gradient(to right, ${TEAL}, rgba(94,232,213,0.06))`,
+            background: `linear-gradient(to right, ${TEAL}, rgb(var(--primary-500) / 0.06))`,
             marginBottom: 16, animation: "nvFadeUp 0.8s ease forwards 0.94s", opacity: 0,
           }} />
 
@@ -165,7 +165,7 @@ export default function HeroSection() {
             Premium research-grade peptides lyophilized and verified in the USA. Engineered for consistency, stability, and analytical reliability.
           </p>
           <p style={{
-            fontSize: 10, fontStyle: "italic", color: "rgba(233,237,242,0.2)",
+            fontSize: 10, fontStyle: "italic", color: "rgb(var(--fg-100) / 0.2)",
             marginBottom: 20, animation: "nvFadeUp 0.9s ease forwards 1.12s", opacity: 0,
           }}>
             *For Research Use Only. Not intended for human consumption.*
@@ -175,8 +175,8 @@ export default function HeroSection() {
           <div className="flex flex-wrap gap-2" style={{ marginBottom: 24, animation: "nvFadeUp 0.9s ease forwards 1.18s", opacity: 0 }}>
             {["≥99% PURITY", "3RD PARTY TESTED", "LYOPHILIZED · NO COLD-CHAIN"].map((b) => (
               <div key={b} className="flex items-center gap-2" style={{
-                padding: "5px 12px", border: `1px solid rgba(94,232,213,0.25)`,
-                background: "rgba(94,232,213,0.04)",
+                padding: "5px 12px", border: `1px solid rgb(var(--primary-500) / 0.25)`,
+                background: "rgb(var(--primary-500) / 0.04)",
                 fontFamily: "'JetBrains Mono',monospace", fontSize: 9.5,
                 letterSpacing: "0.13em", color: TEAL,
               }}>
@@ -195,7 +195,7 @@ export default function HeroSection() {
               Shop Catalog <i className="ri-arrow-right-line"/>
             </Link>
             <Link href="/coa" className="transition-all duration-200 whitespace-nowrap"
-              style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 11, letterSpacing: "0.14em", color: TEAL_D, borderBottom: `1.5px solid rgba(94,232,213,0.28)`, paddingBottom: 2 }}
+              style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 11, letterSpacing: "0.14em", color: TEAL_D, borderBottom: `1.5px solid rgb(var(--primary-500) / 0.28)`, paddingBottom: 2 }}
               onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = TEAL; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = TEAL_D; }}>
               Verify a COA →
@@ -208,7 +208,7 @@ export default function HeroSection() {
         <div className="hidden lg:block relative shrink-0" style={{ width: "48%", maxWidth: 760 }}>
           {/* Ambient glow behind the panel */}
           <div className="absolute inset-0 pointer-events-none" style={{
-            background: "radial-gradient(ellipse 70% 70% at 50% 50%, rgba(94,232,213,0.13) 0%, transparent 70%)",
+            background: "radial-gradient(ellipse 70% 70% at 50% 50%, rgb(var(--primary-500) / 0.13) 0%, transparent 70%)",
           }} />
 
           <div
@@ -216,14 +216,14 @@ export default function HeroSection() {
             style={{ boxShadow: "0 50px 120px -30px rgba(0,0,0,0.65)" }}
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-9 py-6 border-b border-background-200/50" style={{ background: "rgba(94,232,213,0.04)" }}>
+            <div className="flex items-center justify-between px-9 py-6 border-b border-background-200/50" style={{ background: "rgb(var(--primary-500) / 0.04)" }}>
               <div className="flex items-center gap-3">
                 <span className="w-2.5 h-2.5 rounded-full bg-primary-500" style={{ animation: "nvPulse 2s ease-in-out infinite" }} />
                 <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 17, letterSpacing: "0.15em", color: TEAL_D, textTransform: "uppercase" }}>
                   MS Confirmation · BPC-157
                 </span>
               </div>
-              <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 16, color: "rgba(233,237,242,0.35)" }}>
+              <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 16, color: "rgb(var(--fg-100) / 0.35)" }}>
                 BATCH VTX-24-1142-C
               </span>
             </div>
@@ -232,12 +232,12 @@ export default function HeroSection() {
             <div className="px-9 pt-10 pb-5">
               <svg viewBox="0 0 400 150" className="w-full h-auto overflow-visible" preserveAspectRatio="none">
                 {[0, 1, 2, 3].map((i) => (
-                  <line key={`h${i}`} x1="0" x2="400" y1={i * 38} y2={i * 38} stroke="rgba(94,232,213,0.08)" strokeWidth="1" />
+                  <line key={`h${i}`} x1="0" x2="400" y1={i * 38} y2={i * 38} stroke="rgb(var(--primary-500) / 0.08)" strokeWidth="1" />
                 ))}
                 {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
-                  <line key={`v${i}`} x1={i * 50} x2={i * 50} y1="0" y2="146" stroke="rgba(94,232,213,0.06)" strokeWidth="1" />
+                  <line key={`v${i}`} x1={i * 50} x2={i * 50} y1="0" y2="146" stroke="rgb(var(--primary-500) / 0.06)" strokeWidth="1" />
                 ))}
-                <line x1="0" x2="400" y1="146" y2="146" stroke="rgba(94,232,213,0.2)" strokeWidth="1" />
+                <line x1="0" x2="400" y1="146" y2="146" stroke="rgb(var(--primary-500) / 0.2)" strokeWidth="1" />
 
                 {[
                   { x: 40, h: 13 }, { x: 68, h: 8 }, { x: 100, h: 18 }, { x: 140, h: 10 },
@@ -267,7 +267,7 @@ export default function HeroSection() {
                   <animate attributeName="opacity" values="0.45;0.1;0.45" dur="7s" repeatCount="indefinite" />
                 </rect>
               </svg>
-              <p className="mt-4" style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 15, color: "rgba(233,237,242,0.4)" }}>
+              <p className="mt-4" style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 15, color: "rgb(var(--fg-100) / 0.4)" }}>
                 CAS 137525-51-0 · C₆₂H₉₈N₁₆O₂₂
               </p>
             </div>
@@ -280,7 +280,7 @@ export default function HeroSection() {
                 { label: "m/z [M+H]⁺", value: "1419.6" },
               ].map((s) => (
                 <div key={s.label} className="px-6 py-6 text-center">
-                  <p style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 13, letterSpacing: "0.15em", color: "rgba(233,237,242,0.35)", textTransform: "uppercase", marginBottom: 8 }}>
+                  <p style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 13, letterSpacing: "0.15em", color: "rgb(var(--fg-100) / 0.35)", textTransform: "uppercase", marginBottom: 8 }}>
                     {s.label}
                   </p>
                   <p style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: 24, color: TEAL_L }}>
@@ -295,7 +295,7 @@ export default function HeroSection() {
               href="/coa"
               className="flex items-center justify-between px-9 py-6 border-t border-background-200/50 hover:bg-primary-500/[0.04] transition-colors duration-300 cursor-pointer"
             >
-              <span className="flex items-center gap-2" style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 15, color: "rgba(233,237,242,0.45)" }}>
+              <span className="flex items-center gap-2" style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 15, color: "rgb(var(--fg-100) / 0.45)" }}>
                 <i className="ri-shield-check-line" style={{ color: TEAL }}></i>
                 Verified · Janoshik Analytical
               </span>
@@ -308,7 +308,7 @@ export default function HeroSection() {
       </div>
 
       {/* Bottom border */}
-      <div className="absolute bottom-0 left-0 right-0 z-[9]" style={{ height: 1, background: `linear-gradient(to right, ${TEAL}, rgba(94,232,213,0.05))`, opacity: 0.25 }}/>
+      <div className="absolute bottom-0 left-0 right-0 z-[9]" style={{ height: 1, background: `linear-gradient(to right, ${TEAL}, rgb(var(--primary-500) / 0.05))`, opacity: 0.25 }}/>
 
       {/* Edge vignette */}
       <div className="absolute inset-0 z-[6] pointer-events-none" style={{ background: "radial-gradient(ellipse 100% 100% at 50% 50%, transparent 46%, rgba(5,5,5,0.55) 100%)" }}/>

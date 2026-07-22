@@ -36,7 +36,7 @@ export default function BestSellerCard({
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background-100 via-transparent to-transparent opacity-70"></div>
         <div className="absolute top-4 left-4 flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-background-900/80 backdrop-blur border border-primary-500/30">
-          <span className="w-1.5 h-1.5 rounded-full bg-secondary-500 shadow-[0_0_6px_1px_rgba(94,232,160,0.7)]"></span>
+          <span className="w-1.5 h-1.5 rounded-full bg-secondary-500 shadow-[0_0_6px_1px_rgb(var(--secondary-500) / 0.7)]"></span>
           <span className="font-mono text-[10px] tracking-wider text-primary-500">{selected.purity}</span>
         </div>
         <Link

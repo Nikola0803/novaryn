@@ -95,7 +95,7 @@ export default function ProductPageClient({ slug }: { slug: string }) {
                     </div>
                   )}
                   <div className="absolute top-4 right-4 flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-background-900/80 backdrop-blur border border-secondary-500/30">
-                    <span className="w-1.5 h-1.5 rounded-full bg-secondary-500 shadow-[0_0_6px_1px_rgba(94,232,160,0.7)]"></span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-secondary-500 shadow-[0_0_6px_1px_rgb(var(--secondary-500) / 0.7)]"></span>
                     <span className="font-mono text-[10px] tracking-wider text-secondary-500">COA Verified</span>
                   </div>
                 </div>
@@ -122,7 +122,7 @@ export default function ProductPageClient({ slug }: { slug: string }) {
               {/* Purity + batch badges */}
               <div className="flex flex-wrap items-center gap-3 mb-8">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-primary-500/30 bg-primary-500/5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-secondary-500 shadow-[0_0_6px_1px_rgba(94,232,160,0.7)]"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-secondary-500 shadow-[0_0_6px_1px_rgb(var(--secondary-500) / 0.7)]"></span>
                   <span className="font-mono text-[11px] text-primary-500">{product.purity} purity</span>
                 </div>
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-background-200/60 bg-background-100">
@@ -222,7 +222,7 @@ export default function ProductPageClient({ slug }: { slug: string }) {
                   <button
                     onClick={handleAddToCart}
                     disabled={product.disabled}
-                    className="w-full h-12 rounded-md bg-primary-500 text-background-900 text-[13px] font-semibold hover:bg-primary-400 transition-all duration-300 ease-precision hover:shadow-[0_0_24px_-4px_rgba(94,232,213,0.6)] flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full h-12 rounded-md bg-primary-500 text-background-900 text-[13px] font-semibold hover:bg-primary-400 transition-all duration-300 ease-precision hover:shadow-[0_0_24px_-4px_rgb(var(--primary-500) / 0.6)] flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <i className="ri-shopping-bag-3-line text-[15px]"></i>
                     {product.disabled ? "Out of Stock" : `Add to Cart · ${fmt(tierPrice)}`}

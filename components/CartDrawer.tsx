@@ -172,7 +172,7 @@ export default function CartDrawer() {
             </div>
             <button
               onClick={goCheckout}
-              className="w-full h-12 rounded-md bg-primary-500 text-background-900 text-[13px] font-semibold hover:bg-primary-400 transition-all duration-300 ease-precision hover:shadow-[0_0_24px_-4px_rgba(94,232,213,0.6)] flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer"
+              className="w-full h-12 rounded-md bg-primary-500 text-background-900 text-[13px] font-semibold hover:bg-primary-400 transition-all duration-300 ease-precision hover:shadow-[0_0_24px_-4px_rgb(var(--primary-500) / 0.6)] flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer"
             >
               <i className="ri-lock-line text-[14px]"></i>Proceed to Checkout
             </button>

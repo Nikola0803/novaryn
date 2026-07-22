@@ -48,6 +48,15 @@ export default function RootLayout({
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
     >
       <body className="bg-background-800 text-foreground-100 font-sans antialiased">
+        {/* Runs before hydration so the saved theme applies before first
+            paint — avoids a flash of the wrong (default dark) theme on
+            load. See components/ThemeToggle.tsx for the toggle itself. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var t=localStorage.getItem('vertalis-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();",
+          }}
+        />
         <CartProvider>
           <VertalisGate>
             {children}

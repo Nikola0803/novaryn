@@ -193,7 +193,7 @@ export default function CheckoutPage() {
             <div className="lg:col-span-5">
               <div className="lg:sticky lg:top-[130px] mb-8">
                 <div className="rounded-lg border border-primary-500/25 bg-background-900/70 overflow-hidden" style={{ boxShadow: "0 30px 70px -30px rgba(0,0,0,0.55)" }}>
-                  <div className="flex items-center justify-between px-4 py-3.5 border-b border-background-200/50" style={{ background: "rgba(94,232,213,0.05)" }}>
+                  <div className="flex items-center justify-between px-4 py-3.5 border-b border-background-200/50" style={{ background: "rgb(var(--primary-500) / 0.05)" }}>
                     <div className="flex items-center gap-2">
                       <i className="ri-shopping-bag-3-line text-[15px] text-primary-500"></i>
                       <span className="font-display text-[15px] text-foreground-100">Your Order</span>
@@ -237,7 +237,7 @@ export default function CheckoutPage() {
                         aria-pressed={active}
                         className={`relative flex flex-col items-center gap-2 p-4 rounded-lg border transition-all duration-300 cursor-pointer ${
                           active
-                            ? "border-primary-500 bg-primary-500/10 shadow-[0_0_20px_-6px_rgba(94,232,213,0.5)]"
+                            ? "border-primary-500 bg-primary-500/10 shadow-[0_0_20px_-6px_rgb(var(--primary-500) / 0.5)]"
                             : "border-background-200/60 bg-background-100/50 hover:border-background-300"
                         }`}
                       >
@@ -338,7 +338,7 @@ export default function CheckoutPage() {
                 <button
                   type="submit"
                   disabled={items.length === 0 || !selectedGateway || expired}
-                  className="w-full h-12 rounded-md bg-primary-500 text-background-900 text-[13px] font-semibold hover:bg-primary-400 transition-all duration-300 ease-precision hover:shadow-[0_0_24px_-4px_rgba(94,232,213,0.6)] flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:shadow-none"
+                  className="w-full h-12 rounded-md bg-primary-500 text-background-900 text-[13px] font-semibold hover:bg-primary-400 transition-all duration-300 ease-precision hover:shadow-[0_0_24px_-4px_rgb(var(--primary-500) / 0.6)] flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:shadow-none"
                 >
                   <i className="ri-lock-line text-[14px]"></i>Confirm Order · $190.00
                 </button>

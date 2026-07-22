@@ -91,7 +91,7 @@ export default function ShopPage() {
                     onClick={() => setActiveCategory(cat.value)}
                     className={`relative shrink-0 flex items-center gap-3 px-5 py-3.5 rounded-xl border transition-all duration-300 ease-precision cursor-pointer ${
                       active
-                        ? "border-primary-500/60 bg-primary-500/10 shadow-[0_0_20px_-6px_rgba(94,232,213,0.3)]"
+                        ? "border-primary-500/60 bg-primary-500/10 shadow-[0_0_20px_-6px_rgb(var(--primary-500) / 0.3)]"
                         : "border-background-200/60 bg-background-100 hover:border-foreground-500/30 hover:bg-background-800/60"
                     }`}
                   >

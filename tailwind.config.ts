@@ -10,34 +10,41 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Every value resolves through a CSS custom property so the whole
+        // palette can flip between the dark (default/original) and light
+        // themes at runtime (see globals.css :root / [data-theme="light"]
+        // and components/ThemeToggle.tsx) without touching a component.
+        // The "rgb(var(--x) / <alpha-value>)" form is required (not a plain
+        // var() of a hex string) so Tailwind's opacity modifiers like
+        // bg-primary-500/40 keep working against a runtime-swappable value.
         background: {
-          100: "#14161A",
-          200: "#1F2228",
-          300: "#2A2E36",
-          800: "#0A0B0D",
-          900: "#08090B",
+          100: "rgb(var(--bg-100) / <alpha-value>)",
+          200: "rgb(var(--bg-200) / <alpha-value>)",
+          300: "rgb(var(--bg-300) / <alpha-value>)",
+          800: "rgb(var(--bg-800) / <alpha-value>)",
+          900: "rgb(var(--bg-900) / <alpha-value>)",
         },
         foreground: {
-          100: "#E9EDF2",
-          200: "#D4DAE3",
-          300: "#C9CDD3",
-          400: "#A8AEB8",
-          500: "#8B93A1",
-          600: "#6B7280",
+          100: "rgb(var(--fg-100) / <alpha-value>)",
+          200: "rgb(var(--fg-200) / <alpha-value>)",
+          300: "rgb(var(--fg-300) / <alpha-value>)",
+          400: "rgb(var(--fg-400) / <alpha-value>)",
+          500: "rgb(var(--fg-500) / <alpha-value>)",
+          600: "rgb(var(--fg-600) / <alpha-value>)",
         },
         primary: {
-          400: "#5EE8D5",
-          500: "#5EE8D5",
+          400: "rgb(var(--primary-500) / <alpha-value>)",
+          500: "rgb(var(--primary-500) / <alpha-value>)",
         },
         secondary: {
-          400: "#5EE8A0",
-          500: "#5EE8A0",
+          400: "rgb(var(--secondary-500) / <alpha-value>)",
+          500: "rgb(var(--secondary-500) / <alpha-value>)",
         },
         accent: {
-          200: "#D4DAE3",
-          300: "#C9CDD3",
+          200: "rgb(var(--accent-200) / <alpha-value>)",
+          300: "rgb(var(--accent-300) / <alpha-value>)",
         },
-        signal: "#FF5C5C",
+        signal: "rgb(var(--signal) / <alpha-value>)",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "sans-serif"],

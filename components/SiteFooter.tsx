@@ -69,7 +69,7 @@ export default function SiteFooter() {
               <span className="relative w-8 h-8 flex items-center justify-center shrink-0">
                 <span className="absolute inset-0 rounded-lg border border-primary-500/50 rotate-45"></span>
                 <span className="absolute inset-[6px] rounded-md bg-primary-500/10 rotate-45"></span>
-                <span className="relative w-1.5 h-1.5 rounded-full bg-primary-500 shadow-[0_0_10px_2px_rgba(94,232,213,0.6)]"></span>
+                <span className="relative w-1.5 h-1.5 rounded-full bg-primary-500 shadow-[0_0_10px_2px_rgb(var(--primary-500) / 0.6)]"></span>
               </span>
               <span className="flex flex-col leading-none">
                 <span className="font-display text-[19px] tracking-[0.22em] text-foreground-100">VERTALIS</span>

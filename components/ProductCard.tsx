@@ -40,7 +40,7 @@ export default function ProductCard({ product }: { product: Product }) {
             </span>
           </div>
           <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-background-900/70 backdrop-blur border border-primary-500/25">
-            <span className="w-1.5 h-1.5 rounded-full bg-secondary-500 shadow-[0_0_7px_2px_rgba(94,232,160,0.6)]"></span>
+            <span className="w-1.5 h-1.5 rounded-full bg-secondary-500 shadow-[0_0_7px_2px_rgb(var(--secondary-500) / 0.6)]"></span>
             <span className="font-mono text-[10px] tracking-wider text-primary-500">
               {selected.purity}
             </span>
@@ -99,7 +99,7 @@ export default function ProductCard({ product }: { product: Product }) {
               image: selected.image,
             })
           }
-          className="w-full h-10 rounded-lg text-[12px] font-medium transition-all duration-500 ease-precision flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer bg-background-100 text-foreground-300 hover:bg-primary-500 hover:text-background-900 hover:shadow-[0_0_20px_-4px_rgba(94,232,213,0.4)] disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-background-100 disabled:hover:text-foreground-300 disabled:hover:shadow-none"
+          className="w-full h-10 rounded-lg text-[12px] font-medium transition-all duration-500 ease-precision flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer bg-background-100 text-foreground-300 hover:bg-primary-500 hover:text-background-900 hover:shadow-[0_0_20px_-4px_rgb(var(--primary-500) / 0.4)] disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-background-100 disabled:hover:text-foreground-300 disabled:hover:shadow-none"
         >
           <i className="ri-shopping-bag-3-line text-[13px]"></i>
           {selected.buttonText}

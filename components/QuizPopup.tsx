@@ -18,7 +18,7 @@ export default function QuizPopup() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 z-40 flex items-center gap-2 rounded-full bg-primary-500 px-5 py-3 text-[13px] font-semibold text-background-900 shadow-[0_12px_30px_-8px_rgba(94,232,213,0.55)] transition-transform duration-300 ease-precision hover:scale-[1.04] cursor-pointer"
+        className="fixed bottom-6 right-6 z-40 flex items-center gap-2 rounded-full bg-primary-500 px-5 py-3 text-[13px] font-semibold text-background-900 shadow-[0_12px_30px_-8px_rgb(var(--primary-500) / 0.55)] transition-transform duration-300 ease-precision hover:scale-[1.04] cursor-pointer"
       >
         <i className="ri-questionnaire-line text-[15px]"></i>
         <span className="hidden sm:inline">Not sure what you need?</span>
