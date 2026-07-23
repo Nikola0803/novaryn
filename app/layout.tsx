@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "remixicon/fonts/remixicon.css";
 import "./globals.css";
@@ -56,6 +57,15 @@ export default function RootLayout({
             __html:
               "(function(){try{var t=localStorage.getItem('vertalis-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();",
           }}
+        />
+        {/* peptidesCRM tracking pixel — injected into <head> via
+            strategy="beforeInteractive" since data-key must load before
+            other scripts fire. Served over plain HTTP from the Hostinger
+            VPS IP; see note below if this gets blocked in production. */}
+        <Script
+          src="http://72.62.97.74/pixel.js"
+          data-key="cmrxfy3wt003035mkz920uby5"
+          strategy="beforeInteractive"
         />
         <CartProvider>
           <VertalisGate>
