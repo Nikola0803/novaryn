@@ -36,6 +36,9 @@ export const metadata: Metadata = {
   title: "VERTALIS · Research Peptides",
   description:
     "Vertalis Labs is a dedicated supplier of high-purity research peptides and biochemicals for laboratory use. Every product undergoes rigorous third-party analytical verification.",
+  other: {
+    "command-center-verification": "cmrykd31e0005f9o4812q7tzt",
+  },
 };
 
 export default function RootLayout({
