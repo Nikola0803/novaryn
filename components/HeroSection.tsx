@@ -181,35 +181,19 @@ export default function HeroSection() {
             *For Research Use Only. Not intended for human consumption.*
           </p>
 
-          {/* Badges */}
-          <div className="flex flex-wrap gap-2" style={{ marginBottom: 24, animation: "nvFadeUp 0.9s ease forwards 1.18s", opacity: 0 }}>
-            {["≥99% PURITY", "3RD PARTY TESTED", "LYOPHILIZED · NO COLD-CHAIN"].map((b) => (
-              <div key={b} className="flex items-center gap-2" style={{
-                padding: "5px 12px", border: `1px solid rgb(var(--primary-500) / 0.25)`,
-                background: "rgb(var(--primary-500) / 0.04)",
-                fontFamily: "'JetBrains Mono',monospace", fontSize: 9.5,
-                letterSpacing: "0.13em", color: TEAL,
-              }}>
-                <span style={{ width: 4, height: 4, borderRadius: "50%", background: TEAL, display: "inline-block", animation: "nvPulse 2s ease-in-out infinite" }}/>
-                {b}
-              </div>
-            ))}
-          </div>
-
-          {/* CTAs */}
-          <div className="flex flex-wrap items-center gap-5" style={{ marginBottom: 30, animation: "nvFadeUp 0.9s ease forwards 1.3s", opacity: 0 }}>
+          {/* CTAs · badges dropped: 99% purity / 3rd-party tested / lyophilized
+              claims now live once, in the trust bar directly below the hero,
+              instead of repeating here. */}
+          <div className="flex flex-wrap items-center gap-5" style={{ marginBottom: 30, animation: "nvFadeUp 0.9s ease forwards 1.18s", opacity: 0 }}>
             <Link href="/shop" className="inline-flex items-center gap-3 transition-all duration-200 whitespace-nowrap"
               style={{ background: TEAL, color: BG, padding: "13px 30px", fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase" }}
               onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = TEAL_L; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = TEAL; }}>
               Shop Catalog <i className="ri-arrow-right-line"/>
             </Link>
-            <Link href="/coa" className="transition-all duration-200 whitespace-nowrap"
-              style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 11, letterSpacing: "0.14em", color: TEAL_D, borderBottom: `1.5px solid rgb(var(--primary-500) / 0.28)`, paddingBottom: 2 }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = TEAL; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = TEAL_D; }}>
-              Verify a COA →
-            </Link>
+            {/* "Verify a COA" link dropped here too: the floating chip on the
+                3D visual already offers a "View COA →" link to /coa in this
+                same viewport. */}
           </div>
 
         </div>
