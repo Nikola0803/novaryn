@@ -13,17 +13,51 @@ import { useMemo, useRef, useState, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
-const TEAL = "#5EE8D5";
-const TEAL_DIM = "#2A5F58";
-const TEAL_BRIGHT = "#A8F5ED";
-const PLATINUM = "#C9CDD3";
+/**
+ * The helix's palette is driven by the same CSS custom properties the rest
+ * of the site uses for theming (see app/globals.css :root / [data-theme
+ * light]). Three.js materials can't read CSS vars directly, so this hook
+ * reads the computed values off <html> and re-reads them whenever
+ * data-theme flips, keeping the 3D piece in sync with the light/dark
+ * toggle instead of being hardcoded to one theme.
+ */
+function readCssColor(varName: string, fallback: string) {
+  if (typeof window === "undefined") return fallback;
+  const raw = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+  if (!raw) return fallback;
+  const parts = raw.split(/\s+/).filter(Boolean);
+  return parts.length === 3 ? `rgb(${parts.join(",")})` : fallback;
+}
+
+function readThemeColors() {
+  return {
+    teal: readCssColor("--primary-500", "#5EE8D5"),
+    tealDim: readCssColor("--hero-dim", "#2A5F58"),
+    tealBright: readCssColor("--hero-emphasis", "#A8F5ED"),
+    platinum: readCssColor("--platinum-2", "#C9CDD3"),
+    bg: readCssColor("--bg-900", "#08090B"),
+  };
+}
+
+function useThemeColors() {
+  const [colors, setColors] = useState(readThemeColors);
+  useEffect(() => {
+    setColors(readThemeColors());
+    const observer = new MutationObserver(() => setColors(readThemeColors()));
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    return () => observer.disconnect();
+  }, []);
+  return colors;
+}
+
+type ThemeColors = ReturnType<typeof readThemeColors>;
 
 /**
  * Builds a small procedural environment map and assigns it to the scene so
  * the metallic bonds / node highlights have something coherent to reflect;
  * without one they read flat under a transparent canvas.
  */
-function EnvironmentSetup() {
+function EnvironmentSetup({ colors }: { colors: ThemeColors }) {
   const { gl, scene } = useThree();
 
   useEffect(() => {
@@ -39,21 +73,24 @@ function EnvironmentSetup() {
       if (!ctx) return;
 
       const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
-      grad.addColorStop(0, "#123a35");
-      grad.addColorStop(0.42, "#0d2320");
-      grad.addColorStop(0.6, "#0a0b0d");
-      grad.addColorStop(1, "#050607");
+      grad.addColorStop(0, colors.tealDim);
+      grad.addColorStop(0.42, colors.bg);
+      grad.addColorStop(0.6, colors.bg);
+      grad.addColorStop(1, colors.bg);
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = "rgba(168,245,237,0.85)";
+      ctx.fillStyle = colors.tealBright;
+      ctx.globalAlpha = 0.85;
       ctx.beginPath();
       ctx.ellipse(canvas.width * 0.28, canvas.height * 0.32, 46, 16, 0, 0, Math.PI * 2);
       ctx.fill();
-      ctx.fillStyle = "rgba(94,232,213,0.35)";
+      ctx.fillStyle = colors.teal;
+      ctx.globalAlpha = 0.35;
       ctx.beginPath();
       ctx.ellipse(canvas.width * 0.78, canvas.height * 0.62, 60, 22, 0, 0, Math.PI * 2);
       ctx.fill();
+      ctx.globalAlpha = 1;
 
       envTexture = new THREE.CanvasTexture(canvas);
       envTexture.mapping = THREE.EquirectangularReflectionMapping;
@@ -114,7 +151,7 @@ function buildHelix() {
   return { points, bonds };
 }
 
-function HelixModel({ reduceMotion }: { reduceMotion: boolean }) {
+function HelixModel({ reduceMotion, colors }: { reduceMotion: boolean; colors: ThemeColors }) {
   const group = useRef<THREE.Group>(null);
   const nodeRefs = useRef<(THREE.Mesh | null)[]>([]);
   const elapsed = useRef(0);
@@ -143,7 +180,7 @@ function HelixModel({ reduceMotion }: { reduceMotion: boolean }) {
       {bonds.map((bond, i) => (
         <mesh key={`bond-${i}`} position={bond.mid} quaternion={bond.quaternion}>
           <cylinderGeometry args={[0.028, 0.028, bond.length, 10]} />
-          <meshStandardMaterial color={PLATINUM} metalness={0.75} roughness={0.35} envMapIntensity={1.1} />
+          <meshStandardMaterial color={colors.platinum} metalness={0.75} roughness={0.35} envMapIntensity={1.1} />
         </mesh>
       ))}
 
@@ -161,8 +198,8 @@ function HelixModel({ reduceMotion }: { reduceMotion: boolean }) {
           >
             <sphereGeometry args={[radius, 20, 20]} />
             <meshStandardMaterial
-              color={major ? TEAL_BRIGHT : TEAL}
-              emissive={TEAL}
+              color={major ? colors.tealBright : colors.teal}
+              emissive={colors.teal}
               emissiveIntensity={0.7}
               metalness={0.2}
               roughness={0.3}
@@ -177,6 +214,7 @@ function HelixModel({ reduceMotion }: { reduceMotion: boolean }) {
 
 export default function HeroVial3D() {
   const [reduceMotion, setReduceMotion] = useState(false);
+  const colors = useThemeColors();
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -196,10 +234,10 @@ export default function HeroVial3D() {
       >
         <ambientLight intensity={0.4} />
         <directionalLight position={[3, 4, 4]} intensity={1.1} color="#ffffff" />
-        <pointLight position={[-3, 1, 2]} intensity={14} color={TEAL} />
-        <pointLight position={[2, -2, -3]} intensity={6} color={TEAL_DIM} />
-        <EnvironmentSetup />
-        <HelixModel reduceMotion={reduceMotion} />
+        <pointLight position={[-3, 1, 2]} intensity={14} color={colors.teal} />
+        <pointLight position={[2, -2, -3]} intensity={6} color={colors.tealDim} />
+        <EnvironmentSetup colors={colors} />
+        <HelixModel reduceMotion={reduceMotion} colors={colors} />
       </Canvas>
     </div>
   );
