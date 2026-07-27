@@ -23,7 +23,7 @@ const USER_KEY = "nvr_auth_user";
 const ACCESS_KEY = "nvr_access"; // guest consent grant
 const ACCESS_TTL_DAYS = 30;
 
-interface AuthUser {
+export interface AuthUser {
   email: string;
   username: string;
   user_id: number;
@@ -45,6 +45,20 @@ export function clearAuth() {
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(USER_KEY);
   localStorage.removeItem(ACCESS_KEY);
+}
+/** Shared with app/account/page.tsx so both the gate and the account page
+ *  write the exact same session shape instead of two slightly-different
+ *  copies of this logic drifting apart over time. */
+export function saveAuth(data: { token: string; email: string; username: string; user_id: number }) {
+  try {
+    localStorage.setItem(TOKEN_KEY, data.token);
+    localStorage.setItem(
+      USER_KEY,
+      JSON.stringify({ email: data.email, username: data.username, user_id: data.user_id })
+    );
+  } catch {
+    /* ignore */
+  }
 }
 
 type Mode = "verify" | "signin" | "register";
@@ -151,16 +165,8 @@ export default function VertalisGate({ children }: { children: React.ReactNode }
     setGranted(true);
   };
 
-  const saveAuth = (data: { token: string; email: string; username: string; user_id: number }) => {
-    try {
-      localStorage.setItem(TOKEN_KEY, data.token);
-      localStorage.setItem(
-        USER_KEY,
-        JSON.stringify({ email: data.email, username: data.username, user_id: data.user_id })
-      );
-    } catch {
-      /* ignore */
-    }
+  const handleAuthSuccess = (data: { token: string; email: string; username: string; user_id: number }) => {
+    saveAuth(data);
     setGranted(true);
   };
 
@@ -222,7 +228,7 @@ export default function VertalisGate({ children }: { children: React.ReactNode }
         setError(data?.error || "Something went wrong. Please try again.");
         shake();
       } else {
-        saveAuth(data);
+        handleAuthSuccess(data);
       }
     } catch {
       setError("Network error. Please check your connection.");

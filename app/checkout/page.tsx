@@ -8,6 +8,14 @@ import Footer from "@/components/Footer";
 import CheckoutSummary from "@/components/CheckoutSummary";
 import { useCart } from "@/lib/cart-context";
 import { SITE } from "@/data/site-config";
+import { createOrder, getProductBySlug, type WCOrderPayload } from "@/lib/woocommerce";
+
+const US_STATES = [
+  "AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA",
+  "KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ",
+  "NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT",
+  "VA","WA","WV","WI","WY","DC",
+];
 
 const MEMO_CHARS = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"; // avoids ambiguous 0/O/1/I/L
 const RESERVATION_MS = 2 * 60 * 60 * 1000; // 2 hours
@@ -54,7 +62,7 @@ const GATEWAYS = [
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { items, clearCart } = useCart();
+  const { items, clearCart, subtotal } = useCart();
 
   const [selectedGateway, setSelectedGateway] = useState<(typeof GATEWAYS)[number]["id"] | null>(null);
   const [memo, setMemo] = useState(() => generateMemo());
@@ -62,6 +70,27 @@ export default function CheckoutPage() {
   const [now, setNow] = useState(() => Date.now());
   const [copied, setCopied] = useState(false);
   const [handleCopied, setHandleCopied] = useState(false);
+
+  // Shipping fields — previously uncontrolled (defaultValue="", no state),
+  // meaning nothing the customer typed was ever captured. Now backing
+  // createOrder()'s billing/shipping payload below.
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address1, setAddress1] = useState("");
+  const [city, setCity] = useState("");
+  const [stateCode, setStateCode] = useState("");
+  const [zip, setZip] = useState("");
+  const [smsConsent, setSmsConsent] = useState(false);
+  const [orderNotes, setOrderNotes] = useState("");
+  const [placing, setPlacing] = useState(false);
+  const [orderError, setOrderError] = useState("");
+
+  const shippingComplete = Boolean(
+    firstName.trim() && lastName.trim() && email.trim() && phone.trim() &&
+    address1.trim() && city.trim() && stateCode && zip.trim()
+  );
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(Date.now()), 1000);
@@ -99,11 +128,76 @@ export default function CheckoutPage() {
     }
   };
 
-  const handlePlaceOrder = (e: React.FormEvent) => {
+  const handlePlaceOrder = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (items.length === 0 || !selectedGateway || expired) return;
-    clearCart();
-    router.push("/order-success");
+    if (items.length === 0 || !selectedGateway || expired || !shippingComplete || placing) return;
+    setOrderError("");
+    setPlacing(true);
+
+    try {
+      // Cart items only carry a slug (see lib/cart-context.tsx) — WooCommerce
+      // needs the numeric product ID for each line, so resolve them here.
+      const lineItems = await Promise.all(
+        items.map(async (item) => {
+          const product = await getProductBySlug(item.slug);
+          if (!product) {
+            throw new Error(`"${item.name}" is no longer available. Remove it from your cart and try again.`);
+          }
+          return { product_id: product.id, quantity: item.qty };
+        })
+      );
+
+      const gatewayInfo = GATEWAYS.find((g) => g.id === selectedGateway)!;
+      const payload: WCOrderPayload = {
+        payment_method: selectedGateway,
+        payment_method_title: gatewayInfo.label,
+        set_paid: false,
+        status: "pending",
+        billing: {
+          first_name: firstName.trim(),
+          last_name: lastName.trim(),
+          email: email.trim(),
+          phone: phone.trim(),
+          address_1: address1.trim(),
+          city: city.trim(),
+          state: stateCode,
+          postcode: zip.trim(),
+          country: "US",
+        },
+        shipping: {
+          first_name: firstName.trim(),
+          last_name: lastName.trim(),
+          address_1: address1.trim(),
+          city: city.trim(),
+          state: stateCode,
+          postcode: zip.trim(),
+          country: "US",
+        },
+        line_items: lineItems,
+        customer_note: orderNotes.trim() || undefined,
+        meta_data: [
+          { key: "_vertalis_payment_memo", value: memo },
+          { key: "_vertalis_sms_consent", value: smsConsent ? "yes" : "no" },
+        ],
+      };
+
+      const order = await createOrder(payload);
+      clearCart();
+
+      const params = new URLSearchParams({
+        order: order.number || String(order.id),
+        gateway: selectedGateway,
+        label: gatewayInfo.label,
+        handle: gatewayInfo.handle || "",
+        memo,
+      });
+      router.push(`/order-success?${params.toString()}`);
+    } catch (err) {
+      setOrderError(
+        err instanceof Error ? err.message : "Something went wrong placing your order. Please try again."
+      );
+      setPlacing(false);
+    }
   };
 
   return (
@@ -152,39 +246,49 @@ export default function CheckoutPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[12px] font-medium text-foreground-300 mb-1.5">First Name <span className="text-signal">*</span></label>
-                      <input placeholder="John" className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="text" defaultValue="" />
+                      <input placeholder="John" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="text" />
                     </div>
                     <div>
                       <label className="block text-[12px] font-medium text-foreground-300 mb-1.5">Last Name <span className="text-signal">*</span></label>
-                      <input placeholder="Doe" className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="text" defaultValue="" />
+                      <input placeholder="Doe" value={lastName} onChange={(e) => setLastName(e.target.value)} className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="text" />
                     </div>
                     <div className="sm:col-span-2">
                       <label className="block text-[12px] font-medium text-foreground-300 mb-1.5">Email Address <span className="text-signal">*</span></label>
-                      <input placeholder="you@lab.edu" className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="email" defaultValue="" />
+                      <input placeholder="you@lab.edu" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="email" />
                     </div>
                     <div className="sm:col-span-2">
                       <label className="block text-[12px] font-medium text-foreground-300 mb-1.5">Phone Number <span className="text-signal">*</span></label>
-                      <input placeholder="+1 (555) 000-0000" className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="tel" defaultValue="" />
+                      <input placeholder="+1 (555) 000-0000" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="tel" />
                     </div>
                     <div className="sm:col-span-2">
                       <label className="block text-[12px] font-medium text-foreground-300 mb-1.5">Street Address <span className="text-signal">*</span></label>
-                      <input placeholder="123 Research Blvd, Suite 100" className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="text" defaultValue="" />
+                      <input placeholder="123 Research Blvd, Suite 100" value={address1} onChange={(e) => setAddress1(e.target.value)} className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="text" />
                     </div>
                     <div>
                       <label className="block text-[12px] font-medium text-foreground-300 mb-1.5">City <span className="text-signal">*</span></label>
-                      <input placeholder="Boston" className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="text" defaultValue="" />
+                      <input placeholder="Boston" value={city} onChange={(e) => setCity(e.target.value)} className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="text" />
                     </div>
                     <div className="relative">
                       <label className="block text-[12px] font-medium text-foreground-300 mb-1.5">State <span className="text-signal">*</span></label>
-                      <button type="button" className="w-full h-10 px-3 rounded-md bg-background-100 border text-sm text-left flex items-center justify-between transition cursor-pointer border-background-200 focus:border-primary-500 text-foreground-600"><span className="truncate">Select state…</span><i className="ri-arrow-down-s-line text-[14px] text-foreground-500 transition-transform duration-200 "></i></button>
+                      <select
+                        value={stateCode}
+                        onChange={(e) => setStateCode(e.target.value)}
+                        className="w-full h-10 px-3 rounded-md bg-background-100 border text-sm transition cursor-pointer border-background-200 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500/40 appearance-none"
+                        style={{ color: stateCode ? "rgb(var(--fg-100))" : "rgb(var(--fg-600))" }}
+                      >
+                        <option value="" disabled>Select state…</option>
+                        {US_STATES.map((s) => (
+                          <option key={s} value={s} style={{ color: "#000" }}>{s}</option>
+                        ))}
+                      </select>
                     </div>
                     <div className="sm:col-span-2">
                       <label className="block text-[12px] font-medium text-foreground-300 mb-1.5">ZIP Code <span className="text-signal">*</span></label>
-                      <input placeholder="02110" maxLength={10} className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="text" defaultValue="" />
+                      <input placeholder="02110" maxLength={10} value={zip} onChange={(e) => setZip(e.target.value)} className="w-full h-10 px-3 rounded-md bg-background-100 border text-foreground-100 text-sm placeholder:text-foreground-600 focus:outline-none focus:ring-1 transition border-background-200 focus:border-primary-500 focus:ring-primary-500/40" type="text" />
                     </div>
                   </div>
                   <div className="mt-5 flex items-start gap-3 p-3 rounded-md bg-background-100/40 border border-background-200/60">
-                    <input type="checkbox" id="sms-consent" className="mt-0.5 w-4 h-4 shrink-0 accent-primary-500 cursor-pointer" />
+                    <input type="checkbox" id="sms-consent" checked={smsConsent} onChange={(e) => setSmsConsent(e.target.checked)} className="mt-0.5 w-4 h-4 shrink-0 accent-primary-500 cursor-pointer" />
                     <label htmlFor="sms-consent" className="text-[11px] text-foreground-500 leading-relaxed cursor-pointer">By checking this box, you agree to receive text messages from Vertalis Peptides at the number provided. Consent is not a condition to purchase. Message frequency varies. Message and data rates may apply. Reply STOP to cancel or HELP for help. View our <a href="https://vertalispeptides.com/legal/privacy" target="_blank" rel="noopener noreferrer" className="text-primary-500 hover:text-primary-400 underline transition-colors">Privacy Policy</a> and <a href="https://vertalispeptides.com/legal/terms" target="_blank" rel="noopener noreferrer" className="text-primary-500 hover:text-primary-400 underline transition-colors">Terms of Service</a>.</label>
                   </div>
                 </div>
@@ -326,8 +430,15 @@ export default function CheckoutPage() {
 
                 <div>
                   <label className="block text-[13px] font-medium text-foreground-200 mb-2">Order Notes <span className="text-foreground-500 font-normal">(optional)</span></label>
-                  <textarea maxLength={500} rows={3} placeholder="Any special instructions or notes..." className="w-full px-4 py-3 rounded-md bg-background-100 border border-background-200 text-foreground-100 text-sm placeholder:text-foreground-600 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500/40 transition resize-none"></textarea>
-                  <p className="mt-1 text-[10px] text-foreground-600 text-right">0/500</p>
+                  <textarea
+                    maxLength={500}
+                    rows={3}
+                    placeholder="Any special instructions or notes..."
+                    value={orderNotes}
+                    onChange={(e) => setOrderNotes(e.target.value)}
+                    className="w-full px-4 py-3 rounded-md bg-background-100 border border-background-200 text-foreground-100 text-sm placeholder:text-foreground-600 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500/40 transition resize-none"
+                  ></textarea>
+                  <p className="mt-1 text-[10px] text-foreground-600 text-right">{orderNotes.length}/500</p>
                 </div>
 
                 <div className="flex items-start gap-2 p-3 rounded-md bg-yellow-400/5 border border-yellow-400/20">
@@ -335,12 +446,28 @@ export default function CheckoutPage() {
                   <p className="text-[11px] text-foreground-500 leading-relaxed">By placing this order, you confirm that all products are purchased for laboratory research use only, in accordance with our Terms of Service.</p>
                 </div>
 
+                {orderError && (
+                  <div role="alert" className="flex items-start gap-2 p-3 rounded-md bg-signal/5 border border-signal/30">
+                    <i className="ri-error-warning-line text-[14px] text-signal mt-0.5"></i>
+                    <p className="text-[11px] text-signal leading-relaxed">{orderError}</p>
+                  </div>
+                )}
+
                 <button
                   type="submit"
-                  disabled={items.length === 0 || !selectedGateway || expired}
+                  disabled={items.length === 0 || !selectedGateway || expired || !shippingComplete || placing}
                   className="w-full h-12 rounded-md bg-primary-500 text-background-900 text-[13px] font-semibold hover:bg-primary-400 transition-all duration-300 ease-precision hover:shadow-[0_0_24px_-4px_rgb(var(--primary-500) / 0.6)] flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:shadow-none"
                 >
-                  <i className="ri-lock-line text-[14px]"></i>Confirm Order · $190.00
+                  {placing ? (
+                    <>
+                      <span className="w-3.5 h-3.5 inline-block border-2 border-background-900/30 border-t-background-900 rounded-full animate-spin" />
+                      Placing Order…
+                    </>
+                  ) : (
+                    <>
+                      <i className="ri-lock-line text-[14px]"></i>Confirm Order · ${subtotal.toFixed(2)}
+                    </>
+                  )}
                 </button>
               </form>
             </div>

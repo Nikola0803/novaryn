@@ -107,9 +107,19 @@ Business / legal decisions (not code):
 
 ## 4. Account wall backend (companion WordPress plugin)
 
-The **Enter Site** (guest) path needs nothing. **Sign In / Create Account** need
-a tiny WordPress plugin exposing three REST routes under the `nvr/v1` namespace,
-exactly mirroring Valkyrie's `valkyrie-router.php`:
+**Built**: `integrations/nvr-account/nvr-account.php`. Install it on
+cms.vertalispeptides.com (same way vp-affiliates.php was installed) and set
+`WC_URL` / `WC_KEY` / `WC_SECRET` in the Vercel project's env vars — until
+then, `wcConfigured` is false and the account tabs show a friendly "not
+available yet — use Enter Site" message instead of erroring.
+
+A signed-up account is a real WordPress user with role `customer`, so orders
+placed at checkout (now wired to `createOrder()`, see `app/checkout/page.tsx`)
+show up as that customer's orders in both WooCommerce's own admin and on the
+Next.js `/account` page — not a separate parallel record.
+
+The **Enter Site** (guest) path needs nothing else. **Sign In / Create
+Account** call four REST routes under the `nvr/v1` namespace:
 
 ```
 POST  {WC_URL}/wp-json/nvr/v1/login      { email, password }
@@ -120,12 +130,18 @@ POST  {WC_URL}/wp-json/nvr/v1/register   { email, password, username?, marketing
 
 POST  {WC_URL}/wp-json/nvr/v1/validate   { token }
         -> 200 { valid: true | false }
+
+POST  {WC_URL}/wp-json/nvr/v1/me         { token }
+        -> 200 { email, username, user_id }          (401 if invalid/expired)
 ```
 
-The Vertalis `/api/auth/*` handlers already proxy to these. Until the plugin is
-installed, the account tabs return a friendly "not available yet — use Enter
-Site" message and the gate still works. (You can adapt Valkyrie's existing router
-PHP; just rename the namespace to `nvr/v1`.)
+`/me` is new (not in the original spec) — added so `/api/account/orders` can
+resolve which customer a session token belongs to server-side, rather than
+trusting a client-supplied customer id/email. `/validate` stays boolean-only
+on purpose; the gate only needs a yes/no.
+
+The Vertalis `/api/auth/*` and `/api/account/orders` handlers already proxy to
+these.
 
 ---
 
