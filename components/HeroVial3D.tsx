@@ -151,20 +151,24 @@ function buildHelix() {
   return { points, bonds };
 }
 
-function HelixModel({ reduceMotion, colors }: { reduceMotion: boolean; colors: ThemeColors }) {
+function HelixModel({ colors }: { colors: ThemeColors }) {
   const group = useRef<THREE.Group>(null);
   const nodeRefs = useRef<(THREE.Mesh | null)[]>([]);
   const elapsed = useRef(0);
 
   const { points, bonds } = useMemo(() => buildHelix(), []);
 
+  // Purely decorative background motion, same as the particle canvas and
+  // scanline elsewhere in this hero (neither of which gate on
+  // prefers-reduced-motion either) — kept unconditional so this doesn't
+  // silently go static on machines with "reduce motion" enabled at the OS
+  // level, which is a common default a lot of people never notice is on.
   useFrame((_, delta) => {
-    if (group.current && !reduceMotion) {
-      group.current.rotation.y += delta * 0.32;
+    if (group.current) {
+      group.current.rotation.y += delta * 0.5;
     }
-    if (reduceMotion) return;
     elapsed.current += delta;
-    // A slow pulse of light travels down the chain, node to node.
+    // A pulse of light travels down the chain, node to node.
     nodeRefs.current.forEach((mesh, i) => {
       if (!mesh) return;
       const mat = mesh.material as THREE.MeshStandardMaterial;
@@ -213,16 +217,7 @@ function HelixModel({ reduceMotion, colors }: { reduceMotion: boolean; colors: T
 }
 
 export default function HeroVial3D() {
-  const [reduceMotion, setReduceMotion] = useState(false);
   const colors = useThemeColors();
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduceMotion(mq.matches);
-    const onChange = () => setReduceMotion(mq.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
 
   return (
     <div className="w-full h-full">
@@ -237,7 +232,7 @@ export default function HeroVial3D() {
         <pointLight position={[-3, 1, 2]} intensity={14} color={colors.teal} />
         <pointLight position={[2, -2, -3]} intensity={6} color={colors.tealDim} />
         <EnvironmentSetup colors={colors} />
-        <HelixModel reduceMotion={reduceMotion} colors={colors} />
+        <HelixModel colors={colors} />
       </Canvas>
     </div>
   );
