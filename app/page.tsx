@@ -11,44 +11,35 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-background-800 text-foreground-100"><PromoBanner /><Header /><main><HeroSection /><section className="relative bg-background-900 border-y border-background-200/60">
   <div className="w-full max-w-[1440px] mx-auto px-4 md:px-10">
-    <div className="flex items-center gap-x-7 gap-y-3 overflow-x-auto no-scrollbar md:flex-wrap md:justify-center py-4 md:py-5">
-      <div className="flex items-center gap-2 shrink-0">
-        <i className="ri-microscope-line text-primary-500 text-[15px] shrink-0"></i>
-        <span className="font-mono text-[11px] tracking-[0.08em] text-foreground-300 uppercase whitespace-nowrap">3rd Party Lab Tested</span>
-      </div>
-      <span className="hidden md:block w-px h-3 bg-background-200 shrink-0"></span>
-      <div className="flex items-center gap-2 shrink-0">
-        <i className="ri-flask-line text-primary-500 text-[15px] shrink-0"></i>
-        <span className="font-mono text-[11px] tracking-[0.08em] text-foreground-300 uppercase whitespace-nowrap">Lyophilized in the USA</span>
-      </div>
-      <span className="hidden md:block w-px h-3 bg-background-200 shrink-0"></span>
-      <div className="flex items-center gap-2 shrink-0">
-        <i className="ri-truck-line text-primary-500 text-[15px] shrink-0"></i>
-        <span className="font-mono text-[11px] tracking-[0.08em] text-foreground-300 uppercase whitespace-nowrap">Ships in 1–2 Business Days</span>
-      </div>
-      <span className="hidden md:block w-px h-3 bg-background-200 shrink-0"></span>
-      <div className="flex items-center gap-2 shrink-0">
-        <i className="ri-award-line text-primary-500 text-[15px] shrink-0"></i>
-        <span className="font-mono text-[11px] tracking-[0.08em] text-foreground-300 uppercase whitespace-nowrap">99%+ Purity Guaranteed</span>
-      </div>
-      <span className="hidden md:block w-px h-3 bg-background-200 shrink-0"></span>
+    <div className="flex flex-wrap items-center justify-center gap-x-7 gap-y-3 py-4 md:py-5">
       <div className="flex items-center gap-2 shrink-0">
         <i className="ri-lock-line text-primary-500 text-[15px] shrink-0"></i>
         <span className="font-mono text-[11px] tracking-[0.08em] text-foreground-300 uppercase whitespace-nowrap">Secure Checkout</span>
       </div>
-      <span className="hidden md:block w-px h-3 bg-background-200 shrink-0"></span>
+      <span className="hidden sm:block w-px h-3 bg-background-200 shrink-0"></span>
       <div className="flex items-center gap-2 shrink-0">
-        <i className="ri-google-fill text-primary-500 text-[15px] shrink-0"></i>
-        <span className="font-mono text-[11px] tracking-[0.08em] text-foreground-300 uppercase whitespace-nowrap">Google Reviews</span>
+        <i className="ri-truck-line text-primary-500 text-[15px] shrink-0"></i>
+        <span className="font-mono text-[11px] tracking-[0.08em] text-foreground-300 uppercase whitespace-nowrap">Ships in 1–2 Business Days</span>
       </div>
-      <span className="hidden md:block w-px h-3 bg-background-200 shrink-0"></span>
-      <div className="flex items-center gap-2.5 shrink-0">
-        <span className="font-mono text-[11px] tracking-[0.08em] text-foreground-400 uppercase whitespace-nowrap">We Accept</span>
-        <div className="flex items-center gap-1.5">
-          <span className="inline-flex items-center px-2 py-0.5 rounded-md border text-[10px] font-semibold tracking-wide whitespace-nowrap border-[#6D1ED4]/40 text-[#8B5CF6] bg-[#6D1ED4]/10">Zelle</span>
-          <span className="inline-flex items-center px-2 py-0.5 rounded-md border text-[10px] font-semibold tracking-wide whitespace-nowrap border-[#00D632]/30 text-[#00D632] bg-[#00D632]/10">Cash App</span>
-          <span className="inline-flex items-center px-2 py-0.5 rounded-md border text-[10px] font-semibold tracking-wide whitespace-nowrap border-[#008AFF]/30 text-[#008AFF] bg-[#008AFF]/10">Venmo</span>
-        </div>
+      <span className="hidden sm:block w-px h-3 bg-background-200 shrink-0"></span>
+      <div className="flex items-center gap-2 shrink-0">
+        <i className="ri-customer-service-2-line text-primary-500 text-[15px] shrink-0"></i>
+        <span className="font-mono text-[11px] tracking-[0.08em] text-foreground-300 uppercase whitespace-nowrap">Support 24/7</span>
+      </div>
+      <span className="hidden sm:block w-px h-3 bg-background-200 shrink-0"></span>
+      <div className="flex items-center gap-2 shrink-0">
+        <i className="ri-star-fill text-primary-500 text-[15px] shrink-0"></i>
+        <span className="font-mono text-[11px] tracking-[0.08em] text-foreground-300 uppercase whitespace-nowrap">Verified &amp; Vetted Reviews</span>
+      </div>
+    </div>
+    {/* Payment methods get their own row, centered and never clipped, since
+        they're a separate kind of trust signal from the claims above. */}
+    <div className="flex items-center justify-center gap-2.5 flex-wrap pb-4 md:pb-5">
+      <span className="font-mono text-[11px] tracking-[0.08em] text-foreground-400 uppercase whitespace-nowrap">We Accept</span>
+      <div className="flex items-center gap-1.5 flex-wrap justify-center">
+        <span className="inline-flex items-center px-2.5 py-0.5 rounded-md border text-[10px] font-semibold tracking-wide whitespace-nowrap border-[#6D1ED4]/40 text-[#8B5CF6] bg-[#6D1ED4]/10">Zelle</span>
+        <span className="inline-flex items-center px-2.5 py-0.5 rounded-md border text-[10px] font-semibold tracking-wide whitespace-nowrap border-[#00D632]/30 text-[#00D632] bg-[#00D632]/10">Cash App</span>
+        <span className="inline-flex items-center px-2.5 py-0.5 rounded-md border text-[10px] font-semibold tracking-wide whitespace-nowrap border-[#008AFF]/30 text-[#008AFF] bg-[#008AFF]/10">Venmo</span>
       </div>
     </div>
   </div>
