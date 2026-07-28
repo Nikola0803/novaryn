@@ -3,8 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Product, getVariants, getVariantLabel } from "@/data/products";
+import { Product, getVariants, getVariantLabel, getRating } from "@/data/products";
 import { useCart } from "@/lib/cart-context";
+import StarRating from "@/components/StarRating";
 
 function formatPrice(price: number) {
   return Number.isInteger(price) ? `$${price}` : `$${price.toFixed(2)}`;
@@ -16,6 +17,7 @@ export default function ProductCard({ product }: { product: Product }) {
   const [selectedSlug, setSelectedSlug] = useState(product.slug);
   const selected = variants.find((v) => v.slug === selectedSlug) ?? product;
   const href = `/product/${selected.slug}`;
+  const rating = getRating(product);
 
   return (
     <article
@@ -52,7 +54,7 @@ export default function ProductCard({ product }: { product: Product }) {
           {product.category}
         </span>
         <Link href={href} className="block">
-          <div className="flex items-start justify-between gap-3 mb-2">
+          <div className="flex items-start justify-between gap-3 mb-1.5">
             <h3 className="font-display text-[16px] leading-tight text-foreground-100 group-hover:text-primary-500 transition-colors duration-500">
               {product.name}
             </h3>
@@ -63,10 +65,19 @@ export default function ProductCard({ product }: { product: Product }) {
               <span className="font-mono text-[10px] text-foreground-600">USD</span>
             </div>
           </div>
-          <div className="flex items-center gap-1.5 mb-4">
+          <div className="mb-2">
+            <StarRating stars={rating.stars} count={rating.count} />
+          </div>
+          <div className="flex items-center gap-1.5 mb-1">
             <i className="ri-shield-check-line text-[12px] text-secondary-500"></i>
             <span className="font-mono text-[11px] tracking-wide text-secondary-500">
               99%+ Purity Verified
+            </span>
+          </div>
+          <div className="flex items-center gap-1.5 mb-4">
+            <i className="ri-truck-line text-[12px] text-foreground-500"></i>
+            <span className="font-mono text-[10px] tracking-wide text-foreground-500">
+              Ships within 24h
             </span>
           </div>
         </Link>

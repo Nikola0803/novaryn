@@ -38,7 +38,7 @@ export default function CartDrawer() {
           </div>
           <button
             onClick={closeCart}
-            className="w-8 h-8 flex items-center justify-center rounded-md text-foreground-400 hover:text-foreground-100 hover:bg-background-200/60 transition-colors cursor-pointer"
+            className="w-10 h-10 flex items-center justify-center rounded-md text-foreground-400 hover:text-foreground-100 hover:bg-background-200/60 transition-colors cursor-pointer"
             aria-label="Close cart"
           >
             <i className="ri-close-line text-[18px]"></i>
@@ -94,25 +94,25 @@ export default function CartDrawer() {
                       <div className="flex items-center gap-1">
                         <button
                           onClick={() => setQty(item.slug, item.qty - 1)}
-                          className="w-6 h-6 flex items-center justify-center rounded border border-background-300 text-foreground-400 hover:text-foreground-100 hover:border-primary-500 transition-colors cursor-pointer"
+                          className="w-8 h-8 flex items-center justify-center rounded border border-background-300 text-foreground-400 hover:text-foreground-100 hover:border-primary-500 transition-colors cursor-pointer"
                           aria-label="Decrease quantity"
                         >
-                          <i className="ri-subtract-line text-[11px]"></i>
+                          <i className="ri-subtract-line text-[12px]"></i>
                         </button>
                         <span className="w-7 text-center font-mono text-[12px] text-foreground-200">
                           {item.qty}
                         </span>
                         <button
                           onClick={() => setQty(item.slug, item.qty + 1)}
-                          className="w-6 h-6 flex items-center justify-center rounded border border-background-300 text-foreground-400 hover:text-foreground-100 hover:border-primary-500 transition-colors cursor-pointer"
+                          className="w-8 h-8 flex items-center justify-center rounded border border-background-300 text-foreground-400 hover:text-foreground-100 hover:border-primary-500 transition-colors cursor-pointer"
                           aria-label="Increase quantity"
                         >
-                          <i className="ri-add-line text-[11px]"></i>
+                          <i className="ri-add-line text-[12px]"></i>
                         </button>
                       </div>
                       <button
                         onClick={() => removeItem(item.slug)}
-                        className="text-[11px] text-foreground-500 hover:text-signal transition-colors cursor-pointer"
+                        className="py-2 px-1 text-[11px] text-foreground-500 hover:text-signal transition-colors cursor-pointer"
                       >
                         Remove
                       </button>

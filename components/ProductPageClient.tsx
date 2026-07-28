@@ -9,7 +9,8 @@ import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import CoaModal from "@/components/CoaModal";
 import { useCart } from "@/lib/cart-context";
-import { PRODUCTS, getProduct } from "@/data/products";
+import { PRODUCTS, getProduct, getRating } from "@/data/products";
+import StarRating from "@/components/StarRating";
 
 const TABS = ["Overview", "Specifications", "Certificate of Analysis", "Shipping & Handling", "Research References"];
 
@@ -28,6 +29,7 @@ function fmt(n: number) {
 export default function ProductPageClient({ slug }: { slug: string }) {
   const { addItem } = useCart();
   const product = getProduct(slug) ?? getProduct("nvr-sema-10")!;
+  const rating = getRating(product);
 
   const [activeTab, setActiveTab] = useState(0);
   const [selectedTier, setSelectedTier] = useState(0);
@@ -116,6 +118,9 @@ export default function ProductPageClient({ slug }: { slug: string }) {
                 <h1 className="font-display text-[38px] md:text-[48px] leading-[1.02] tracking-tightest text-foreground-100 mb-2">
                   {product.name}
                 </h1>
+                <div className="flex items-center gap-3 mb-2">
+                  <StarRating stars={rating.stars} count={rating.count} size="md" />
+                </div>
                 <p className="font-mono text-[14px] text-foreground-500">{product.spec}</p>
               </div>
 

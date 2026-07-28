@@ -65,21 +65,21 @@ export default function CheckoutSummary() {
                   <button
                     type="button"
                     onClick={() => setQty(item.slug, item.qty - 1)}
-                    className="w-5 h-5 flex items-center justify-center rounded border border-background-300 text-foreground-400 hover:text-foreground-100 transition-colors cursor-pointer"
+                    className="w-8 h-8 flex items-center justify-center rounded border border-background-300 text-foreground-400 hover:text-foreground-100 transition-colors cursor-pointer"
                     aria-label="Decrease"
                   >
-                    <i className="ri-subtract-line text-[10px]"></i>
+                    <i className="ri-subtract-line text-[11px]"></i>
                   </button>
-                  <span className="w-5 text-center font-mono text-[11px] text-foreground-300">
+                  <span className="w-6 text-center font-mono text-[11px] text-foreground-300">
                     {item.qty}
                   </span>
                   <button
                     type="button"
                     onClick={() => setQty(item.slug, item.qty + 1)}
-                    className="w-5 h-5 flex items-center justify-center rounded border border-background-300 text-foreground-400 hover:text-foreground-100 transition-colors cursor-pointer"
+                    className="w-8 h-8 flex items-center justify-center rounded border border-background-300 text-foreground-400 hover:text-foreground-100 transition-colors cursor-pointer"
                     aria-label="Increase"
                   >
-                    <i className="ri-add-line text-[10px]"></i>
+                    <i className="ri-add-line text-[11px]"></i>
                   </button>
                 </div>
               </div>

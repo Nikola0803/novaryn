@@ -936,6 +936,25 @@ export function getProduct(slug: string): Product | undefined {
   return PRODUCTS.find((p) => p.slug === slug);
 }
 
+/**
+ * Deterministic aggregate star rating + review count derived from the
+ * product slug. This is illustrative placeholder data, not a real
+ * collected-reviews feed, there is no written-testimonial content
+ * attached to it. Swap this out for a real source (WooCommerce product
+ * reviews, Trustpilot, Google) before treating the numbers as verified
+ * claims, fabricated review counts/quotes can run afoul of FTC rules
+ * against fake reviews.
+ */
+export function getRating(product: Product): { stars: number; count: number } {
+  let hash = 0;
+  for (let i = 0; i < product.slug.length; i++) {
+    hash = (hash * 31 + product.slug.charCodeAt(i)) >>> 0;
+  }
+  const stars = Math.round((4.6 + ((hash % 40) / 100)) * 10) / 10; // 4.6–4.99, one decimal
+  const count = 30 + (hash % 280); // 30–309
+  return { stars, count };
+}
+
 /** All size/variant entries that share a product name, sorted smallest to largest dose. */
 export function getVariants(name: string): Product[] {
   return PRODUCTS.filter((p) => p.name === name).sort(

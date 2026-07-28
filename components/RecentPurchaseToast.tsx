@@ -1,10 +1,17 @@
 "use client";
 
 /**
- * Floating "recent purchase" social-proof toast. Positioned beside the
- * WhatsApp launcher (bottom-6 left-6, 56px circle — see WhatsAppButton.tsx),
- * not stacked above it: left-[88px] clears that button with an ~8px gap at
+ * Floating "recent purchase" social-proof toast. On desktop it sits beside
+ * the WhatsApp launcher (bottom-6 left-6, 56px circle — see
+ * WhatsAppButton.tsx): left-[88px] clears that button with an ~8px gap at
  * the same bottom offset, so the two sit side by side as a pair.
+ *
+ * On narrow mobile viewports that bottom-left slot plus the WhatsApp button
+ * (bottom-6 left-6) and QuizPopup (bottom-6 right-6) all competing for the
+ * same 24px-from-bottom strip caused real overlap below ~400px wide
+ * screens, so on mobile this renders as a full-width banner just under the
+ * fixed header instead (top-[100px] inset-x-4), clearing all three floating
+ * elements entirely.
  *
  * Data is illustrative, not a live feed of real orders — same convention as
  * the affiliate tier table (see the comment on TIERS in app/affiliate/page.tsx):
@@ -74,8 +81,10 @@ export default function RecentPurchaseToast() {
     <div
       role="status"
       aria-live="polite"
-      className={`fixed bottom-6 left-[88px] z-40 w-[min(18rem,calc(100vw-7rem))] transition-all duration-500 ease-out ${
-        visible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0 pointer-events-none"
+      className={`fixed z-40 top-[100px] inset-x-4 sm:inset-x-auto sm:top-auto sm:bottom-6 sm:left-[88px] sm:w-[min(18rem,calc(100vw-7rem))] transition-all duration-500 ease-out ${
+        visible
+          ? "translate-y-0 opacity-100"
+          : "-translate-y-2 sm:translate-y-2 opacity-0 pointer-events-none"
       }`}
     >
       <div className="relative flex items-center gap-3 rounded-2xl border border-background-200/60 bg-background-900/95 p-3 pr-8 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] backdrop-blur-md">
