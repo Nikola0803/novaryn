@@ -80,33 +80,6 @@ export default function HeroSection() {
       {/* Particles */}
       <canvas ref={canvasRef} className="absolute inset-0 z-[3] w-full h-full pointer-events-none" />
 
-      {/* Scanline */}
-      <div className="absolute top-0 bottom-0 z-[4] pointer-events-none" style={{
-        width: 1,
-        background: `linear-gradient(to bottom, transparent, ${TEAL_D} 20%, ${TEAL_L} 50%, ${TEAL_D} 80%, transparent)`,
-        animation: "nvScanline 10s ease-in-out infinite",
-        opacity: 0.5,
-      }} />
-
-      {/* Corner marks */}
-      {([
-        { top: 20, left: 20, bt: true, bl: true },
-        { top: 20, right: 20, bt: true, br: true },
-        { bottom: 20, left: 20, bb: true, bl: true },
-        { bottom: 20, right: 20, bb: true, br: true },
-      ] as const).map((c, i) => (
-        <div key={i} className="absolute z-[10] pointer-events-none" style={{
-          width: 20, height: 20,
-          top: (c as any).top, bottom: (c as any).bottom,
-          left: (c as any).left, right: (c as any).right,
-          borderTop:    (c as any).bt ? `1.5px solid ${TEAL}` : undefined,
-          borderLeft:   (c as any).bl ? `1.5px solid ${TEAL}` : undefined,
-          borderBottom: (c as any).bb ? `1.5px solid ${TEAL}` : undefined,
-          borderRight:  (c as any).br ? `1.5px solid ${TEAL}` : undefined,
-          opacity: 0.45,
-        }} />
-      ))}
-
       {/* ── Text + visual panel · both anchored to the same 1440px grid so left/right gutters match exactly ── */}
       <div className="relative z-[8] h-full w-full max-w-[1440px] mx-auto px-6 md:px-10 flex items-center justify-between gap-10 lg:gap-16">
         <div className="max-w-[580px]">
@@ -257,12 +230,6 @@ export default function HeroSection() {
       <div className="absolute inset-0 z-[6] pointer-events-none" style={{ background: "radial-gradient(ellipse 100% 100% at 50% 50%, transparent 46%, rgba(5,5,5,0.55) 100%)" }}/>
 
       <style>{`
-        @keyframes nvScanline {
-          0%   { left:-2%; opacity:0; }
-          8%   { opacity:0.5; }
-          92%  { opacity:0.35; }
-          100% { left:102%; opacity:0; }
-        }
         @keyframes nvFadeUp {
           from { opacity:0; transform:translateY(14px); }
           to   { opacity:1; transform:translateY(0); }
