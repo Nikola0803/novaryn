@@ -39,27 +39,37 @@ export default function AffiliatePage() {
         <section className="relative pt-[112px] bg-background-900 border-b border-background-200/60 overflow-hidden">
           <div className="absolute inset-0 grid-overlay opacity-20 pointer-events-none"></div>
           <div className="absolute top-20 right-10 w-96 h-96 rounded-full bg-primary-500/6 blur-[140px] pointer-events-none"></div>
-          <div className="relative w-full max-w-[1440px] mx-auto px-6 md:px-10 py-20 md:py-28">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="w-8 h-px bg-primary-500/60"></span>
-              <span className="font-mono text-[10px] tracking-[0.28em] text-primary-500 uppercase">Lab Affiliate Program</span>
+          <div className="relative w-full max-w-[1440px] mx-auto px-6 md:px-10 py-20 md:py-28 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-7">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="w-8 h-px bg-primary-500/60"></span>
+                <span className="font-mono text-[10px] tracking-[0.28em] text-primary-500 uppercase">Lab Affiliate Program</span>
+              </div>
+              <h1 className="font-display text-[44px] md:text-[64px] leading-[0.95] tracking-tightest text-foreground-100 mb-6 max-w-3xl">
+                Refer colleagues.<br /><span className="text-platinum">Earn on every order.</span>
+              </h1>
+              <p className="text-[16px] text-foreground-400 max-w-xl leading-relaxed mb-10">
+                Designed for researchers, lab managers, and institutions who trust Vertalis and want to extend that trust, and earn while doing it.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <a href="#apply" className="h-12 px-8 rounded-md bg-primary-500 text-background-900 text-[13px] font-semibold hover:bg-primary-400 transition-all cursor-pointer inline-flex items-center gap-2">
+                  <i className="ri-user-add-line text-[14px]"></i>Apply Now
+                </a>
+                <a href="#tiers" className="h-12 px-8 rounded-md border border-background-200 text-[13px] text-foreground-300 hover:border-primary-500 hover:text-primary-500 transition-all cursor-pointer inline-flex items-center gap-2">
+                  View Commission Tiers
+                </a>
+                <a href={LOGIN_HREF} className="h-12 px-8 rounded-md text-[13px] text-foreground-500 hover:text-primary-500 transition-all cursor-pointer inline-flex items-center gap-2">
+                  Already an affiliate? Log in <i className="ri-arrow-right-line text-[14px]"></i>
+                </a>
+              </div>
             </div>
-            <h1 className="font-display text-[44px] md:text-[64px] leading-[0.95] tracking-tightest text-foreground-100 mb-6 max-w-3xl">
-              Refer colleagues.<br /><span className="text-platinum">Earn on every order.</span>
-            </h1>
-            <p className="text-[16px] text-foreground-400 max-w-xl leading-relaxed mb-10">
-              Designed for researchers, lab managers, and institutions who trust Vertalis and want to extend that trust, and earn while doing it.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <a href="#apply" className="h-12 px-8 rounded-md bg-primary-500 text-background-900 text-[13px] font-semibold hover:bg-primary-400 transition-all cursor-pointer inline-flex items-center gap-2">
-                <i className="ri-user-add-line text-[14px]"></i>Apply Now
-              </a>
-              <a href="#tiers" className="h-12 px-8 rounded-md border border-background-200 text-[13px] text-foreground-300 hover:border-primary-500 hover:text-primary-500 transition-all cursor-pointer inline-flex items-center gap-2">
-                View Commission Tiers
-              </a>
-              <a href={LOGIN_HREF} className="h-12 px-8 rounded-md text-[13px] text-foreground-500 hover:text-primary-500 transition-all cursor-pointer inline-flex items-center gap-2">
-                Already an affiliate? Log in <i className="ri-arrow-right-line text-[14px]"></i>
-              </a>
+            <div className="hidden lg:block lg:col-span-5 h-[300px] relative rounded-xl overflow-hidden border border-background-200/60">
+              <img
+                src="https://images.pexels.com/photos/33175650/pexels-photo-33175650.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                alt="Two people shaking hands on a business partnership"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background-900/70 via-transparent to-transparent"></div>
             </div>
           </div>
         </section>
@@ -98,14 +108,24 @@ export default function AffiliatePage() {
         {/* Benefits */}
         <section className="border-t border-background-200/60 bg-background-900/40 py-24 md:py-32">
           <div className="w-full max-w-[1440px] mx-auto px-6 md:px-10">
-            <div className="max-w-3xl mb-16">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="font-mono text-[10px] tracking-[0.28em] text-primary-500 uppercase">/ 02 · Program Benefits</span>
-                <span className="w-8 h-px bg-primary-500/40"></span>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-16">
+              <div className="lg:col-span-7">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="font-mono text-[10px] tracking-[0.28em] text-primary-500 uppercase">/ 02 · Program Benefits</span>
+                  <span className="w-8 h-px bg-primary-500/40"></span>
+                </div>
+                <h2 className="font-display text-[38px] md:text-[48px] leading-[1.02] tracking-tightest text-foreground-100">
+                  What you get.
+                </h2>
               </div>
-              <h2 className="font-display text-[38px] md:text-[48px] leading-[1.02] tracking-tightest text-foreground-100">
-                What you get.
-              </h2>
+              <div className="hidden lg:block lg:col-span-5 h-[220px] relative rounded-xl overflow-hidden border border-background-200/60">
+                <img
+                  src="https://images.pexels.com/photos/577210/pexels-photo-577210.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="Laptop showing an analytics dashboard on a desk"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background-900/70 via-transparent to-transparent"></div>
+              </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {BENEFITS.map((b) => (
