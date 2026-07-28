@@ -9,6 +9,7 @@ import SiteFooter from "@/components/SiteFooter";
 import VertalisGate from "@/components/VertalisGate";
 import QuizPopup from "@/components/QuizPopup";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import RecentPurchaseToast from "@/components/RecentPurchaseToast";
 import AffiliateTracker from "@/components/AffiliateTracker";
 
 const inter = Inter({
@@ -77,6 +78,7 @@ export default function RootLayout({
             <CartDrawer />
             <QuizPopup />
             <WhatsAppButton />
+            <RecentPurchaseToast />
             <AffiliateTracker />
           </VertalisGate>
         </CartProvider>

@@ -234,8 +234,8 @@ export default function CheckoutPage() {
           </div>
         </section>
         <section className="w-full max-w-[1440px] mx-auto px-6 md:px-10 py-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
-            <div className="lg:col-span-7 flex flex-col gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-14">
+            <div className="md:col-span-7 flex flex-col gap-10">
               <div>
                 <div className="flex items-center gap-3 mb-1">
                   <span className="font-mono text-[10px] tracking-[0.22em] text-primary-500">01</span>
@@ -294,8 +294,8 @@ export default function CheckoutPage() {
                 </div>
               </div>
             </div>
-            <div className="lg:col-span-5">
-              <div className="lg:sticky lg:top-[130px] mb-8">
+            <div className="md:col-span-5">
+              <div className="md:sticky md:top-[130px] mb-8">
                 <div className="rounded-lg border border-primary-500/25 bg-background-900/70 overflow-hidden" style={{ boxShadow: "0 30px 70px -30px rgba(0,0,0,0.55)" }}>
                   <div className="flex items-center justify-between px-4 py-3.5 border-b border-background-200/50" style={{ background: "rgb(var(--primary-500) / 0.05)" }}>
                     <div className="flex items-center gap-2">
