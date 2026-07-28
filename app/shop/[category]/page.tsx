@@ -39,6 +39,7 @@ export default async function CategoryPage({
   if (!categoryName) notFound();
 
   const products = PRODUCTS.filter((p) => !p.hidden && p.category === categoryName);
+  const otherCategories = Object.entries(SLUG_TO_CATEGORY).filter(([slug]) => slug !== category);
 
   return (
     <div className="min-h-screen bg-background-800 text-foreground-100">
@@ -48,13 +49,18 @@ export default async function CategoryPage({
         <section className="relative pt-[112px] bg-background-900 border-b border-background-200/60">
           <div className="absolute inset-0 grid-overlay opacity-20 pointer-events-none"></div>
           <div className="relative w-full max-w-[1440px] mx-auto px-6 md:px-10 py-14 md:py-16">
-            <nav className="flex items-center gap-2 text-[12px] text-foreground-500 font-mono mb-6">
-              <Link href="/" className="hover:text-primary-500 transition-colors">Home</Link>
-              <span>/</span>
-              <Link href="/shop" className="hover:text-primary-500 transition-colors">Shop</Link>
-              <span>/</span>
-              <span className="text-primary-500">{categoryName}</span>
-            </nav>
+            <div className="flex items-center justify-between gap-4 mb-6">
+              <nav className="flex items-center gap-2 text-[12px] text-foreground-500 font-mono">
+                <Link href="/" className="hover:text-primary-500 transition-colors">Home</Link>
+                <span>/</span>
+                <Link href="/shop" className="hover:text-primary-500 transition-colors">Shop</Link>
+                <span>/</span>
+                <span className="text-primary-500">{categoryName}</span>
+              </nav>
+              <Link href="/shop" className="group hidden sm:inline-flex items-center gap-2 text-[12px] font-medium text-foreground-400 hover:text-primary-500 transition-colors cursor-pointer">
+                <i className="ri-arrow-left-line text-[13px] group-hover:-translate-x-1 transition-transform"></i>Back to Shop
+              </Link>
+            </div>
             <div className="flex items-center gap-3 mb-3">
               <span className="w-8 h-px bg-primary-500/60"></span>
               <span className="font-mono text-[10px] tracking-[0.28em] text-primary-500 uppercase">Category</span>
@@ -69,6 +75,18 @@ export default async function CategoryPage({
               <span className="flex items-center gap-1.5 font-mono text-[11px] text-secondary-500">
                 <i className="ri-shield-check-line text-[12px]"></i>All batches COA verified
               </span>
+            </div>
+            <div className="flex flex-wrap items-center gap-2 mt-8 pt-6 border-t border-background-200/40">
+              <span className="font-mono text-[10px] tracking-[0.18em] text-foreground-600 uppercase mr-1">Other Categories</span>
+              {otherCategories.map(([slug, name]) => (
+                <Link
+                  key={slug}
+                  href={`/shop/${slug}`}
+                  className="px-3 py-1.5 rounded-full border border-background-200/60 bg-background-100/60 text-[12px] text-foreground-400 hover:border-primary-500/50 hover:text-primary-500 transition-all cursor-pointer whitespace-nowrap"
+                >
+                  {name}
+                </Link>
+              ))}
             </div>
           </div>
         </section>
