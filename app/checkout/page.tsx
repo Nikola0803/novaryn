@@ -236,7 +236,7 @@ export default function CheckoutPage() {
         <section className="w-full max-w-[1440px] mx-auto px-6 md:px-10 py-10">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-14">
             <div className="md:col-span-7 flex flex-col gap-10">
-              <div>
+              <div className="md:sticky md:top-[130px] md:max-h-[calc(100vh-160px)] md:overflow-y-auto md:pr-1">
                 <div className="flex items-center gap-3 mb-1">
                   <span className="font-mono text-[10px] tracking-[0.22em] text-primary-500">01</span>
                   <h2 className="font-display text-[20px] text-foreground-100">Shipping Information</h2>
@@ -295,7 +295,7 @@ export default function CheckoutPage() {
               </div>
             </div>
             <div className="md:col-span-5">
-              <div className="md:sticky md:top-[130px] mb-8">
+              <div className="mb-8">
                 <div className="rounded-lg border border-primary-500/25 bg-background-900/70 overflow-hidden" style={{ boxShadow: "0 30px 70px -30px rgba(0,0,0,0.55)" }}>
                   <div className="flex items-center justify-between px-4 py-3.5 border-b border-background-200/50" style={{ background: "rgb(var(--primary-500) / 0.05)" }}>
                     <div className="flex items-center gap-2">
