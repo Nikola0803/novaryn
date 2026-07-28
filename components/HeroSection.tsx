@@ -268,8 +268,8 @@ export default function HeroSection() {
           to   { opacity:1; transform:translateY(0); }
         }
         @keyframes nvPulse {
-          0%,100% { opacity:1; transform:scale(1); }
-          50%     { opacity:0.35; transform:scale(0.6); }
+          0%,100% { opacity:0.9; transform:scale(1); }
+          50%     { opacity:0.5; transform:scale(0.85); }
         }
         @keyframes nvFloat {
           0%,100% { transform:translateY(0); }

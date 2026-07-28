@@ -12,24 +12,28 @@
    app/layout.tsx sets it before hydration so there's no flash of the
    wrong theme on load. --------------------------------------------------- */
 :root {
-  --bg-100: 20 22 26;
-  --bg-200: 31 34 40;
-  --bg-300: 42 46 54;
-  --bg-800: 10 11 13;
-  --bg-900: 8 9 11;
-  --fg-100: 233 237 242;
-  --fg-200: 212 218 227;
-  --fg-300: 201 205 211;
-  --fg-400: 168 174 184;
-  --fg-500: 139 147 161;
-  --fg-600: 107 114 128;
-  --primary-500: 94 232 213;
-  --secondary-500: 94 232 160;
-  --accent-200: 212 218 227;
-  --accent-300: 201 205 211;
+  /* Dark theme, retuned toward a restrained navy/steel-blue palette (moving
+     away from the earlier bright mint-teal "neon lab" look) — desaturated
+     accent, cooler near-black backgrounds. Every component reads off these
+     vars, so this one block is most of the "calmer, cleaner tone" pass. */
+  --bg-100: 22 26 34;
+  --bg-200: 32 38 48;
+  --bg-300: 44 51 64;
+  --bg-800: 11 14 20;
+  --bg-900: 8 10 15;
+  --fg-100: 230 234 240;
+  --fg-200: 208 214 224;
+  --fg-300: 190 197 208;
+  --fg-400: 156 165 179;
+  --fg-500: 128 138 154;
+  --fg-600: 98 108 124;
+  --primary-500: 140 178 224;
+  --secondary-500: 124 168 150;
+  --accent-200: 208 214 224;
+  --accent-300: 190 197 208;
   --signal: 255 92 92;
-  --hero-emphasis: 168 245 237;
-  --hero-dim: 59 184 168;
+  --hero-emphasis: 196 216 240;
+  --hero-dim: 92 126 168;
   --platinum-1: 245 246 248;
   --platinum-2: 201 205 211;
   --platinum-3: 139 147 161;
@@ -113,8 +117,8 @@
 
   .glow-cyan {
     box-shadow:
-      0 0 0 1px rgb(var(--primary-500) / 0.25),
-      0 0 40px -6px rgb(var(--primary-500) / 0.35);
+      0 0 0 1px rgb(var(--primary-500) / 0.18),
+      0 0 26px -8px rgb(var(--primary-500) / 0.22);
   }
 
   .text-platinum {
