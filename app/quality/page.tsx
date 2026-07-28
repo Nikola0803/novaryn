@@ -52,6 +52,10 @@ export default function QualityPage() {
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background-900/70 via-transparent to-transparent"></div>
+              <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2 px-3.5 py-2.5 rounded-lg bg-background-900/85 backdrop-blur border border-background-200/50">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary-500 shrink-0"></span>
+                <span className="font-mono text-[10px] tracking-[0.08em] text-foreground-200 uppercase">Six Stages, Zero Shortcuts</span>
+              </div>
             </div>
           </div>
         </section>
@@ -140,6 +144,10 @@ export default function QualityPage() {
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background-900/70 via-transparent to-transparent"></div>
+                <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2 px-3.5 py-2.5 rounded-lg bg-background-900/85 backdrop-blur border border-background-200/50">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary-500 shrink-0"></span>
+                  <span className="font-mono text-[10px] tracking-[0.08em] text-foreground-200 uppercase">3 Independent Testing Labs</span>
+                </div>
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
