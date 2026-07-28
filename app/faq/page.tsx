@@ -1,6 +1,15 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import PromoBanner from "@/components/PromoBanner";
 import FaqAccordion from "@/components/FaqAccordion";
+
+export const metadata: Metadata = {
+  title: "FAQ",
+  description:
+    "Answers to what researchers ask before and after their first order: shipping, COAs, purity testing, payment methods, and more.",
+  alternates: { canonical: "/faq" },
+};
+
 export default function FaqPage() {
   return (
     <div className="min-h-screen bg-background-800 text-foreground-100">

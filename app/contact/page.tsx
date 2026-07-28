@@ -1,6 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
 import PromoBanner from "@/components/PromoBanner";
+
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description:
+    "US-based support available 7 days a week for product questions, bulk orders, and documentation. We respond within 24 hours.",
+  alternates: { canonical: "/contact" },
+};
+
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-background-800 text-foreground-100">

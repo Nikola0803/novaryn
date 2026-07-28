@@ -1,6 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
 import PromoBanner from "@/components/PromoBanner";
+
+export const metadata: Metadata = {
+  title: "Quality & Verification",
+  description:
+    "Every Vertalis batch passes a documented six-stage quality pipeline, sourcing, synthesis, independent third-party testing, published COA, and ambient fulfillment, before it reaches your lab.",
+  alternates: { canonical: "/quality" },
+};
+
 const STEPS = [
   { n: "01", icon: "ri-flask-line", title: "Sourcing", body: "All raw materials are procured exclusively from vetted synthesis partners operating under strict NDAs. Every supplier undergoes facility audit and documented chain-of-custody verification before we accept a single gram of material." },
   { n: "02", icon: "ri-test-tube-line", title: "Synthesis", body: "Peptides are synthesized via solid-phase peptide synthesis (SPPS) in ISO-controlled cleanroom environments. Sequence fidelity is verified at synthesis before lyophilization." },

@@ -1,6 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
 import PromoBanner from "@/components/PromoBanner";
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description:
+    "Vertalis exists to be the research peptide supplier you don't have to take on faith. Documentation over claims, public COAs, and independent third-party testing on every batch.",
+  alternates: { canonical: "/about" },
+};
+
 const PILLARS = [
   {
     icon: "ri-file-shield-2-line",

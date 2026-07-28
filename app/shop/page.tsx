@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Header from "@/components/Header";
 import PromoBanner from "@/components/PromoBanner";
 import Footer from "@/components/Footer";
@@ -22,10 +23,19 @@ const SORTS = ["Featured", "Price: Low to High", "Price: High to Low", "Purity %
 
 const VISIBLE = PRODUCTS.filter((p) => !p.hidden);
 
-export default function ShopPage() {
+function ShopPageInner() {
+  const searchParams = useSearchParams();
   const [activeCategory, setActiveCategory] = useState("all");
   const [sortBy, setSortBy] = useState("Featured");
   const [search, setSearch] = useState("");
+
+  // Support a ?q= deep link (used by the site-search JSON-LD action and
+  // shareable "search this catalog" links) without changing the filter's
+  // own local-state behavior once the user starts typing.
+  useEffect(() => {
+    const q = searchParams.get("q");
+    if (q) setSearch(q);
+  }, [searchParams]);
 
   const filtered = useMemo(() => {
     let list = VISIBLE;
@@ -162,7 +172,15 @@ export default function ShopPage() {
           )}
         </section>
       </main>
-      
+
     </div>
+  );
+}
+
+export default function ShopPage() {
+  return (
+    <Suspense fallback={null}>
+      <ShopPageInner />
+    </Suspense>
   );
 }

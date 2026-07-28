@@ -1,7 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
 import PromoBanner from "@/components/PromoBanner";
 import { SITE } from "@/data/site-config";
+
+export const metadata: Metadata = {
+  title: "Lab Affiliate Program",
+  description:
+    "Earn commission on every order you refer, up to 16%, with a 30-day cookie window and monthly payouts. Built for researchers, lab managers, and institutions.",
+  alternates: { canonical: "/affiliate" },
+};
 
 const BENEFITS = [
   { icon: "ri-percent-line", title: "Commission on Every Order", body: "Earn a percentage on every verified order placed through your unique referral link or personal discount code." },

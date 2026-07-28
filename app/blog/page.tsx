@@ -1,6 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
 import PromoBanner from "@/components/PromoBanner";
+
+export const metadata: Metadata = {
+  title: "Blog",
+  description:
+    "Research notes, methodology, and what our QA team is learning about purity verification, storage science, and peptide research.",
+  alternates: { canonical: "/blog" },
+};
+
 const POSTS = [
   {
     tag: "Quality & Verification",

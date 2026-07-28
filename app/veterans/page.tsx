@@ -1,6 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
 import PromoBanner from "@/components/PromoBanner";
+
+export const metadata: Metadata = {
+  title: "Military, Veterans & First Responders Discount",
+  description:
+    "Active military, veterans, and first responders get 23% off every order, for life. A permanent thank-you, not a one-time promo code.",
+  alternates: { canonical: "/veterans" },
+};
+
 const BRANCHES = [
   { icon: "ri-shield-star-line", label: "Active Duty & Reserve" },
   { icon: "ri-medal-line", label: "Veterans" },
