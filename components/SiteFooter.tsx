@@ -115,7 +115,7 @@ export default function SiteFooter() {
               </span>
               <span className="font-mono text-[11px] tracking-[0.18em] text-accent-300 uppercase">Research Use Only</span>
             </div>
-            <p className="text-[12px] text-foreground-500 leading-relaxed max-w-3xl">
+            <p className="text-[12px] text-foreground-500 leading-relaxed flex-1">
               All products sold on this website are intended for research and identification purposes only. These products are not intended for human dosing, injection, or ingestion. The statements made on this website have not been evaluated by the US Food and Drug Administration. The statements and the products of this company are not intended to diagnose, treat, cure, or prevent any disease. Vertalis is a chemical supplier, not a compounding pharmacy or outsourcing facility as defined under 503A or 503B of the Federal Food, Drug, and Cosmetic Act.
             </p>
           </div>

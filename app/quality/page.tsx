@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Header from "@/components/Header";
 import PromoBanner from "@/components/PromoBanner";
+import LabIllustration from "@/components/LabIllustration";
 
 const STEPS = [
   { n: "01", icon: "ri-flask-line", title: "Sourcing", body: "All raw materials are procured exclusively from vetted synthesis partners operating under strict NDAs. Every supplier undergoes facility audit and documented chain-of-custody verification before we accept a single gram of material." },
@@ -26,23 +27,28 @@ export default function QualityPage() {
         <section className="relative pt-[112px] bg-background-900 border-b border-background-200/60">
           <div className="absolute inset-0 grid-overlay opacity-20 pointer-events-none"></div>
           <div className="absolute top-20 right-0 w-80 h-80 rounded-full bg-primary-500/5 blur-[120px] pointer-events-none"></div>
-          <div className="relative w-full max-w-[1440px] mx-auto px-6 md:px-10 py-20 md:py-28">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="w-8 h-px bg-primary-500/60"></span>
-              <span className="font-mono text-[10px] tracking-[0.28em] text-primary-500 uppercase">Quality & Verification</span>
+          <div className="relative w-full max-w-[1440px] mx-auto px-6 md:px-10 py-20 md:py-28 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="w-8 h-px bg-primary-500/60"></span>
+                <span className="font-mono text-[10px] tracking-[0.28em] text-primary-500 uppercase">Quality & Verification</span>
+              </div>
+              <h1 className="font-display text-[44px] md:text-[64px] leading-[0.95] tracking-tightest text-foreground-100 mb-6 max-w-3xl">
+                Six stages.<br /><span className="text-platinum">Nothing ships without them.</span>
+              </h1>
+              <p className="text-[16px] text-foreground-400 max-w-xl leading-relaxed">
+                Every Vertalis batch passes a documented six-stage quality pipeline before it reaches your lab. No exceptions. No batch-skipping. No shortcuts.
+              </p>
+              <div className="flex flex-wrap gap-4 mt-8">
+                {["≥99% Purity Baseline", "100% Third-Party Verified", "Publicly Archived COAs", "Lyophilized · Ships Ambient"].map((badge) => (
+                  <span key={badge} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-secondary-500/30 bg-secondary-500/5 font-mono text-[11px] text-secondary-500">
+                    <i className="ri-checkbox-circle-fill text-[12px]"></i>{badge}
+                  </span>
+                ))}
+              </div>
             </div>
-            <h1 className="font-display text-[44px] md:text-[64px] leading-[0.95] tracking-tightest text-foreground-100 mb-6 max-w-3xl">
-              Six stages.<br /><span className="text-platinum">Nothing ships without them.</span>
-            </h1>
-            <p className="text-[16px] text-foreground-400 max-w-xl leading-relaxed">
-              Every Vertalis batch passes a documented six-stage quality pipeline before it reaches your lab. No exceptions. No batch-skipping. No shortcuts.
-            </p>
-            <div className="flex flex-wrap gap-4 mt-8">
-              {["≥99% Purity Baseline", "100% Third-Party Verified", "Publicly Archived COAs", "Lyophilized · Ships Ambient"].map((badge) => (
-                <span key={badge} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-secondary-500/30 bg-secondary-500/5 font-mono text-[11px] text-secondary-500">
-                  <i className="ri-checkbox-circle-fill text-[12px]"></i>{badge}
-                </span>
-              ))}
+            <div className="hidden lg:block lg:col-span-5 h-[320px]">
+              <LabIllustration variant="shield" className="w-full h-full" />
             </div>
           </div>
         </section>
@@ -111,17 +117,22 @@ export default function QualityPage() {
         {/* Testing partners */}
         <section id="partners" className="border-t border-background-200/60 py-24 md:py-32">
           <div className="w-full max-w-[1440px] mx-auto px-6 md:px-10">
-            <div className="max-w-3xl mb-16">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="font-mono text-[10px] tracking-[0.28em] text-primary-500 uppercase">/ 03 · Testing Partners</span>
-                <span className="w-8 h-px bg-primary-500/40"></span>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-16">
+              <div className="lg:col-span-7">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="font-mono text-[10px] tracking-[0.28em] text-primary-500 uppercase">/ 03 · Testing Partners</span>
+                  <span className="w-8 h-px bg-primary-500/40"></span>
+                </div>
+                <h2 className="font-display text-[38px] md:text-[48px] leading-[1.02] tracking-tightest text-foreground-100">
+                  The labs behind every COA.
+                </h2>
+                <p className="mt-4 text-[15px] text-foreground-500 max-w-xl">
+                  We work exclusively with accredited, internationally recognized analytical laboratories. All are independent. They report results to us, not the other way around.
+                </p>
               </div>
-              <h2 className="font-display text-[38px] md:text-[48px] leading-[1.02] tracking-tightest text-foreground-100">
-                The labs behind every COA.
-              </h2>
-              <p className="mt-4 text-[15px] text-foreground-500 max-w-xl">
-                We work exclusively with accredited, internationally recognized analytical laboratories. All are independent. They report results to us, not the other way around.
-              </p>
+              <div className="hidden lg:block lg:col-span-5 h-[220px]">
+                <LabIllustration variant="spectrum" className="w-full h-full" />
+              </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {LABS.map((lab) => (

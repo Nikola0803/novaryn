@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Header from "@/components/Header";
 import PromoBanner from "@/components/PromoBanner";
+import LabIllustration from "@/components/LabIllustration";
 
 const PILLARS = [
   {
@@ -36,17 +37,22 @@ export default function AboutPage() {
         <section className="relative pt-[112px] bg-background-900 border-b border-background-200/60 overflow-hidden">
           <div className="absolute inset-0 grid-overlay opacity-20 pointer-events-none"></div>
           <div className="absolute top-10 right-0 w-96 h-96 rounded-full bg-primary-500/5 blur-[140px] pointer-events-none"></div>
-          <div className="relative w-full max-w-[1440px] mx-auto px-6 md:px-10 py-20 md:py-28">
-            <div className="flex items-center gap-3 mb-5">
-              <span className="w-8 h-px bg-primary-500/60"></span>
-              <span className="font-mono text-[10px] tracking-[0.28em] text-primary-500 uppercase">About Vertalis</span>
+          <div className="relative w-full max-w-[1440px] mx-auto px-6 md:px-10 py-20 md:py-28 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7">
+              <div className="flex items-center gap-3 mb-5">
+                <span className="w-8 h-px bg-primary-500/60"></span>
+                <span className="font-mono text-[10px] tracking-[0.28em] text-primary-500 uppercase">About Vertalis</span>
+              </div>
+              <h1 className="font-display text-[40px] md:text-[60px] leading-[0.98] tracking-tightest text-foreground-100 max-w-3xl mb-6">
+                Research peptides, <span className="text-platinum">without the guesswork.</span>
+              </h1>
+              <p className="text-[16px] text-foreground-400 leading-relaxed max-w-xl">
+                The research peptide market grew faster than its standards did. Most suppliers sell on confidence and a nice label. Purity claims you can't check, sourcing you can't see. Vertalis exists to be the supplier where you don't have to take our word for it.
+              </p>
             </div>
-            <h1 className="font-display text-[40px] md:text-[60px] leading-[0.98] tracking-tightest text-foreground-100 max-w-3xl mb-6">
-              Research peptides, <span className="text-platinum">without the guesswork.</span>
-            </h1>
-            <p className="text-[16px] text-foreground-400 leading-relaxed max-w-xl">
-              The research peptide market grew faster than its standards did. Most suppliers sell on confidence and a nice label. Purity claims you can't check, sourcing you can't see. Vertalis exists to be the supplier where you don't have to take our word for it.
-            </p>
+            <div className="hidden lg:block lg:col-span-5 h-[300px]">
+              <LabIllustration variant="molecule" className="w-full h-full" />
+            </div>
           </div>
         </section>
 
@@ -120,6 +126,9 @@ export default function AboutPage() {
                   See the full six-stage pipeline
                   <i className="ri-arrow-right-line text-[14px] group-hover:translate-x-1 transition-transform"></i>
                 </Link>
+                <div className="hidden lg:block h-[220px] mt-8">
+                  <LabIllustration variant="flask" className="w-full h-full" />
+                </div>
               </div>
               <div className="lg:col-span-5 lg:col-start-8 space-y-3">
                 {STANDARD_STEPS.map((s) => (

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Header from "@/components/Header";
 import PromoBanner from "@/components/PromoBanner";
+import LabIllustration from "@/components/LabIllustration";
 
 const BRANCHES = [
   { icon: "ri-shield-star-line", label: "Active Duty & Reserve" },
@@ -36,26 +37,31 @@ export default function VeteransPage() {
         <section className="relative pt-[112px] bg-background-900 border-b border-background-200/60 overflow-hidden">
           <div className="absolute inset-0 grid-overlay opacity-20 pointer-events-none"></div>
           <div className="absolute top-10 right-0 w-96 h-96 rounded-full bg-primary-500/5 blur-[140px] pointer-events-none"></div>
-          <div className="relative w-full max-w-[1440px] mx-auto px-6 md:px-10 py-20 md:py-28">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="w-8 h-px bg-primary-500/60"></span>
-              <span className="font-mono text-[10px] tracking-[0.28em] text-primary-500 uppercase">Military, Veterans & First Responders</span>
+          <div className="relative w-full max-w-[1440px] mx-auto px-6 md:px-10 py-20 md:py-28 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-7">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="w-8 h-px bg-primary-500/60"></span>
+                <span className="font-mono text-[10px] tracking-[0.28em] text-primary-500 uppercase">Military, Veterans & First Responders</span>
+              </div>
+              <h1 className="font-display text-[44px] md:text-[64px] leading-[0.95] tracking-tightest text-foreground-100 mb-6 max-w-3xl">
+                You serve. <span className="text-platinum">We take care of the rest.</span>
+              </h1>
+              <p className="text-[16px] text-foreground-400 max-w-xl leading-relaxed mb-8">
+                Active military, veterans, and first responders get 23% off every order, for life. It's a small, permanent thank-you from our team, not a one-time promo.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {BRANCHES.map((b) => (
+                  <span
+                    key={b.label}
+                    className="inline-flex items-center gap-2 px-3.5 py-2 rounded-md border border-primary-500/25 bg-primary-500/5 font-mono text-[11px] text-primary-500"
+                  >
+                    <i className={`${b.icon} text-[14px]`}></i>{b.label}
+                  </span>
+                ))}
+              </div>
             </div>
-            <h1 className="font-display text-[44px] md:text-[64px] leading-[0.95] tracking-tightest text-foreground-100 mb-6 max-w-3xl">
-              You serve. <span className="text-platinum">We take care of the rest.</span>
-            </h1>
-            <p className="text-[16px] text-foreground-400 max-w-xl leading-relaxed mb-8">
-              Active military, veterans, and first responders get 23% off every order, for life. It's a small, permanent thank-you from our team, not a one-time promo.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              {BRANCHES.map((b) => (
-                <span
-                  key={b.label}
-                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-md border border-primary-500/25 bg-primary-500/5 font-mono text-[11px] text-primary-500"
-                >
-                  <i className={`${b.icon} text-[14px]`}></i>{b.label}
-                </span>
-              ))}
+            <div className="hidden lg:block lg:col-span-5 h-[280px]">
+              <LabIllustration variant="shield" className="w-full h-full" />
             </div>
           </div>
         </section>

@@ -4,6 +4,7 @@ import { useCart } from "@/lib/cart-context";
 import { PRODUCTS } from "@/data/products";
 
 const BAC_SLUGS = ["nvr-bac-5", "nvr-bac-10"];
+const FREE_SHIPPING_THRESHOLD = 300;
 
 export default function CheckoutSummary() {
   const { items, addItem, removeItem, setQty, subtotal, count } = useCart();
@@ -12,8 +13,34 @@ export default function CheckoutSummary() {
   const hasBac = items.some((i) => BAC_SLUGS.includes(i.slug));
   const bacOptions = PRODUCTS.filter((p) => BAC_SLUGS.includes(p.slug));
 
+  const remainingForFreeShipping = Math.max(0, FREE_SHIPPING_THRESHOLD - subtotal);
+  const freeShippingUnlocked = remainingForFreeShipping === 0;
+  const freeShippingProgress = Math.min(100, (subtotal / FREE_SHIPPING_THRESHOLD) * 100);
+
   return (
     <>
+      {items.length > 0 && (
+        <div className="p-4 border-b border-background-200/40">
+          <div className="flex items-center gap-2 mb-2.5">
+            <i className={`${freeShippingUnlocked ? "ri-checkbox-circle-fill" : "ri-truck-line"} text-[14px] text-primary-500 shrink-0`}></i>
+            <p className="text-[12px] text-foreground-300">
+              {freeShippingUnlocked ? (
+                <span className="font-medium text-primary-500">You&apos;ve unlocked free shipping!</span>
+              ) : (
+                <>
+                  You&apos;re <span className="font-semibold text-foreground-100">${remainingForFreeShipping.toFixed(2)}</span> away from free shipping
+                </>
+              )}
+            </p>
+          </div>
+          <div className="h-1.5 w-full rounded-full bg-background-200/60 overflow-hidden">
+            <div
+              className="h-full rounded-full bg-primary-500 transition-all duration-500 ease-out"
+              style={{ width: `${freeShippingProgress}%` }}
+            />
+          </div>
+        </div>
+      )}
       <div className="divide-y divide-background-200/40">
         {items.length === 0 ? (
           <div className="p-6 text-center">
