@@ -1,8 +1,6 @@
 import Link from "next/link";
 import Header from "@/components/Header";
 import PromoBanner from "@/components/PromoBanner";
-import LabIllustration from "@/components/LabIllustration";
-
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-background-800 text-foreground-100">
@@ -23,8 +21,13 @@ export default function ContactPage() {
                 US-based support available 7 days a week. Whether you have a product question, bulk order inquiry, or need documentation. We respond within 24 hours.
               </p>
             </div>
-            <div className="hidden lg:block lg:col-span-5 h-[240px]">
-              <LabIllustration variant="molecule" className="w-full h-full" />
+            <div className="hidden lg:block lg:col-span-5 h-[240px] relative rounded-xl overflow-hidden border border-background-200/60">
+              <img
+                src="https://images.pexels.com/photos/8867405/pexels-photo-8867405.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                alt="Customer support team member with headset"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background-900/70 via-transparent to-transparent"></div>
             </div>
           </div>
         </section>

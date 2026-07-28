@@ -1,8 +1,6 @@
 import Link from "next/link";
 import Header from "@/components/Header";
 import PromoBanner from "@/components/PromoBanner";
-import LabIllustration from "@/components/LabIllustration";
-
 const POSTS = [
   {
     tag: "Quality & Verification",
@@ -80,8 +78,13 @@ export default function BlogPage() {
                 Notes from our lab and QA team on purity verification, storage science, and the research our compounds show up in most.
               </p>
             </div>
-            <div className="hidden lg:block lg:col-span-5 h-[240px]">
-              <LabIllustration variant="helix" className="w-full h-full" />
+            <div className="hidden lg:block lg:col-span-5 h-[240px] relative rounded-xl overflow-hidden border border-background-200/60">
+              <img
+                src="https://images.pexels.com/photos/8531365/pexels-photo-8531365.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                alt="Scientist writing notes in a laboratory"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background-900/70 via-transparent to-transparent"></div>
             </div>
           </div>
         </section>

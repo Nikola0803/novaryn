@@ -1,8 +1,6 @@
 import Link from "next/link";
 import Header from "@/components/Header";
 import PromoBanner from "@/components/PromoBanner";
-import LabIllustration from "@/components/LabIllustration";
-
 const PILLARS = [
   {
     icon: "ri-file-shield-2-line",
@@ -50,8 +48,13 @@ export default function AboutPage() {
                 The research peptide market grew faster than its standards did. Most suppliers sell on confidence and a nice label. Purity claims you can't check, sourcing you can't see. Vertalis exists to be the supplier where you don't have to take our word for it.
               </p>
             </div>
-            <div className="hidden lg:block lg:col-span-5 h-[300px]">
-              <LabIllustration variant="molecule" className="w-full h-full" />
+            <div className="hidden lg:block lg:col-span-5 h-[300px] relative rounded-xl overflow-hidden border border-background-200/60">
+              <img
+                src="https://images.pexels.com/photos/15509862/pexels-photo-15509862.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                alt="Laboratory flasks and research glassware"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background-900/70 via-transparent to-transparent"></div>
             </div>
           </div>
         </section>
@@ -126,8 +129,13 @@ export default function AboutPage() {
                   See the full six-stage pipeline
                   <i className="ri-arrow-right-line text-[14px] group-hover:translate-x-1 transition-transform"></i>
                 </Link>
-                <div className="hidden lg:block h-[220px] mt-8">
-                  <LabIllustration variant="flask" className="w-full h-full" />
+                <div className="hidden lg:block h-[220px] mt-8 relative rounded-xl overflow-hidden border border-background-200/60">
+                  <img
+                    src="https://images.pexels.com/photos/3912482/pexels-photo-3912482.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                    alt="Researcher using a pipette in the lab"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background-900/70 via-transparent to-transparent"></div>
                 </div>
               </div>
               <div className="lg:col-span-5 lg:col-start-8 space-y-3">

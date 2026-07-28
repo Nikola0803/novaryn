@@ -1,8 +1,6 @@
 import Link from "next/link";
 import Header from "@/components/Header";
 import PromoBanner from "@/components/PromoBanner";
-import LabIllustration from "@/components/LabIllustration";
-
 const STEPS = [
   { n: "01", icon: "ri-flask-line", title: "Sourcing", body: "All raw materials are procured exclusively from vetted synthesis partners operating under strict NDAs. Every supplier undergoes facility audit and documented chain-of-custody verification before we accept a single gram of material." },
   { n: "02", icon: "ri-test-tube-line", title: "Synthesis", body: "Peptides are synthesized via solid-phase peptide synthesis (SPPS) in ISO-controlled cleanroom environments. Sequence fidelity is verified at synthesis before lyophilization." },
@@ -47,8 +45,13 @@ export default function QualityPage() {
                 ))}
               </div>
             </div>
-            <div className="hidden lg:block lg:col-span-5 h-[320px]">
-              <LabIllustration variant="shield" className="w-full h-full" />
+            <div className="hidden lg:block lg:col-span-5 h-[320px] relative rounded-xl overflow-hidden border border-background-200/60">
+              <img
+                src="https://images.pexels.com/photos/18689301/pexels-photo-18689301.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                alt="Lab technician holding a sample vial for analysis"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background-900/70 via-transparent to-transparent"></div>
             </div>
           </div>
         </section>
@@ -130,8 +133,13 @@ export default function QualityPage() {
                   We work exclusively with accredited, internationally recognized analytical laboratories. All are independent. They report results to us, not the other way around.
                 </p>
               </div>
-              <div className="hidden lg:block lg:col-span-5 h-[220px]">
-                <LabIllustration variant="spectrum" className="w-full h-full" />
+              <div className="hidden lg:block lg:col-span-5 h-[220px] relative rounded-xl overflow-hidden border border-background-200/60">
+                <img
+                  src="https://images.pexels.com/photos/13014236/pexels-photo-13014236.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="DNA molecule and scientific research visualization"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background-900/70 via-transparent to-transparent"></div>
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
