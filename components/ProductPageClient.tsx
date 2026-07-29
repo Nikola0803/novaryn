@@ -14,14 +14,6 @@ import StarRating from "@/components/StarRating";
 
 const TABS = ["Overview", "Specifications", "Certificate of Analysis", "Shipping & Handling", "Research References"];
 
-// Bulk discount tiers (% off base price)
-const TIERS = [
-  { qty: 1, pct: 0, label: "1 Vial" },
-  { qty: 3, pct: 9, label: "3-Pack" },
-  { qty: 5, pct: 15, label: "5-Pack" },
-  { qty: 10, pct: 21, label: "10-Pack" },
-];
-
 function fmt(n: number) {
   return "$" + Math.round(n);
 }
@@ -32,16 +24,12 @@ export default function ProductPageClient({ slug }: { slug: string }) {
   const rating = getRating(product);
 
   const [activeTab, setActiveTab] = useState(0);
-  const [selectedTier, setSelectedTier] = useState(0);
   const [showCoa, setShowCoa] = useState(false);
 
   // Related: same category, exclude self, max 4
   const related = PRODUCTS.filter(
     (p) => !p.hidden && p.category === product.category && p.slug !== product.slug
   ).slice(0, 4);
-
-  const tierPrice = Math.round(product.price * (1 - TIERS[selectedTier].pct / 100));
-  const tierTotal = tierPrice * TIERS[selectedTier].qty;
 
   const handleAddToCart = () => {
     addItem({
@@ -139,72 +127,11 @@ export default function ProductPageClient({ slug }: { slug: string }) {
                 </div>
               </div>
 
-              {/* Quantity tiers */}
-              <div className="mb-6">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="font-mono text-[10px] tracking-[0.22em] text-foreground-600 uppercase">Quantity</span>
-                  <span className="w-6 h-px bg-background-200/60"></span>
-                </div>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {TIERS.map((t, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setSelectedTier(i)}
-                      className={`px-4 py-2 rounded-md border text-[13px] transition-all duration-300 ease-precision whitespace-nowrap cursor-pointer ${
-                        selectedTier === i
-                          ? "border-primary-500 bg-primary-500/10 text-primary-500"
-                          : "border-background-200/60 bg-background-100 text-foreground-400 hover:border-foreground-500/40"
-                      }`}
-                    >
-                      {t.label}
-                      {t.pct > 0 && <span className="ml-1.5 font-mono text-[10px] text-secondary-500">−{t.pct}%</span>}
-                    </button>
-                  ))}
-                </div>
-                {/* Bulk table */}
-                <div className="rounded-md border border-background-200/60 overflow-hidden">
-                  <table className="w-full text-left">
-                    <thead>
-                      <tr className="border-b border-background-200/60 bg-background-100/50">
-                        <th className="py-2.5 px-3 font-mono text-[9px] tracking-[0.18em] text-foreground-600 uppercase">Qty</th>
-                        <th className="py-2.5 px-3 font-mono text-[9px] tracking-[0.18em] text-foreground-600 uppercase">Per Unit</th>
-                        <th className="py-2.5 px-3 font-mono text-[9px] tracking-[0.18em] text-foreground-600 uppercase">Total</th>
-                        <th className="py-2.5 px-3 font-mono text-[9px] tracking-[0.18em] text-foreground-600 uppercase text-right">Savings</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {TIERS.map((t, i) => {
-                        const unitP = Math.round(product.price * (1 - t.pct / 100));
-                        const totalP = unitP * t.qty;
-                        const active = selectedTier === i;
-                        return (
-                          <tr
-                            key={i}
-                            onClick={() => setSelectedTier(i)}
-                            className={`border-b border-background-200/40 last:border-none cursor-pointer transition-colors ${active ? "bg-primary-500/5" : "hover:bg-background-100/30"}`}
-                          >
-                            <td className={`py-2.5 px-3 text-[13px] font-semibold ${active ? "text-primary-500" : "text-foreground-200"}`}>{t.qty}</td>
-                            <td className={`py-2.5 px-3 font-mono text-[12px] ${active ? "text-primary-500" : "text-foreground-300"}`}>{fmt(unitP)}</td>
-                            <td className={`py-2.5 px-3 font-mono text-[12px] ${active ? "text-primary-500" : "text-foreground-300"}`}>{fmt(totalP)}</td>
-                            <td className="py-2.5 px-3 font-mono text-[12px] text-right text-secondary-500">{t.pct > 0 ? `${t.pct}%` : "0%"}</td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-
               {/* CTA panel */}
               <div className="mt-8">
                 <div className="rounded-lg p-6 glass border border-background-200/60">
                   <div className="flex items-end justify-between mb-2">
-                    <span className="font-display text-[40px] leading-none text-foreground-100">{fmt(tierPrice)}</span>
-                    {selectedTier > 0 && (
-                      <span className="font-mono text-[12px] text-foreground-500 mb-1">
-                        × {TIERS[selectedTier].qty} = <span className="text-foreground-200">{fmt(tierTotal)}</span>
-                      </span>
-                    )}
+                    <span className="font-display text-[40px] leading-none text-foreground-100">{fmt(product.price)}</span>
                   </div>
                   {product.statusLabel !== "In Stock" && (
                     <div className="flex items-center gap-2 mb-5">
@@ -230,7 +157,7 @@ export default function ProductPageClient({ slug }: { slug: string }) {
                     className="w-full h-12 rounded-md bg-primary-500 text-background-900 text-[13px] font-semibold hover:bg-primary-400 transition-all duration-300 ease-precision hover:shadow-[0_0_24px_-4px_rgb(var(--primary-500) / 0.6)] flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <i className="ri-shopping-bag-3-line text-[15px]"></i>
-                    {product.disabled ? "Out of Stock" : `Add to Cart · ${fmt(tierPrice)}`}
+                    {product.disabled ? "Out of Stock" : `Add to Cart · ${fmt(product.price)}`}
                   </button>
                   <p className="mt-4 flex items-center gap-1.5 text-[11px] text-foreground-500">
                     <i className="ri-flask-line text-[13px]"></i>Lyophilized, ships ambient within 24 hours, no cold-chain needed
