@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/lib/cart-context";
 import { getProduct } from "@/data/products";
 import ThemeToggle from "@/components/ThemeToggle";
+import SearchModal from "@/components/SearchModal";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -75,6 +76,7 @@ export default function Header() {
   const [mobileShopOpen, setMobileShopOpen] = useState(false);
   const [contactMenuOpen, setContactMenuOpen] = useState(false);
   const [mobileContactOpen, setMobileContactOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const contactCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { count, openCart } = useCart();
@@ -292,6 +294,7 @@ export default function Header() {
         <div className="flex items-center gap-3">
           <ThemeToggle />
           <button
+            onClick={() => setSearchOpen(true)}
             aria-label="Search"
             className="hidden md:flex w-9 h-9 items-center justify-center rounded-md text-foreground-300 hover:text-primary-500 hover:bg-background-200/60 transition-colors cursor-pointer"
           >
@@ -321,6 +324,13 @@ export default function Header() {
           >
             Shop Peptides
           </Link>
+          <button
+            onClick={() => setSearchOpen(true)}
+            aria-label="Search"
+            className="md:hidden w-9 h-9 flex items-center justify-center rounded-md text-foreground-300 hover:text-primary-500 hover:bg-background-200/60 transition-colors cursor-pointer"
+          >
+            <i className="ri-search-line text-[17px]"></i>
+          </button>
           <button
             aria-label="Menu"
             onClick={() => setMenuOpen((v) => !v)}
@@ -461,6 +471,7 @@ export default function Header() {
           </nav>
         </div>
       )}
+      {searchOpen && <SearchModal onClose={() => setSearchOpen(false)} />}
     </header>
   );
 }

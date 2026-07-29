@@ -129,6 +129,19 @@ export default function QuizPage() {
     }
   }
 
+  function goBack() {
+    if (step === STEPS.SUBGOAL) {
+      if (subgoalIndex > 0) {
+        setSubgoalIndex(subgoalIndex - 1);
+      } else {
+        setStep(STEPS.GOALS);
+      }
+    } else if (step === STEPS.RESULTS) {
+      setSubgoalIndex(selectedGoals.length - 1);
+      setStep(STEPS.SUBGOAL);
+    }
+  }
+
   function retake() {
     setStep(STEPS.GOALS);
     setSelectedGoals([]);
@@ -210,6 +223,13 @@ export default function QuizPage() {
                   if (!config) return null;
                   return (
                     <div>
+                      <button
+                        type="button"
+                        onClick={goBack}
+                        className="mb-4 inline-flex items-center gap-1.5 font-mono text-[11px] text-foreground-500 hover:text-primary-500 transition-colors cursor-pointer"
+                      >
+                        <i className="ri-arrow-left-line text-[13px]"></i>Back
+                      </button>
                       <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-primary-500">
                         {goalLabel(goalSlug)} · {subgoalIndex + 1} of {selectedGoals.length}
                       </p>
@@ -235,6 +255,13 @@ export default function QuizPage() {
 
               {step === STEPS.RESULTS && results && (
                 <div>
+                  <button
+                    type="button"
+                    onClick={goBack}
+                    className="mb-4 inline-flex items-center gap-1.5 font-mono text-[11px] text-foreground-500 hover:text-primary-500 transition-colors cursor-pointer"
+                  >
+                    <i className="ri-arrow-left-line text-[13px]"></i>Back
+                  </button>
                   <h2 className="font-display text-[20px] md:text-[24px] font-semibold text-foreground-100">
                     {QUIZ_LABELS.pageHeader}
                   </h2>
