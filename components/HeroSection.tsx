@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 
@@ -21,6 +21,19 @@ const FG_DIM = "rgb(var(--fg-100) / 0.48)";
 
 export default function HeroSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isLight, setIsLight] = useState(false);
+
+  // The 3D vial render is tuned for the dark theme's glow; on the white
+  // theme we swap it for the pre-rendered white-mode intro video instead.
+  // Tracks [data-theme] on <html> (same mechanism ThemeToggle writes to)
+  // so it stays in sync if the user flips themes without a reload.
+  useEffect(() => {
+    const read = () => setIsLight(document.documentElement.getAttribute("data-theme") === "light");
+    read();
+    const observer = new MutationObserver(read);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -194,9 +207,23 @@ export default function HeroSection() {
             background: "radial-gradient(ellipse 65% 65% at 50% 48%, rgb(var(--primary-500) / 0.16) 0%, transparent 72%)",
           }} />
 
-          {/* Procedural peptide-chain render, no product photography */}
+          {/* Procedural peptide-chain render on dark theme; pre-rendered
+              intro video on the white theme, where the 3D glow reads muddy
+              against a light background. */}
           <div className="absolute inset-0" style={{ animation: "nvFadeUp 1.1s ease forwards 0.5s", opacity: 0 }}>
-            <HeroVial3D />
+            {isLight ? (
+              <video
+                className="w-full h-full object-contain"
+                src="/videos/hero-intro-white-01.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                aria-hidden="true"
+              />
+            ) : (
+              <HeroVial3D />
+            )}
           </div>
 
           {/* Compact trust chip, floated over the bottom of the visual */}
