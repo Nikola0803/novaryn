@@ -79,7 +79,7 @@ export default function HeroSection() {
       <video
         key={isLight ? "light" : "dark"}
         className="absolute inset-0 z-0 w-full h-full object-contain pointer-events-none"
-        style={{ objectPosition: isLight ? "right center" : "center center" }}
+        style={{ objectPosition: "right center" }}
         src={isLight ? "/videos/hero-intro-white-01.mp4" : "/videos/hero-intro-dark-superwide-01.mp4"}
         autoPlay
         muted
