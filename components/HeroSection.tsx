@@ -82,7 +82,19 @@ export default function HeroSection() {
   return (
     <section
       className="relative w-full overflow-hidden"
-      style={{ height: "calc(100vh - 72px)", minHeight: 560, maxHeight: 880, background: BG }}
+      style={{
+        height: "calc(100vh - 72px)",
+        minHeight: 560,
+        maxHeight: 880,
+        // Light theme's page background is a flat solid, but the video's
+        // own studio backdrop has a vertical light/shadow falloff (light
+        // top, darker mid, lighter bottom). Matching that same falloff on
+        // the section itself means the video's edge dissolves into the
+        // page instead of sitting on top of a visibly flatter color.
+        background: isLight
+          ? "linear-gradient(to bottom, #E6E7E9 0%, #DCDFE2 35%, #A8ADB3 55%, #5A5E64 68%, #8E939A 82%, #C5C9CE 100%)"
+          : BG,
+      }}
     >
       {/* Background vial video · full-bleed, sits under the same
           grid/gradient/particle treatment so the vial reads as part of the
