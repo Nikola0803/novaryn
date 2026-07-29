@@ -79,7 +79,17 @@ export default function HeroSection() {
       <video
         key={isLight ? "light" : "dark"}
         className="absolute inset-0 z-0 w-full h-full object-contain pointer-events-none"
-        style={{ objectPosition: "right center" }}
+        style={{
+          objectPosition: "right center",
+          // The overlay gradient below fades the *page* background over the
+          // video, but it can't know exactly where the video's own visible
+          // pixels start inside its object-contain box (that shifts with
+          // viewport width). Masking the video element itself guarantees
+          // its own left edge always dissolves to transparent, rather than
+          // potentially showing a hard box edge before the overlay catches up.
+          maskImage: "linear-gradient(to right, transparent 0%, transparent 8%, black 55%, black 100%)",
+          WebkitMaskImage: "linear-gradient(to right, transparent 0%, transparent 8%, black 55%, black 100%)",
+        }}
         src={isLight ? "/videos/hero-intro-white-01.mp4" : "/videos/hero-intro-dark-superwide-01.mp4"}
         autoPlay
         muted
