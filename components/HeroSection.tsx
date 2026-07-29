@@ -2,16 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 
-// Client-only: react-three-fiber's Canvas touches WebGL/window at mount,
-// so it's loaded with ssr:false rather than imported directly. The empty
-// fallback keeps the panel's footprint stable (no layout shift) while the
-// bundle loads in.
-const HeroVial3D = dynamic(() => import("./HeroVial3D"), {
-  ssr: false,
-  loading: () => <div className="w-full h-full" />,
-});
+// HeroVial3D (react-three-fiber) previously rendered here; both themes now
+// use a full-bleed background video instead. Left the component file in
+// place in case we revert.
 
 const TEAL   = "rgb(var(--primary-500))";
 const TEAL_D = "rgb(var(--hero-dim))";
@@ -77,24 +71,25 @@ export default function HeroSection() {
       className="relative w-full overflow-hidden"
       style={{ height: "calc(100vh - 72px)", minHeight: 560, maxHeight: 880, background: BG }}
     >
-      {/* White-theme background video · full-bleed, sits under the same
-          grid/gradient/particle treatment dark mode uses so the vial reads
-          as part of the scene rather than a separate inserted clip. */}
-      {isLight && (
-        <video
-          className="absolute inset-0 z-0 w-full h-full object-cover pointer-events-none"
-          src="/videos/hero-intro-white-01.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          aria-hidden="true"
-        />
-      )}
+      {/* Background vial video · full-bleed, sits under the same
+          grid/gradient/particle treatment so the vial reads as part of the
+          scene rather than a separate inserted clip. Dark and white themes
+          each get their own take (test: dark clip is new, may get swapped
+          back to HeroVial3D if it doesn't hold up). */}
+      <video
+        key={isLight ? "light" : "dark"}
+        className="absolute inset-0 z-0 w-full h-full object-cover pointer-events-none"
+        src={isLight ? "/videos/hero-intro-white-01.mp4" : "/videos/hero-intro-dark-01.mp4"}
+        autoPlay
+        muted
+        loop
+        playsInline
+        aria-hidden="true"
+      />
 
       {/* Radial ambient */}
       <div className="absolute inset-0 z-0" style={{
-        background: `radial-gradient(ellipse 58% 75% at 70% 50%, rgb(var(--primary-500) / 0.06) 0%, transparent 65%), ${isLight ? "transparent" : BG}`,
+        background: "radial-gradient(ellipse 58% 75% at 70% 50%, rgb(var(--primary-500) / 0.06) 0%, transparent 65%)",
       }} />
 
       {/* Grid */}
@@ -215,25 +210,11 @@ export default function HeroSection() {
 
         </div>
 
-        {/* Right side · on dark theme this hosts the animated 3D vial. On the
-            white theme the vial already lives in the full-bleed background
-            video (positioned right, per the source clip), so this column
-            just reserves the matching gutter and hosts the trust chip. */}
+        {/* Right side · the vial lives in the full-bleed background video
+            (positioned right, per the source clip) for both themes now, so
+            this column just reserves the matching gutter and hosts the
+            trust chip. */}
         <div className="hidden lg:block relative shrink-0" style={{ width: "48%", maxWidth: 760, height: "88%" }}>
-          {!isLight && (
-            <>
-              {/* Ambient glow behind the visual */}
-              <div className="absolute inset-0 pointer-events-none" style={{
-                background: "radial-gradient(ellipse 65% 65% at 50% 48%, rgb(var(--primary-500) / 0.16) 0%, transparent 72%)",
-              }} />
-
-              {/* Procedural peptide-chain render, no product photography */}
-              <div className="absolute inset-0" style={{ animation: "nvFadeUp 1.1s ease forwards 0.5s", opacity: 0 }}>
-                <HeroVial3D />
-              </div>
-            </>
-          )}
-
           {/* Compact trust chip, floated over the bottom of the visual */}
           <div
             className="absolute left-1/2 bottom-2 -translate-x-1/2 w-[86%] max-w-[420px]"
