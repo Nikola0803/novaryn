@@ -6,6 +6,7 @@ import Image from "next/image";
 import { getProduct, getVariants, getVariantLabel, getRating } from "@/data/products";
 import { useCart } from "@/lib/cart-context";
 import StarRating from "@/components/StarRating";
+import CoaModal from "@/components/CoaModal";
 
 function formatPrice(price: number) {
   return Number.isInteger(price) ? `$${price}` : `$${price.toFixed(2)}`;
@@ -13,12 +14,10 @@ function formatPrice(price: number) {
 
 export default function BestSellerCard({
   slug,
-  coaHref,
   batchLabel,
   category,
 }: {
   slug: string;
-  coaHref: string;
   batchLabel: string;
   category: string;
 }) {
@@ -31,6 +30,15 @@ export default function BestSellerCard({
   const { addItem } = useCart();
   const rating = getRating(base);
   const href = `/product/${selected.slug}`;
+  const [showCoa, setShowCoa] = useState(false);
+
+  // Derive a display batch code + test date from the MMDD-style batchLabel
+  // (e.g. "1121-A" -> NVR-24-1121-A, tested 2024-11-21).
+  const batchCode = `NVR-24-${batchLabel}`;
+  const mm = batchLabel.slice(0, 2);
+  const dd = batchLabel.slice(2, 4);
+  const testDate = `2024-${mm}-${dd}`;
+  const labRef = `JAN-2024-${mm}-${4700 + parseInt(dd, 10)}`;
 
   return (
     <article
@@ -68,13 +76,18 @@ export default function BestSellerCard({
           <span className="inline-block px-2 py-0.5 rounded-md bg-background-100 font-mono text-[10px] tracking-wider text-foreground-500 uppercase">
             {category}
           </span>
-          <Link
-            href={coaHref}
-            className="w-7 h-7 flex items-center justify-center rounded-md bg-background-100 border border-background-200/60 text-foreground-400 hover:bg-primary-500 hover:text-background-900 hover:border-primary-500 transition-all cursor-pointer"
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              setShowCoa(true);
+            }}
+            className="flex items-center gap-1.5 px-2.5 h-7 rounded-md bg-background-100 border border-background-200/60 text-foreground-400 hover:bg-primary-500 hover:text-background-900 hover:border-primary-500 transition-all cursor-pointer"
             title="View COA"
           >
+            <span className="font-mono text-[10px] tracking-wide">Read COA</span>
             <i className="ri-shield-check-line text-[13px]"></i>
-          </Link>
+          </button>
         </div>
 
         <Link href={href} className="block">
@@ -157,6 +170,20 @@ export default function BestSellerCard({
           <i className="ri-shopping-bag-3-line text-[13px]"></i>Quick Add
         </button>
       </div>
+
+      {showCoa && (
+        <CoaModal
+          coa={{
+            batchCode,
+            compound: base.name,
+            spec: selected.spec,
+            purity: selected.purity,
+            testDate,
+            labRef,
+          }}
+          onClose={() => setShowCoa(false)}
+        />
+      )}
     </article>
   );
 }

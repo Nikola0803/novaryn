@@ -131,7 +131,8 @@ export const PRODUCTS: Product[] = [
     "buttonText": "Add to Cart",
     "footClass": null,
     "footText": null,
-    "description": "Semaglutide is a GLP-1 receptor agonist studied extensively in metabolic and appetite-regulation research. Lyophilized and sealed for stability. Ships ambient with no cold-chain required."
+    "description": "Semaglutide is a GLP-1 receptor agonist studied extensively in metabolic and appetite-regulation research. Lyophilized and sealed for stability. Ships ambient with no cold-chain required.",
+    "hidden": true
   },
   {
     "slug": "nvr-tirz-10",
@@ -446,7 +447,7 @@ export const PRODUCTS: Product[] = [
     "name": "Ipamorelin",
     "spec": "2 mg / vial",
     "price": 62.0,
-    "image": "/images/shop-ipam-01.jpg",
+    "image": "/images/vertalis-prod-ipam-2-01.png",
     "imgAlt": "Ipamorelin research peptide vial 2 mg / vial",
     "imgTitle": "Ipamorelin · 2 mg / vial",
     "category": "Recovery & Repair",
@@ -516,24 +517,6 @@ export const PRODUCTS: Product[] = [
     "name": "IGF-1LR3",
     "spec": "1 mg / vial",
     "price": 59.99,
-    "image": "/images/vertalis-prod-igf1lr3-1-01.png",
-    "imgAlt": "IGF-1LR3 research peptide vial 1 mg / vial",
-    "imgTitle": "IGF-1LR3 · 1 mg / vial",
-    "category": "Recovery & Repair",
-    "statusDot": IN_STOCK,
-    "statusLabel": "In Stock",
-    "purity": "99.24%",
-    "disabled": false,
-    "buttonText": "Add to Cart",
-    "footClass": null,
-    "footText": null,
-    "description": "IGF-1 LR3 is a long-arginine analog of insulin-like growth factor 1, studied in tissue-growth and recovery research. Supplied as a lyophilized powder. Ambient-stable in transit, no cold-chain shipping required."
-  },
-  {
-    "slug": "nvr-igf1lr3b-1",
-    "name": "IGF-1LR3 (Alt SKU, placeholder name)",
-    "spec": "1 mg / vial",
-    "price": 74.99,
     "image": "/images/vertalis-prod-igf1lr3-1-01.png",
     "imgAlt": "IGF-1LR3 research peptide vial 1 mg / vial",
     "imgTitle": "IGF-1LR3 · 1 mg / vial",
@@ -746,7 +729,8 @@ export const PRODUCTS: Product[] = [
     "disabled": false,
     "buttonText": "Add to Cart",
     "footClass": null,
-    "footText": null
+    "footText": null,
+    "hidden": true
   },
   {
     "slug": "nvr-blend-long-01",
@@ -763,7 +747,8 @@ export const PRODUCTS: Product[] = [
     "disabled": false,
     "buttonText": "Add to Cart",
     "footClass": LIMITED_FOOT_CLASS,
-    "footText": "Limited"
+    "footText": "Limited",
+    "hidden": true
   },
   {
     "slug": "nvr-glow-70",

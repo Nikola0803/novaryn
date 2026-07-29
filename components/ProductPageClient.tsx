@@ -81,7 +81,7 @@ export default function ProductPageClient({ slug }: { slug: string }) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
             {/* Image column */}
             <div className="lg:col-span-6 xl:col-span-5">
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-3 lg:sticky lg:top-[130px]">
                 <div className="relative aspect-[4/5] rounded-lg overflow-hidden bg-background-100 border border-background-200/60">
                   {product.image ? (
                     <Image
