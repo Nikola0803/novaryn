@@ -78,8 +78,8 @@ export default function HeroSection() {
           back to HeroVial3D if it doesn't hold up). */}
       <video
         key={isLight ? "light" : "dark"}
-        className="absolute inset-0 z-0 w-full h-full object-cover pointer-events-none"
-        src={isLight ? "/videos/hero-intro-white-01.mp4" : "/videos/hero-intro-dark-01.mp4"}
+        className="absolute inset-0 z-0 w-full h-full object-contain pointer-events-none"
+        src={isLight ? "/videos/hero-intro-white-01.mp4" : "/videos/hero-intro-dark-superwide-01.mp4"}
         autoPlay
         muted
         loop
