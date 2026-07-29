@@ -96,9 +96,13 @@ export default function HeroSection() {
       {/* Grid */}
       <div className="absolute inset-0 z-[1] grid-overlay opacity-[0.07] pointer-events-none" />
 
-      {/* Left fade so text stays readable */}
+      {/* Left fade so text stays readable · softened to an eased curve
+          (more stops, gentler mid-transition) instead of a few hard steps,
+          so the video blends into the background rather than visibly
+          cutting off. Same rgb(var(--bg-900)) variable in both themes, so
+          this one gradient covers light and dark identically. */}
       <div className="absolute inset-0 z-[2] pointer-events-none" style={{
-        background: "linear-gradient(to right, rgb(var(--bg-900) / 1) 0%, rgb(var(--bg-900) / 0.88) 30%, rgb(var(--bg-900) / 0.45) 52%, rgb(var(--bg-900) / 0) 68%)",
+        background: "linear-gradient(to right, rgb(var(--bg-900) / 1) 0%, rgb(var(--bg-900) / 0.97) 16%, rgb(var(--bg-900) / 0.86) 30%, rgb(var(--bg-900) / 0.65) 42%, rgb(var(--bg-900) / 0.4) 54%, rgb(var(--bg-900) / 0.2) 64%, rgb(var(--bg-900) / 0.06) 74%, rgb(var(--bg-900) / 0) 84%)",
       }} />
 
       {/* Particles */}
