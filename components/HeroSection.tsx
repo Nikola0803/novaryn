@@ -16,6 +16,7 @@ const FG_DIM = "rgb(var(--fg-100) / 0.48)";
 export default function HeroSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isLight, setIsLight] = useState(false);
+  const [isUltrawide, setIsUltrawide] = useState(false);
 
   // The 3D vial render is tuned for the dark theme's glow; on the white
   // theme we swap it for the pre-rendered white-mode intro video instead.
@@ -27,6 +28,18 @@ export default function HeroSection() {
     const observer = new MutationObserver(read);
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
     return () => observer.disconnect();
+  }, []);
+
+  // Ultrawide monitors (21:9, 32:9) get a clip shot with far more empty
+  // space around the vial so it doesn't crop or upscale-blur the way a
+  // 16:9 clip does when stretched that wide. Matched on aspect ratio, not
+  // raw width, so a large 16:9 4K display doesn't false-positive.
+  useEffect(() => {
+    const mql = window.matchMedia("(min-aspect-ratio: 2/1)");
+    const read = () => setIsUltrawide(mql.matches);
+    read();
+    mql.addEventListener("change", read);
+    return () => mql.removeEventListener("change", read);
   }, []);
 
   useEffect(() => {
@@ -77,7 +90,7 @@ export default function HeroSection() {
           each get their own take (test: dark clip is new, may get swapped
           back to HeroVial3D if it doesn't hold up). */}
       <video
-        key={isLight ? "light" : "dark"}
+        key={`${isLight ? "light" : "dark"}-${isUltrawide ? "uw" : "std"}`}
         className="absolute inset-0 z-0 w-full h-full object-contain pointer-events-none"
         style={{
           objectPosition: "right center",
@@ -90,7 +103,13 @@ export default function HeroSection() {
           maskImage: "linear-gradient(to right, transparent 0%, transparent 8%, black 55%, black 100%)",
           WebkitMaskImage: "linear-gradient(to right, transparent 0%, transparent 8%, black 55%, black 100%)",
         }}
-        src={isLight ? "/videos/hero-intro-white-01.mp4" : "/videos/hero-intro-dark-superwide-01.mp4"}
+        src={
+          isLight
+            ? "/videos/hero-intro-white-01.mp4"
+            : isUltrawide
+            ? "/videos/hero-intro-dark-ultrawide-01.mp4"
+            : "/videos/hero-intro-dark-superwide-01.mp4"
+        }
         autoPlay
         muted
         loop
