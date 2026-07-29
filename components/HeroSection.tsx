@@ -77,9 +77,24 @@ export default function HeroSection() {
       className="relative w-full overflow-hidden"
       style={{ height: "calc(100vh - 72px)", minHeight: 560, maxHeight: 880, background: BG }}
     >
+      {/* White-theme background video · full-bleed, sits under the same
+          grid/gradient/particle treatment dark mode uses so the vial reads
+          as part of the scene rather than a separate inserted clip. */}
+      {isLight && (
+        <video
+          className="absolute inset-0 z-0 w-full h-full object-cover pointer-events-none"
+          src="/videos/hero-intro-white-01.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          aria-hidden="true"
+        />
+      )}
+
       {/* Radial ambient */}
       <div className="absolute inset-0 z-0" style={{
-        background: `radial-gradient(ellipse 58% 75% at 70% 50%, rgb(var(--primary-500) / 0.06) 0%, transparent 65%), ${BG}`,
+        background: `radial-gradient(ellipse 58% 75% at 70% 50%, rgb(var(--primary-500) / 0.06) 0%, transparent 65%), ${isLight ? "transparent" : BG}`,
       }} />
 
       {/* Grid */}
@@ -200,31 +215,24 @@ export default function HeroSection() {
 
         </div>
 
-        {/* Animated 3D visual · right side, sized against the same container so its right gutter matches the text's left gutter */}
+        {/* Right side · on dark theme this hosts the animated 3D vial. On the
+            white theme the vial already lives in the full-bleed background
+            video (positioned right, per the source clip), so this column
+            just reserves the matching gutter and hosts the trust chip. */}
         <div className="hidden lg:block relative shrink-0" style={{ width: "48%", maxWidth: 760, height: "88%" }}>
-          {/* Ambient glow behind the visual */}
-          <div className="absolute inset-0 pointer-events-none" style={{
-            background: "radial-gradient(ellipse 65% 65% at 50% 48%, rgb(var(--primary-500) / 0.16) 0%, transparent 72%)",
-          }} />
+          {!isLight && (
+            <>
+              {/* Ambient glow behind the visual */}
+              <div className="absolute inset-0 pointer-events-none" style={{
+                background: "radial-gradient(ellipse 65% 65% at 50% 48%, rgb(var(--primary-500) / 0.16) 0%, transparent 72%)",
+              }} />
 
-          {/* Procedural peptide-chain render on dark theme; pre-rendered
-              intro video on the white theme, where the 3D glow reads muddy
-              against a light background. */}
-          <div className="absolute inset-0" style={{ animation: "nvFadeUp 1.1s ease forwards 0.5s", opacity: 0 }}>
-            {isLight ? (
-              <video
-                className="w-full h-full object-contain"
-                src="/videos/hero-intro-white-01.mp4"
-                autoPlay
-                muted
-                loop
-                playsInline
-                aria-hidden="true"
-              />
-            ) : (
-              <HeroVial3D />
-            )}
-          </div>
+              {/* Procedural peptide-chain render, no product photography */}
+              <div className="absolute inset-0" style={{ animation: "nvFadeUp 1.1s ease forwards 0.5s", opacity: 0 }}>
+                <HeroVial3D />
+              </div>
+            </>
+          )}
 
           {/* Compact trust chip, floated over the bottom of the visual */}
           <div
