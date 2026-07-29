@@ -91,7 +91,13 @@ export default function HeroSection() {
         // top, darker mid, lighter bottom). Matching that same falloff on
         // the section itself means the video's edge dissolves into the
         // page instead of sitting on top of a visibly flatter color.
-        background: isLight
+        // The banded gradient only reads correctly when the video already
+        // fills nearly the full frame (true ultrawide, object-contain).
+        // At standard widths the video uses object-cover instead (fills
+        // completely, no exposed background at all), so a flat color is
+        // correct there — the gradient would just show as a visible seam
+        // wherever the video doesn't reach.
+        background: isLight && isUltrawide
           ? "linear-gradient(to bottom, #E6E7E9 0%, #DCDFE2 35%, #A8ADB3 55%, #5A5E64 68%, #8E939A 82%, #C5C9CE 100%)"
           : BG,
       }}
@@ -103,17 +109,21 @@ export default function HeroSection() {
           back to HeroVial3D if it doesn't hold up). */}
       <video
         key={`${isLight ? "light" : "dark"}-${isUltrawide ? "uw" : "std"}`}
-        className="absolute inset-0 z-0 w-full h-full object-contain pointer-events-none"
+        className={`absolute inset-0 z-0 w-full h-full pointer-events-none ${isUltrawide ? "object-contain" : "object-cover"}`}
         style={{
           objectPosition: "right center",
-          // The overlay gradient below fades the *page* background over the
-          // video, but it can't know exactly where the video's own visible
-          // pixels start inside its object-contain box (that shifts with
-          // viewport width). Masking the video element itself guarantees
-          // its own left edge always dissolves to transparent, rather than
-          // potentially showing a hard box edge before the overlay catches up.
-          maskImage: "linear-gradient(to right, transparent 0%, transparent 8%, black 55%, black 100%)",
-          WebkitMaskImage: "linear-gradient(to right, transparent 0%, transparent 8%, black 55%, black 100%)",
+          // On ultrawide the video is letterboxed (object-contain) so it
+          // doesn't upscale-blur, and its own left edge needs a mask to
+          // dissolve into the page. At standard widths it's object-cover
+          // instead — it fills the section completely, so there's no
+          // exposed edge to mask; the overlay gradient below handles
+          // keeping the text side readable on its own.
+          ...(isUltrawide
+            ? {
+                maskImage: "linear-gradient(to right, transparent 0%, transparent 8%, black 55%, black 100%)",
+                WebkitMaskImage: "linear-gradient(to right, transparent 0%, transparent 8%, black 55%, black 100%)",
+              }
+            : {}),
         }}
         src={
           isLight
