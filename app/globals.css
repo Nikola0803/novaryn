@@ -74,6 +74,24 @@
   opacity: 0;
 }
 
+/* Theme-swapped images (e.g. the dark-vs-white lab photo on the homepage
+   "Vertalis Standard" section): both variants render server-side and are
+   toggled purely by [data-theme], so there's no client-component hydration
+   flicker — same mechanism the anti-flash inline script in layout.tsx
+   already relies on. */
+.theme-only-dark {
+  display: block;
+}
+.theme-only-light {
+  display: none;
+}
+[data-theme="light"] .theme-only-dark {
+  display: none;
+}
+[data-theme="light"] .theme-only-light {
+  display: block;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
