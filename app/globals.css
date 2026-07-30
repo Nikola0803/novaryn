@@ -65,6 +65,15 @@
 /* Custom utilities & global styles recovered 1:1 from the original build */
 /* ---------------------------------------------------------------------- */
 
+/* Photo darkening overlays (bg-gradient-to-t from-background-900/...) read
+   off --bg-900, which is near-white on the light theme — so instead of a
+   dark vignette for badge legibility, they showed up as a washed-out white
+   haze over every photo. Killing them entirely in light theme; dark theme
+   keeps the gradient exactly as authored. */
+[data-theme="light"] .photo-fade {
+  opacity: 0;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;

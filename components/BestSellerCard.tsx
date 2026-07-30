@@ -55,7 +55,7 @@ export default function BestSellerCard({
             className="object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-precision"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background-900/90 via-background-900/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500"></div>
+          <div className="photo-fade absolute inset-0 bg-gradient-to-t from-background-900/90 via-background-900/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500"></div>
           <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-background-900/70 backdrop-blur border border-background-200/50">
             <span className={`w-1.5 h-1.5 rounded-full ${selected.statusDot}`}></span>
             <span className="font-mono text-[10px] tracking-wider text-foreground-300">

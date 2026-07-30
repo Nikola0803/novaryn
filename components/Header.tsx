@@ -139,7 +139,7 @@ export default function Header() {
               >
                 <Link
                   href={link.href}
-                  className="flex items-center gap-1.5 text-[13px] tracking-wide text-foreground-300 hover:text-foreground-100 transition-colors relative group"
+                  className="flex items-center gap-1.5 text-[14.5px] tracking-wide text-foreground-300 hover:text-foreground-100 transition-colors relative group"
                   aria-expanded={shopMenuOpen}
                 >
                   {link.label}
@@ -238,7 +238,7 @@ export default function Header() {
               >
                 <Link
                   href={link.href}
-                  className="flex items-center gap-1.5 text-[13px] tracking-wide text-foreground-300 hover:text-foreground-100 transition-colors relative group"
+                  className="flex items-center gap-1.5 text-[14.5px] tracking-wide text-foreground-300 hover:text-foreground-100 transition-colors relative group"
                   aria-expanded={contactMenuOpen}
                 >
                   {link.label}
@@ -283,7 +283,7 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-[13px] tracking-wide text-foreground-300 hover:text-foreground-100 transition-colors relative group"
+                className="text-[14.5px] tracking-wide text-foreground-300 hover:text-foreground-100 transition-colors relative group"
               >
                 {link.label}
                 <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-primary-500 transition-all duration-500 ease-precision group-hover:w-full"></span>
@@ -350,7 +350,7 @@ export default function Header() {
                     <Link
                       href={link.href}
                       onClick={() => setMenuOpen(false)}
-                      className="text-[13px] tracking-wide text-foreground-300 hover:text-foreground-100 transition-colors"
+                      className="text-[14.5px] tracking-wide text-foreground-300 hover:text-foreground-100 transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -421,7 +421,7 @@ export default function Header() {
                     <Link
                       href={link.href}
                       onClick={() => setMenuOpen(false)}
-                      className="text-[13px] tracking-wide text-foreground-300 hover:text-foreground-100 transition-colors"
+                      className="text-[14.5px] tracking-wide text-foreground-300 hover:text-foreground-100 transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -458,14 +458,14 @@ export default function Header() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="py-3 text-[13px] tracking-wide text-foreground-300 hover:text-foreground-100 transition-colors border-b border-background-200/40 last:border-none"
+                  className="py-3 text-[14.5px] tracking-wide text-foreground-300 hover:text-foreground-100 transition-colors border-b border-background-200/40 last:border-none"
                 >
                   {link.label}
                 </Link>
               )
             )}
             <div className="flex items-center justify-between py-3 border-t border-background-200/40 mt-1">
-              <span className="text-[13px] tracking-wide text-foreground-300">Theme</span>
+              <span className="text-[14.5px] tracking-wide text-foreground-300">Theme</span>
               <ThemeToggle />
             </div>
           </nav>
