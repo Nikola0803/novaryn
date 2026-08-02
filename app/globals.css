@@ -92,6 +92,18 @@
   display: block;
 }
 
+/* Category-card photo scrim (homepage "Compounds, curated by research
+   direction" grid): unlike the informational photos above, these have
+   headline text sitting directly on top of the image with no separate
+   background box, so they need a permanent darkening gradient to stay
+   legible. Uses a fixed rgba(black) instead of rgb(var(--bg-900)) so it
+   doesn't wash out to white in light theme the way .photo-fade did. The
+   card text itself is also fixed to white/light in the markup instead of
+   theme-variable foreground colors, for the same reason. */
+.cat-card-scrim {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.45) 45%, rgba(0, 0, 0, 0.05) 75%, transparent 100%);
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
